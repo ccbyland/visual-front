@@ -1,0 +1,8 @@
+.vue-grid-item {
+  background: rgba(255, 119, 15, 0.5);
+}
+
+.vue-grid-item.vue-grid-placeholder {
+  background: #000 !important;
+  opacity: 0.1;
+}

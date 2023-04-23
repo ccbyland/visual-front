@@ -1,19 +1,20 @@
 import { defineComponent } from "vue";
-import Header from "@/components/header/index";
-import Canvas from "@/components/canvas/index";
-import Setter from "@/components/setter/index";
+import { useStore } from "vuex";
+import widgetConfig from "@/config/widget/widgetConfig";
+import Editor from "@/packages/editor/index.jsx";
 import "./index.scss";
 
 export default defineComponent({
   setup() {
+    const store = useStore();
+
+    store.dispatch("updateWidgetConfig", widgetConfig);
+    store.dispatch("updateEditorWidgetData", [12, 2, 3]);
+
     return () => {
       return (
-        <div className="editor">
-          <Header></Header>
-          <div className="main">
-            <Canvas></Canvas>
-            <Setter></Setter>
-          </div>
+        <div class="g-page-editor">
+          <Editor></Editor>
         </div>
       );
     };

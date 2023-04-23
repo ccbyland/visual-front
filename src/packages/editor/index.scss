@@ -1,0 +1,41 @@
+.g-editor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  .g-editor__header {
+    position: relative;
+    width: 100%;
+    height: 45px;
+  }
+  .g-editor__main {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    .g-editor__main-left {
+      position: relative;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      .g-editor__main-left-top {
+        position: relative;
+        background: #efefef;
+        width: 100%;
+        height: 45px;
+        border-bottom: 1px solid #ddd;
+      }
+      .g-editor__main-left-bottom {
+        position: relative;
+        flex-grow: 1;
+      }
+    }
+    .g-editor__main-right {
+      position: relative;
+      width: 250px;
+      background: #efefef;
+      border-left: 1px solid #ddd;
+    }
+  }
+}

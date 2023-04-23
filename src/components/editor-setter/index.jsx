@@ -4,7 +4,7 @@ import "./index.scss";
 export default defineComponent({
   setup() {
     return () => {
-      return <div className="header"></div>;
+      return <div className="editor-setter"></div>;
     };
   },
 });

@@ -5,11 +5,10 @@ export default defineComponent({
   setup() {
     return () => {
       return (
-        <>
-          <div className="setter">
-            <div className="setter-header"></div>
-          </div>
-        </>
+        <div className="editor-header">
+          <div className="info">可视化搭建</div>
+          <div className="operate"></div>
+        </div>
       );
     };
   },

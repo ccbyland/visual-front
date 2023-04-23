@@ -1,6 +1,6 @@
 import { defineComponent } from "vue";
 import EditorHeader from "@/components/editor-header";
-import EditorWidget from "@/components/editor-widget";
+import EditorTool from "@/components/editor-tool";
 import EditorCanvas from "@/components/editor-canvas";
 import EditorGrid from "@/components/editor-grid";
 import EditorSetter from "@/components/editor-setter";
@@ -17,7 +17,7 @@ export default defineComponent({
           <div className="g-editor__main">
             <div className="g-editor__main-left">
               <div className="g-editor__main-left-top">
-                <EditorWidget></EditorWidget>
+                <EditorTool></EditorTool>
               </div>
               <div className="g-editor__main-left-bottom">
                 <EditorCanvas></EditorCanvas>

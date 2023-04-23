@@ -1,1 +1,6 @@
-export const getCardStyle = () => { }
+export default class ComponentStyle {
+
+  static getCardStyle() {
+    return {}
+  }
+}

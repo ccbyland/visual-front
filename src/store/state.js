@@ -1,3 +1,4 @@
 export default {
-    editorWidget: {}
+    editorWidget: [],
+    widgetConfig: {}
 }

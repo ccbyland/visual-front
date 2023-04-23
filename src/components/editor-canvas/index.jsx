@@ -1,42 +1,18 @@
-import { defineComponent, inject, ref } from "vue";
-import draggable from "vuedraggable";
+import { computed, defineComponent } from "vue";
+import { useStore } from "vuex";
+import EditorWidget from "@/components/editor-widget";
 import "./index.scss";
 
 export default defineComponent({
-  components: {
-    draggable,
-  },
   setup() {
-    
-    const widgetConfig = inject('widgetConfig')
-    console.error('widgetConfig', widgetConfig)
+    const store = useStore();
+    const editorWidget = computed(() => store.state.editorWidget);
 
-    const state = ref([
-      { x: 0, y: 0, w: 6, h: 1, i: "0" },
-      { x: 6, y: 0, w: 6, h: 2, i: "1" },
-      { x: 4, y: 0, w: 2, h: 5, i: "2" },
-      { x: 6, y: 0, w: 2, h: 3, i: "3" },
-      { x: 8, y: 0, w: 2, h: 3, i: "4" },
-      { x: 10, y: 0, w: 2, h: 3, i: "5" },
-    ]);
-    // const aaa = ref([]);
-    // const draggableSlots = {
-    //   item: () => {
-    //     return null;
-    //   },
-    // };
     return () => {
       return (
         <div className="editor-canvas">
-          {/* <draggable
-            v-model={aaa.value}
-            v-slots={draggableSlots}
-            class="options"
-            group={{ name: "tb-item" }}
-            sort={false}
-          > */}
           <grid-layout
-            v-model:layout={state.value}
+            v-model:layout={editorWidget.value.widgets}
             col-num={12}
             row-height={20}
             is-draggable={true}
@@ -46,22 +22,20 @@ export default defineComponent({
             margin={[10, 10]}
             use-css-transforms={true}
           >
-            {state.value.map((item) => {
+            {editorWidget.value.widgets.map((item) => {
               return (
                 <grid-item
-                  className="aaa"
                   x={item.x}
                   y={item.y}
                   w={item.w}
                   h={item.h}
                   i={item.i}
                 >
-                  {item.i}
+                  <EditorWidget v-model:widget={item}></EditorWidget>
                 </grid-item>
               );
             })}
           </grid-layout>
-          {/* </draggable> */}
         </div>
       );
     };

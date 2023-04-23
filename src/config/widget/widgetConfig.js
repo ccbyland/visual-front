@@ -10,6 +10,7 @@ function createWidgetConfig() {
     widgetMap,
     register: (widget) => {
       widgetList.push(widget)
+      widgetMap[widget.key] = widget
     }
   }
 }

@@ -9,7 +9,10 @@ export default defineComponent({
     const store = useStore();
 
     store.dispatch("updateWidgetConfig", widgetConfig);
-    store.dispatch("updateEditorWidgetData", [12, 2, 3]);
+    store.dispatch("updateEditorWidgetData", {
+      widgets: [],
+      widgetSelectedIndex: -1
+    });
 
     return () => {
       return (

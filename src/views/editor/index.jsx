@@ -11,7 +11,7 @@ export default defineComponent({
     store.dispatch("updateWidgetConfig", widgetConfig);
     store.dispatch("updateEditorWidgetData", {
       widgets: [],
-      widgetSelectedIndex: -1
+      widgetSelectedIndex: -1 // 当前选择小部件index（初始化为页面-1）
     });
 
     return () => {

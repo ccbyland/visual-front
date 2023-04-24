@@ -8,7 +8,7 @@ export default {
         defaultData: {
             layout: {
                 w: 6,
-                h: 8,
+                h: 10,
             }
         },
         render: renderConfig.line,
@@ -20,7 +20,7 @@ export default {
         defaultData: {
             layout: {
                 w: 6,
-                h: 8,
+                h: 10,
             }
         },
         render: renderConfig.bar,
@@ -32,7 +32,7 @@ export default {
         defaultData: {
             layout: {
                 w: 6,
-                h: 8,
+                h: 10,
             }
         },
         render: renderConfig.pie,
@@ -44,7 +44,7 @@ export default {
         defaultData: {
             layout: {
                 w: 6,
-                h: 8,
+                h: 10,
             }
         },
         render: renderConfig.map,

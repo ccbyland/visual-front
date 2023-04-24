@@ -1,58 +1,45 @@
 import ComponentStyle from '@/utils/componentStyle'
 
 export default {
-  line: ({ props }) => {
-
+  line: ({ id, key, props }) => {
     const { chartStyle } = ComponentStyle.getCardStyle(props)
-
-    // const { prefixComponent, suffixComponent }
-
     return (
       <>
-        <div className='g-card__chart' style={chartStyle}>
-          <echart-line></echart-line>
+        <div className='g-card__widget' style={chartStyle}>
+          <echart-line id={id} type={key} componentStyle={props}></echart-line>
         </div>
       </>
     )
   },
-  bar: ({ props }) => {
+  bar: ({ id, key, props }) => {
 
     const { chartStyle } = ComponentStyle.getCardStyle(props)
-
-    // const { prefixComponent, suffixComponent }
-
     return (
       <>
-        <div className='g-card__chart' style={chartStyle}>
-          <echart-bar></echart-bar>
+        <div className='g-card__widget' style={chartStyle}>
+          <echart-bar id={id} type={key} componentStyle={props}></echart-bar>
         </div>
       </>
     )
   },
-  pie: ({ props }) => {
+  pie: ({ id, key, props }) => {
 
     const { chartStyle } = ComponentStyle.getCardStyle(props)
-
-    // const { prefixComponent, suffixComponent }
-
     return (
       <>
-        <div className='g-card__chart' style={chartStyle}>
-          <echart-pie></echart-pie>
+        <div className='g-card__widget' style={chartStyle}>
+          <echart-pie id={id} type={key} componentStyle={props}></echart-pie>
         </div>
       </>
     )
   },
-  map: ({ props }) => {
+  map: ({ id, key, props }) => {
 
     const { chartStyle } = ComponentStyle.getCardStyle(props)
-
-    // const { prefixComponent, suffixComponent }
-
     return (
       <>
-        <div className='g-card__chart' style={chartStyle}>
-          <echart-map></echart-map>
+        <div className='g-card__widget' style={chartStyle}>
+          <echart-map id={id} type={key} componentStyle={props}></echart-map>
         </div>
       </>
     )

@@ -1,6 +1,7 @@
 import { computed, defineComponent } from "vue";
 import { useStore } from "vuex";
 import EditorWidget from "@/components/editor-widget";
+import useFocus from "../../hooks/useFocus";
 import "./index.scss";
 
 export default defineComponent({
@@ -8,30 +9,35 @@ export default defineComponent({
     const store = useStore();
     const editorWidget = computed(() => store.state.editorWidget);
 
+    const { mousedownCanvas, mousedownCanvasWidget } = useFocus(editorWidget);
+
     return () => {
       return (
-        <div className="editor-canvas">
+        <div className="editor-canvas" onMousedown={mousedownCanvas}>
           <grid-layout
             v-model:layout={editorWidget.value.widgets}
             col-num={12}
             row-height={20}
-            is-draggable={true}
-            is-resizable={true}
-            is-mirrored={false}
-            vertical-compact={true}
+            is-draggable={true} // 是否可拖拽
+            is-resizable={true} // 是否可设置大小
+            vertical-compact={true} // 是否垂直紧凑布局
             margin={[10, 10]}
             use-css-transforms={true}
           >
-            {editorWidget.value.widgets.map((item) => {
+            {editorWidget.value.widgets.map((widget, widgetIndex) => {
               return (
                 <grid-item
-                  x={item.x}
-                  y={item.y}
-                  w={item.w}
-                  h={item.h}
-                  i={item.i}
+                  id={`grid-item__${widget.i}`}
+                  x={widget.x}
+                  y={widget.y}
+                  w={widget.w}
+                  h={widget.h}
+                  i={widget.i}
+                  onMousedown={(e) =>
+                    mousedownCanvasWidget(e, widget, widgetIndex)
+                  }
                 >
-                  <EditorWidget v-model:widget={item}></EditorWidget>
+                  <EditorWidget v-model:widget={widget}></EditorWidget>
                 </grid-item>
               );
             })}

@@ -1,17 +1,21 @@
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { randomStr } from "@/utils";
-import useCommand from './useCommand.js'
+import useCommand from "../../hooks/useCommand.js";
+import useWidgetDraggable from '../../hooks/useWidgetDraggable.js'
 import "./index.scss";
 
 export default defineComponent({
   setup() {
     return () => {
+
+      const canvasRef = ref(null)
+
       const store = useStore();
       const widgetConfig = store.state.widgetConfig;
       const editorWidget = store.state.editorWidget;
 
-      const { commands } = useCommand(editorWidget)
+      const { commands } = useCommand(editorWidget);
 
       const addWidget = (widget) => {
         const defaultData = widget.defaultData;
@@ -26,6 +30,8 @@ export default defineComponent({
         commands.addWidget(newWidget);
       };
 
+      const { dragStartWidget, dragEndWidget} = useWidgetDraggable(canvasRef, editorWidget)
+
       return (
         <div className="editor-tool">
           <div className="item">
@@ -33,7 +39,13 @@ export default defineComponent({
             <div class="options">
               {widgetConfig.widgetList.map((widget) => {
                 return (
-                  <div className="node" onClick={() => addWidget(widget)}>
+                  <div
+                    draggable
+                    onDragStart={(e) => dragStartWidget(e, widget)}
+                    onDragEnd={dragEndWidget}
+                    className="node"
+                    onClick={() => addWidget(widget)}
+                  >
                     <img
                       className="icon"
                       src={require(`@/assets/images/canvas-module/${widget.key}.png`)}

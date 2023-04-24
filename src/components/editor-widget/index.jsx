@@ -22,13 +22,29 @@ export default defineComponent({
 
     let widget = null;
     let renderWidget = null;
+
     if (widgetData.value.key) {
+      const props = widgetData.value.props;
+
       widget = widgetConfig.widgetMap[widgetData.value.key];
-      renderWidget = widget.render({ props: {} });
+      renderWidget = widget.render({
+        id: widgetData.value.i,
+        key: widgetData.value.key,
+        props,
+      });
     }
 
     return () => {
-      return <>{renderWidget}</>;
+      return (
+        <div
+          class={[
+            "g-card__widget-wrap",
+            widgetData.value.focus ? "selected" : "",
+          ]}
+        >
+          {renderWidget}
+        </div>
+      );
     };
   },
 });

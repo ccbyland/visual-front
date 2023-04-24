@@ -3,11 +3,12 @@ import EditorHeader from "@/components/editor-header";
 import EditorTool from "@/components/editor-tool";
 import EditorCanvas from "@/components/editor-canvas";
 import EditorGrid from "@/components/editor-grid";
-import EditorSetter from "@/components/editor-setter";
+import EditorOperator from "@/components/editor-operator";
 import "./index.scss";
 
 export default defineComponent({
   setup() {
+
     return () => {
       return (
         <div className="g-editor">
@@ -19,13 +20,15 @@ export default defineComponent({
               <div className="g-editor__main-left-top">
                 <EditorTool></EditorTool>
               </div>
-              <div className="g-editor__main-left-bottom">
+              <div
+                className="g-editor__main-left-bottom"
+              >
                 <EditorCanvas></EditorCanvas>
                 <EditorGrid></EditorGrid>
               </div>
             </div>
             <div className="g-editor__main-right">
-              <EditorSetter></EditorSetter>
+              <EditorOperator></EditorOperator>
             </div>
           </div>
         </div>

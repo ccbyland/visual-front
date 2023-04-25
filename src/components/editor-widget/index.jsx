@@ -20,21 +20,23 @@ export default defineComponent({
       },
     });
 
-    let widget = null;
-    let renderWidget = null;
-
-    if (widgetData.value.key) {
-      const props = widgetData.value.props;
-
-      widget = widgetConfig.widgetMap[widgetData.value.key];
-      renderWidget = widget.render({
-        id: widgetData.value.i,
-        key: widgetData.value.key,
-        props,
-      });
-    }
-
     return () => {
+
+      let widget = null;
+      let renderWidget = null;
+      const chartStyle = widgetData.value.props
+      const chartQuery =  widgetData.value.query
+  
+      if (widgetData.value.key) {
+        widget = widgetConfig.widgetMap[widgetData.value.key];
+        renderWidget = widget.render({
+          id: widgetData.value.i,
+          key: widgetData.value.key,
+          props: chartStyle,
+          query: chartQuery
+        });
+      }
+
       return (
         <div
           class={[

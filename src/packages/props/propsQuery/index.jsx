@@ -3,6 +3,9 @@ import "./index.scss";
 import { events } from "@/utils/events";
 
 export default defineComponent({
+  props: {
+    editData: { type: Object },
+  },
   setup(props) {
     const { proxy } = getCurrentInstance();
     const currEditData = computed(() => props.editData);

@@ -6,13 +6,19 @@ import "./index.scss";
 
 export default defineComponent({
   setup() {
-    const store = useStore();
+    const initState = () => {
+      const store = useStore();
+      // 共享所有小部件
+      store.dispatch("updateWidgetConfig", widgetConfig);
+      // 编辑器相关数据
+      store.dispatch("updateEditorWidgetData", {
+        container: {}, // 画布容器
+        widgets: [], // 小部件列表
+        widgetSelectedIndex: -1, // 当前选择小部件index（初始化为画布容器:-1）
+      });
+    };
 
-    store.dispatch("updateWidgetConfig", widgetConfig);
-    store.dispatch("updateEditorWidgetData", {
-      widgets: [],
-      widgetSelectedIndex: -1 // 当前选择小部件index（初始化为页面-1）
-    });
+    initState();
 
     return () => {
       return (

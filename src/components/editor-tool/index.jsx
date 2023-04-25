@@ -2,23 +2,24 @@ import { defineComponent, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { randomStr } from "@/utils";
 import useCommand from "../../hooks/useCommand.js";
-import useWidgetDraggable from '../../hooks/useWidgetDraggable.js'
+import useWidgetDraggable from "../../hooks/useWidgetDraggable.js";
 import "./index.scss";
+import useDafaultData from "@/hooks/useDafaultData.js";
 
 export default defineComponent({
   setup() {
     return () => {
-
-      const canvasRef = ref(null)
+      const canvasRef = ref(null);
 
       const store = useStore();
       const widgetConfig = store.state.widgetConfig;
-      const editorWidget = store.state.editorWidget;
+      const editorData = store.state.editorData;
 
-      const { commands } = useCommand(editorWidget);
+      const { commands } = useCommand(editorData);
 
       const addWidget = (widget) => {
         const defaultData = widget.defaultData;
+        const { getQuery } = useDafaultData(widget);
         const newWidget = reactive({
           i: randomStr(8),
           x: 0,
@@ -26,11 +27,16 @@ export default defineComponent({
           w: defaultData.layout ? defaultData.layout.w : 6,
           h: defaultData.layout ? defaultData.layout.h : 6,
           key: widget.key,
+          props: {},
+          query: getQuery(),
         });
         commands.addWidget(newWidget);
       };
 
-      const { dragStartWidget, dragEndWidget} = useWidgetDraggable(canvasRef, editorWidget)
+      const { dragStartWidget, dragEndWidget } = useWidgetDraggable(
+        canvasRef,
+        editorData
+      );
 
       return (
         <div className="editor-tool">

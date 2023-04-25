@@ -1,12 +1,16 @@
 import EmptyImg from '@/assets/images/card/empty.png'
 import { computed, getCurrentInstance, onMounted, onUnmounted, ref } from "vue"
 import { useStore } from 'vuex'
+import deepcopy from 'deepcopy'
 import { events } from '@/utils/events'
+import { genCompleteChartOption } from '@/utils/chartOption'
+import ComponentStyle from '@/utils/componentStyle'
 
 export default {
   props: {
     id: { type: String }, // 图表ID
     type: { type: String }, // 图表类型
+    query: { type: Object }, // 配置字段数据
     componentStyle: { type: Object }, // 图表独立配置数据
   },
   setup(props) {
@@ -17,7 +21,12 @@ export default {
     let offEvent = null
     let observer = null
     let chartInstance = null // 当前图表实例对象
-
+    let dimensionData = []
+    let measureData = []
+    let settings = {
+      dimension: [], // 维度
+      measure: [] // 度量
+    }
     let option = {
       series: [],
       legend: {},
@@ -29,11 +38,6 @@ export default {
 
     const empty = ref(false)
     const chartData = computed(() => store.state.chartData[props.id])
-
-    setTimeout(() => {
-      store.dispatch('updateChartData', { [props.id]: { x: [1, 2, 3], y: [100, 200, 300] } })
-    }, 2000)
-
     onMounted(() => {
       if (chartData.value) {
         empty.value = false
@@ -50,18 +54,21 @@ export default {
 
     const emptyImg = computed(() => Proxy.EmptyImg || EmptyImg)
 
-    const chartDataChange = ({chartData  }) => {
-
-      debugger
-
-      // let data = null
-      if(chartData){
+    const chartDataChange = ({ chartData }) => {
+      if (chartData) {
         empty.value = false
       }
-      if(chartData && chartData.data){
-        // data = chartData.data
-        // store
+      let data = null
+      if (chartData && chartData.data) {
+        data = chartData.data
+        store.dispatch('updateChartData', {
+          id: props.id,
+          data
+        })
       }
+      setTimeout(() => {
+        renderChart(data)
+      }, 0)
     }
 
     const addEvent = () => {
@@ -77,14 +84,13 @@ export default {
         return
       }
       initChart()
-      genChartOption()
+      genChartOption(data)
     }
 
     const initChart = () => {
       if (chartInstance) {
         return
       }
-
       const chartDom = document.getElementById(props.id)
       chartInstance = proxy.$echarts.init(chartDom)
       if (!chartInstance) {
@@ -95,7 +101,7 @@ export default {
     }
 
     const setSize = () => {
-      const rect = { width: 300, height: 300 }
+      const rect = ComponentStyle.calChartClientRect(props.componentStyle, props.id)
       chartInstance && chartInstance.resize(rect)
     }
     const addResizeEvent = () => {
@@ -105,190 +111,88 @@ export default {
         chartInstance && setSize()
       }
       observer = new resizeObserver(callback)
-      const gridItemDom = document.getElementById(`grid_item__${props.id}`)
+      const gridItemDom = document.getElementById(`grid-item__${props.id}`)
       observer.observe(gridItemDom)
     }
-    // const addResizeEvent = () => {
-    //   observer = new window.ResizeObserver((domList) => {
-    //     if (!domList[0]) {
-    //       return
-    //     }
-    //     chartInstance && setSize()
-    //   })
-    //   const gridItemDom = document.getAnimations(`grid-item__${props.id}`)
-    //   observer.observe(gridItemDom)
-    // }
-
-    const genChartOption = () => {
-      option = {
-        "color": ["#8395fe", "#ffcf00", "#8b60f0", "#a791ff", "#53c5ff", "#ffd187"],
-        "grid": {
-          "left": 12,
-          "right": 12,
-          "bottom": 12,
-          "top": 40,
-          "containLabel": true
-        },
-        "effect": {},
-        "legend": {
-          "data": [{
-            "name": "件数"
-          }],
-          "show": true,
-          "textStyle": {
-            "fontSize": 12,
-            "fontWeight": "normal",
-            "fontStyle": "normal",
-            "color": "#666"
-          },
-          "right": "center",
-          "top": "10",
-          "orient": "horizontal"
-        },
-        "xAxis": {
-          "type": "category",
-          "data": ["辽阳市", "桂林市", "嘉义市", "张家界市", "营口市", "文山壮族苗族自治州", "泸州市", "十堰市", "衡阳市", "宜昌市", "固原市", "天津市", "上海市", "南充市", "梧州市", "安顺市", "随州市", "惠州市", "洛阳市", "重庆市", "本溪市", "赤峰市", "牡丹江市", "重庆市", "铁岭市", "安庆市", "七台河市", "台州市", "沧州市", "邵阳市", "天津市", "安康市", "荆州市", "山南地区", "南通市", "三明市", "绥化市", "佳木斯市", "锦州市", "澎湖县", "嘉峪关市", "赤峰市", "株洲市", "赤峰市", "南阳市", "金华市", "杭州市", "焦作市", "海外", "上海市", "张家口市", "石家庄市", "香港岛", "黔西南布依族苗族自治州", "巴中市", "三门峡市", "白山市", "黄石市", "石嘴山市", "茂名市", "晋中市", "吉安市", "铜仁市", "新界", "临沧市", "常德市", "辽阳市", "肇庆市", "咸宁市", "酒泉市", "泸州市", "赣州市", "固原市", "汉中市", "新北市", "石嘴山市", "普洱市", "芜湖市", "上海市", "信阳市", "长春市", "江门市", "芜湖市", "上海市", "唐山市", "宿州市", "上海市", "天津市", "德宏傣族景颇族自治州", "芜湖市", "三亚市", "通化市", "松原市", "泉州市", "永州市", "海南藏族自治州", "锡林郭勒盟", "秦皇岛市", "牡丹江市", "宝鸡市"],
-          "boundaryGap": true,
-          "show": true,
-          "axisLabel": {
-            "show": true,
-            "fontSize": 12,
-            "fontWeight": "normal",
-            "color": "#666",
-            "fontStyle": "normal"
-          },
-          "axisLine": {
-            "show": true,
-            "lineStyle": {
-              "width": "1px",
-              "color": "#666",
-              "type": "solid"
-            }
-          },
-          "splitLine": {
-            "show": false,
-            "lineStyle": {
-              "color": "rgba(221, 221, 221, 1)"
-            }
-          },
-          "axisTick": {
-            "show": false
-          },
-          "nameTextStyle": {
-            "fontSize": 14,
-            "fontWeight": "normal",
-            "color": "",
-            "fontStyle": "normal",
-            "align": "center",
-            "verticalAlign": "top"
-          },
-          "nameLocation": "middle"
-        },
-        "yAxis": {
-          "type": "value",
-          "nameTextStyle": {
-            "fontSize": 12,
-            "fontWeight": "normal",
-            "color": "#666",
-            "fontStyle": "normal"
-          },
-          "axisLine": {
-            "show": false,
-            "lineStyle": {
-              "width": "1",
-              "color": "rgba(221, 221, 221, 1)"
-            }
-          },
-          "axisLabel": {
-            "show": true,
-            "fontSize": 12,
-            "fontWeight": "normal",
-            "color": "#666",
-            "fontStyle": "normal",
-            "showMinLabel": false,
-            "formatter": "{value}"
-          },
-          "splitLine": {
-            "show": true,
-            "lineStyle": {
-              "color": "rgba(221, 221, 221, 1)",
-              "type": "dashed"
-            }
-          },
-          "axisTick": {
-            "show": false
-          },
-          "name": "件数",
-          "nameLocation": "end"
-        },
-        "series": [{
-          "name": "件数",
-          "type": "bar",
-          "data": [130, 4845, 2709, 1011, 9036, 9909, 2306, 1252, 6496, 8806, 6308, 142, 2133, 3261, 4987, 4591, 3519, 5419, 1133, 9200, 3850, 7682, 6725, 2393, 8758, 7697, 307, 7423, 9663, 6136, 7470, 2583, 6452, 2610, 5833, 2705, 2176, 8758, 8642, 4190, 7733, 6882, 3171, 9130, 3799, 886, 8479, 457, 357, 2711, 5612, 4031, 3324, 5259, 1185, 3112, 1629, 893, 6089, 4057, 1635, 1651, 3874, 4715, 725, 5191, 8902, 6173, 6342, 6400, 4544, 7087, 1158, 5197, 697, 9678, 5991, 8726, 6506, 5954, 4706, 3408, 8598, 4010, 8552, 1167, 7734, 9205, 9946, 1870, 5813, 4428, 4829, 7169, 3275, 5710, 3423, 4966, 1463, 8309],
-          "showSymbol": true,
-          "symbolSize": 8,
-          "areaStyle": null,
-          "label": {
-            "show": false,
-            "position": "",
-            "backgroundColor": "rgba(221, 221, 221, 0)",
-            "fontSize": 12,
-            "fontWeight": "normal",
-            "fontStyle": "normal",
-            "color": "#666",
-            "formatter": "{c}"
-          },
-          "smooth": false,
-          "symbol": "circle"
-        }],
-        "tooltip": {
-          "show": true,
-          "trigger": "axis",
-          "backgroundColor": "#fff",
-          "textStyle": {
-            "color": "#666",
-            "fontSize": 12,
-            "fontWeight": "normal",
-            "fontStyle": "normal"
-          }
-        },
-        "textStyle": {
-          "fontFamily": "Microsoft YaHei"
-        },
-        "dataZoom": [{
-          "type": "slider",
-          "show": false,
-          "bottom": 20,
-          "height": "20",
-          "moveOnMouseMove": true,
-          "borderColor": "none",
-          "backgroundColor": "#f3f5f8",
-          "handleColor": "#fff",
-          "handleSize": 20,
-          "handleStyle": {
-            "backgroundColor": "#e2e4eb",
-            "borderColor": "#fff",
-            "shadowBlur": 4,
-            "shadowOffsetX": 1,
-            "shadowOffsetY": 1,
-            "shadowColor": "#fff"
-          },
-          "start": 0,
-          "end": 36
-        }, {
-          "type": "inside",
-          "start": 0,
-          "end": 35,
-          "zoomOnMouseWheel": false,
-          "moveOnMouseWheel": true,
-          "moveOnMouseMove": true
-        }]
+    const genOptionProps = () => {
+      settings = {
+        dimension: [],
+        measure: []
       }
+      props.query.area.forEach(item => {
+        if (item.rule && item.rule.type) {
+          if (item.queryName == 'area_type') {
+            item.value = [
+              { name: 'city', title: '城市' }]
+          }
+          if (item.queryName == 'area_value') {
+            item.value = [
+              { name: 'number', title: '件数' }]
+          }
+          if (item.queryName == 'area_type' || item.queryName == 'area_value') {
+            item.value.forEach(valueItem => {
+              settings[item.rule.type].push(valueItem.name)
+            })
+          }
+          if (item.queryName == 'area_value') {
+            let series = []
+            let legendData = []
+            item.value.forEach((valueItem, valueIndex) => {
+              if (!series[valueIndex]) {
+                series.push({ name: valueItem.title })
+              }
+              option.series = series.map(seriesItem => {
+                return { ...seriesItem, type: props.type }
+              })
+
+              if (!legendData[valueIndex]) {
+                legendData.push({ name: valueItem.name })
+              }
+              option.legend.data = legendData
+            })
+          }
+        }
+      })
+    }
+    const genOptionData = (chartData) => {
+      if (!settings.dimension.length || !settings.measure.length) {
+        empty.value = true
+        return false
+      }
+      dimensionData = chartData.map(chartDataItem => {
+        return chartDataItem[settings.dimension[0]]
+      })
+      settings.measure.forEach(measureItem => {
+        let measureDataItem = []
+        chartData.forEach(chartDataItem => {
+          measureDataItem.push(chartDataItem[measureItem])
+        })
+        measureData.push(measureDataItem)
+      })
+      return true
+    }
+
+    const genChartOption = (data) => {
+      let chartData = deepcopy(data)
+
+      if (Array.isArray(chartData) && chartData.length) {
+        genOptionProps()
+        if (!genOptionData(chartData)) {
+          return
+        }
+      }
+
+      if (!option || !dimensionData.length || !measureData.length) {
+        return
+      }
+      option = proxy.genCustomOption(option, dimensionData, measureData)
+
       chartInstance && setChartOption()
     }
 
     const setChartOption = () => {
       chartInstance && chartInstance.clear()
+      option = genCompleteChartOption(option)
       chartInstance && chartInstance.setOption(option)
     }
 
@@ -298,7 +202,7 @@ export default {
       const titleTextStyle = {}
       return (
         <div className='g-card__title' style={titleStyle}>
-          <div className='g-card__title-text' style={titleTextStyle}>{props.card_title}</div>
+          <div className='g-card__title-text' style={titleTextStyle}>{props.componentStyle.card_title}</div>
         </div>
       )
     }

@@ -1,45 +1,45 @@
 import ComponentStyle from '@/utils/componentStyle'
 
 export default {
-  line: ({ id, key, props }) => {
-    const { chartStyle } = ComponentStyle.getCardStyle(props)
+  line: ({ id, key, query, props }) => {
+    const { chartStyle } = ComponentStyle.getGCardStyle(props)
     return (
       <>
         <div className='g-card__widget' style={chartStyle}>
-          <echart-line id={id} type={key} componentStyle={props}></echart-line>
+          <echart-line id={id} type={key} query={query} componentStyle={props}></echart-line>
         </div>
       </>
     )
   },
-  bar: ({ id, key, props }) => {
+  bar: ({ id, key, query, props }) => {
 
-    const { chartStyle } = ComponentStyle.getCardStyle(props)
+    const { chartStyle } = ComponentStyle.getGCardStyle(props)
     return (
       <>
         <div className='g-card__widget' style={chartStyle}>
-          <echart-bar id={id} type={key} componentStyle={props}></echart-bar>
+          <echart-bar id={id} type={key} query={query} componentStyle={props}></echart-bar>
         </div>
       </>
     )
   },
-  pie: ({ id, key, props }) => {
+  pie: ({ id, key, query, props }) => {
 
-    const { chartStyle } = ComponentStyle.getCardStyle(props)
+    const { chartStyle } = ComponentStyle.getGCardStyle(props)
     return (
       <>
         <div className='g-card__widget' style={chartStyle}>
-          <echart-pie id={id} type={key} componentStyle={props}></echart-pie>
+          <echart-pie id={id} type={key} query={query} componentStyle={props}></echart-pie>
         </div>
       </>
     )
   },
-  map: ({ id, key, props }) => {
+  map: ({ id, key, query, props }) => {
 
-    const { chartStyle } = ComponentStyle.getCardStyle(props)
+    const { chartStyle } = ComponentStyle.getGCardStyle(props)
     return (
       <>
         <div className='g-card__widget' style={chartStyle}>
-          <echart-map id={id} type={key} componentStyle={props}></echart-map>
+          <echart-map id={id} type={key} query={query} componentStyle={props}></echart-map>
         </div>
       </>
     )

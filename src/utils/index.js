@@ -7,3 +7,11 @@ export function randomStr(length, chars) {
     }
     return result
 }
+
+export function getDomSize(dom) {
+
+    if (!dom) {
+        return
+    }
+    return { width: dom.offsetWidth, height: dom.offsetHeight }
+}

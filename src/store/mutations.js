@@ -2,12 +2,12 @@ import { UPDATE_EDITOR_WIDGET_DATA, UPDATE_WIDGET_CONFIG, UPDATE_CHART_DATA } fr
 
 export default {
     [UPDATE_EDITOR_WIDGET_DATA](state, payload) {
-        state.editorWidget = payload
+        state.editorData = payload
     },
     [UPDATE_WIDGET_CONFIG](state, payload) {
         state.widgetConfig = payload
     },
     [UPDATE_CHART_DATA](state, payload) {
-        state.chartData = { ...state.chartData, ...payload }
+        state.chartData[payload.id] = payload.data
     }
 }

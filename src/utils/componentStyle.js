@@ -9,7 +9,7 @@ export default class ComponentStyle {
   static calChartClientRect(props, id) {
 
     let width = 0
-    let height = 0
+    let height = 0 - 35
     const gridItemDom = document.getElementById(`grid-item__${id}`)
     const clientRect = getDomSize(gridItemDom)
 

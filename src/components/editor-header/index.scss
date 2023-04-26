@@ -4,11 +4,20 @@
   border-bottom: 1px solid #ababab;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
+  justify-content: flex-start;
+  padding: 0 10px;
   box-sizing: border-box;
+  .logo{
+    width: 25px;
+    height: 25px;
+  }
   .info {
     color: #fff;
+    font-size: 18px;
     font-weight: bold;
+    margin-left: 10px;
+    font-family: 'almm';
+    position: relative;
+    top: 2px;
   }
 }

@@ -6,7 +6,8 @@ export default defineComponent({
     return () => {
       return (
         <div className="editor-header">
-          <div className="info">可视化搭建</div>
+          <img className="logo" src={require(`@/assets/images/logo.png`)} />
+          <div className="info">八爪鱼搭建平台</div>
           <div className="operate"></div>
         </div>
       );

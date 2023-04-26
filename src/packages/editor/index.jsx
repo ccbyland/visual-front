@@ -8,7 +8,6 @@ import "./index.scss";
 
 export default defineComponent({
   setup() {
-
     return () => {
       return (
         <div className="g-editor">
@@ -17,15 +16,11 @@ export default defineComponent({
           </div>
           <div className="g-editor__main">
             <div className="g-editor__main-left">
-              <div className="g-editor__main-left-top">
-                <EditorTool></EditorTool>
-              </div>
-              <div
-                className="g-editor__main-left-bottom"
-              >
-                <EditorCanvas></EditorCanvas>
-                <EditorGrid></EditorGrid>
-              </div>
+              <EditorTool></EditorTool>
+            </div>
+            <div className="g-editor__main-center">
+              <EditorCanvas></EditorCanvas>
+              <EditorGrid></EditorGrid>
             </div>
             <div className="g-editor__main-right">
               <EditorOperator></EditorOperator>

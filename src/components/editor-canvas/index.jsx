@@ -7,15 +7,15 @@ import "./index.scss";
 export default defineComponent({
   setup() {
     const store = useStore();
-    const editorData = computed(() => store.state.editorData);
+    const editorWidgetData = computed(() => store.state.editorWidgetData);
 
-    const { mousedownCanvas, mousedownCanvasWidget } = useFocus(editorData);
+    const { mousedownCanvas, mousedownCanvasWidget } = useFocus(editorWidgetData);
 
     return () => {
       return (
         <div className="editor-canvas" onMousedown={mousedownCanvas}>
           <grid-layout
-            v-model:layout={editorData.value.widgets}
+            v-model:layout={editorWidgetData.value.widgets}
             col-num={12}
             row-height={20}
             is-draggable={true} // 是否可拖拽
@@ -24,7 +24,7 @@ export default defineComponent({
             margin={[10, 10]}
             use-css-transforms={true}
           >
-            {editorData.value.widgets.map((widget, widgetIndex) => {
+            {editorWidgetData.value.widgets.map((widget, widgetIndex) => {
               return (
                 <grid-item
                   id={`grid-item__${widget.i}`}

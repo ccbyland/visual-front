@@ -1,11 +1,11 @@
-import { UPDATE_EDITOR_WIDGET_DATA, UPDATE_WIDGET_CONFIG, UPDATE_CHART_DATA } from "./mutations-type"
+import { UPDATE_EDITOR_WIDGET_DATA, UPDATE_EDITOR_WIDGET_CONFIG, UPDATE_CHART_DATA } from "./mutations-type"
 
 export default {
     [UPDATE_EDITOR_WIDGET_DATA](state, payload) {
-        state.editorData = payload
+        state.editorWidgetData = payload
     },
-    [UPDATE_WIDGET_CONFIG](state, payload) {
-        state.widgetConfig = payload
+    [UPDATE_EDITOR_WIDGET_CONFIG](state, payload) {
+        state.editorWidgetConfig = payload
     },
     [UPDATE_CHART_DATA](state, payload) {
         state.chartData[payload.id] = payload.data

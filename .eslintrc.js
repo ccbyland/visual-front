@@ -12,6 +12,7 @@ module.exports = {
     },
     rules: {
         "no-debugger": "off",
+        "no-unused-vars": "off",
         "vue/multi-word-component-names": "off",
     }
 }

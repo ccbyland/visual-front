@@ -1,13 +1,10 @@
 import { computed, defineComponent, reactive, watch } from "vue";
-import PropsQuery from "@/packages/props/propsQuery";
+import PropsStyle from "@/packages/props/propsStyle";
 import "./index.scss";
 import { useStore } from "vuex";
 import useFocus from "@/hooks/useFocus";
 
 export default defineComponent({
-  props: {
-    widget: { type: Object }, // 当前选中的元素
-  },
   setup() {
     const store = useStore();
 
@@ -15,12 +12,12 @@ export default defineComponent({
       editData: {},
     });
 
-    const editorData = computed(() => store.state.editorData);
-
-    const { lastSelectWidget } = useFocus(editorData);
+    const editorwidgetConfig = computed(() => store.state.editorWidgetConfig);
+    const editorWidgetData = computed(() => store.state.editorWidgetData);
+    const { lastSelectWidget } = useFocus(editorWidgetData);
 
     watch(
-      [lastSelectWidget, editorData],
+      [lastSelectWidget, editorWidgetData],
       ([newLastSelectWidget, newEditorData]) => {
         if (!newLastSelectWidget) {
           state.editData = newEditorData.container;
@@ -30,12 +27,14 @@ export default defineComponent({
       },
       { immediate: true }
     );
-
     watch();
     return () => {
       return (
         <div className="editor-operator">
-          <PropsQuery editData={state.editData}></PropsQuery>
+          <PropsStyle
+            setters={editorwidgetConfig.value.globalConfig.styles}
+            editData={state.editData}
+          ></PropsStyle>
         </div>
       );
     };

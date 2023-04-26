@@ -19,7 +19,6 @@ export default defineComponent({
         chartData: res,
       });
     };
-
     return () => {
       return (
         <div className="g-props__query">

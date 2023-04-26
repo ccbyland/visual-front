@@ -9,7 +9,7 @@ export default defineComponent({
   emits: ["update:widget"],
   setup(props, ctx) {
     const store = useStore();
-    const widgetConfig = store.state.widgetConfig;
+    const editorWidgetConfig = store.state.editorWidgetConfig;
 
     const widgetData = computed({
       get: () => {
@@ -28,7 +28,7 @@ export default defineComponent({
       const chartQuery =  widgetData.value.query
   
       if (widgetData.value.key) {
-        widget = widgetConfig.widgetMap[widgetData.value.key];
+        widget = editorWidgetConfig.widgetMap[widgetData.value.key];
         renderWidget = widget.render({
           id: widgetData.value.i,
           key: widgetData.value.key,

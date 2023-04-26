@@ -4,7 +4,7 @@ import { randomStr } from "@/utils";
 import useCommand from "../../hooks/useCommand.js";
 import useWidgetDraggable from "../../hooks/useWidgetDraggable.js";
 import "./index.scss";
-import useDafaultData from "@/hooks/useDafaultData.js";
+import useDefaultData from "@/hooks/useDefaultData.js";
 
 export default defineComponent({
   setup() {
@@ -12,14 +12,14 @@ export default defineComponent({
       const canvasRef = ref(null);
 
       const store = useStore();
-      const widgetConfig = store.state.widgetConfig;
-      const editorData = store.state.editorData;
+      const editorWidgetConfig = store.state.editorWidgetConfig;
+      const editorWidgetData = store.state.editorWidgetData;
 
-      const { commands } = useCommand(editorData);
+      const { commands } = useCommand(editorWidgetData);
 
       const addWidget = (widget) => {
         const defaultData = widget.defaultData;
-        const { getQuery } = useDafaultData(widget);
+        const { getQuery } = useDefaultData(widget);
         const newWidget = reactive({
           i: randomStr(8),
           x: 0,
@@ -35,7 +35,7 @@ export default defineComponent({
 
       const { dragStartWidget, dragEndWidget } = useWidgetDraggable(
         canvasRef,
-        editorData
+        editorWidgetData
       );
 
       return (
@@ -43,7 +43,7 @@ export default defineComponent({
           <div className="item">
             <div className="label">图表</div>
             <div class="options">
-              {widgetConfig.widgetList.map((widget) => {
+              {editorWidgetConfig.widgetList.map((widget) => {
                 return (
                   <div
                     draggable

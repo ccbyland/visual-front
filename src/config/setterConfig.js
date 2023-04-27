@@ -120,5 +120,72 @@ export default {
         },
       ]
     }
+  ],
+  globalContentChart: [
+    {
+      label: '轴标题',
+      name: 'global_contentChart',
+      defaultShow: true,
+      children: [
+        {
+          name: 'isShow',
+          type: 'checkbox',
+          value: false,
+        },
+        {
+          name: 'color',
+          type: 'colorPicker',
+          value: '#000'
+        }
+      ]
+    },
+    {
+      label: 'X轴',
+      name: 'global_contentChart',
+      defaultShow: true,
+      children: [
+        {
+          name: 'isShow',
+          type: 'checkbox',
+          value: false,
+        },
+        {
+          name: 'color',
+          type: 'colorPicker',
+          value: '#000'
+        }
+      ]
+    },
+    {
+      label: 'Y轴',
+      name: 'global_contentChart',
+      defaultShow: true,
+      children: [
+        {
+          name: 'isShow',
+          type: 'checkbox',
+          value: false,
+        },
+        {
+          name: 'color',
+          type: 'colorPicker',
+          value: '#000'
+        }
+      ]
+    }
+  ],
+  globalContentTable: [
+    {
+      label: '样式设置',
+      name: 'global_contentTable',
+      defaultShow: true,
+      children: [
+        {
+          name: 'backgroundColor',
+          type: 'colorPicker',
+          value: '#000',
+        },
+      ]
+    }
   ]
 }

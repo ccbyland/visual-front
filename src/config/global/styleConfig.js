@@ -40,16 +40,16 @@ export default [
     ]
   },
   {
-    title: '组件',
+    title: '内容样式',
     layout: 'collapse',
     content: [
       {
-        title: '标题',
-        setters: [{ setterName: 'componentTitleSetter' }],
+        title: '图类样式',
+        setters: [{ setterName: 'globalContentChart' }],
       },
       {
-        title: '盒子',
-        setters: [{ setterName: 'componentBoxSetter' }],
+        title: '表类样式',
+        setters: [{ setterName: 'globalContentTable' }],
       }
     ]
   }

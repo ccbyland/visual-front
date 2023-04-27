@@ -3,6 +3,7 @@ import VueGridLayout from 'vue-grid-layout'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import initEcharts from '@/packages/echarts'
+import initSetters from '@/packages/setters'
 import initAPI from '@/api/index.js'
 import App from './App.jsx'
 import router from './router'
@@ -17,6 +18,7 @@ app.use(router)
 app.use(store)
 
 initEcharts(app)
+initSetters(app)
 initAPI(app)
 
 app.mount('#app')

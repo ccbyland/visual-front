@@ -31,10 +31,14 @@ export default defineComponent({
     return () => {
       return (
         <div className="editor-operator">
-          <PropsStyle
-            setters={editorwidgetConfig.value.globalConfig.styles}
-            editData={state.editData}
-          ></PropsStyle>
+          {lastSelectWidget.value ? (
+            <><div>123</div></>
+          ) : (
+            <PropsStyle
+              setters={editorwidgetConfig.value.globalConfig.styles}
+              editData={state.editData}
+            ></PropsStyle>
+          )}
         </div>
       );
     };

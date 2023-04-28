@@ -28,15 +28,24 @@ export default defineComponent({
       { immediate: true }
     );
     watch();
+
+    const updateEditData = (newEditData, type) => {
+      state.editData = newEditData;
+      // 更新
+    };
+
     return () => {
       return (
         <div className="editor-operator">
           {lastSelectWidget.value ? (
-            <><div>123</div></>
+            <>
+              <div>123</div>
+            </>
           ) : (
             <PropsStyle
               setters={editorwidgetConfig.value.globalConfig.styles}
               editData={state.editData}
+              onUpdateEditData={(value) => updateEditData(value, "style")}
             ></PropsStyle>
           )}
         </div>

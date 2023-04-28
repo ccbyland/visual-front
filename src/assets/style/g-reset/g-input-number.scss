@@ -1,0 +1,17 @@
+.g-input-number {
+  .el-input-number {
+    height: 24px;
+    width: 70px;
+     .el-input__wrapper{
+      padding-left: 20px;
+      padding-right: 20px;
+     }
+  }
+  .el-input-number__decrease, .el-input-number__increase{
+    width: 18px;
+    .el-icon{
+      width: 6px;
+      height: 6px;
+    }
+  }
+}

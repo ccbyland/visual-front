@@ -1,0 +1,14 @@
+.g-color-picker {
+  .el-color-picker__trigger {
+    width: 24px;
+    height: 24px;
+    padding: 1px;
+    border-radius: 90px;
+    // border: 1px solid rgba(255, 255, 255, 0.5);
+    .el-color-picker__color {
+      border-radius: 90px;
+      overflow: hidden;
+      border: none;
+    }
+  }
+}

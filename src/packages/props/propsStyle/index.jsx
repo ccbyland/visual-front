@@ -6,29 +6,38 @@ export default defineComponent({
     setters: { type: Array },
     editData: { type: Object },
   },
-  setup(props) {
+  setup(props, ctx) {
     const { proxy } = getCurrentInstance();
-    const currEditData = computed(() => props.editData);
+    const propsEditData = computed(() => props.editData);
 
     // 当前激活的面板
     const styleCollapseActive = ref([0, 1, 2]);
     const styleCollapseContentActive = ref(0);
 
+    const editDataChange = () => {
+      console.error(
+        "[editDataChange] propsEditData.value",
+        propsEditData.value
+      );
+      ctx.emit("updateEditData", propsEditData.value);
+    };
+
     // 遍历三级设置器（单位：模块项）
     const renderSetter = (setter) => {
       return (
-        currEditData.value.props && (
+        propsEditData.value.props && (
           <g-setter-layout
             setter={setter}
-            v-model:value={currEditData.value.props[setter.name]}
-            currEditData={currEditData.value.props}
+            v-model:value={propsEditData.value.props[setter.name]}
+            propsEditData={propsEditData.value.props}
+            onChange={editDataChange}
           ></g-setter-layout>
         )
       );
     };
 
     // 遍历二级设置器（单位：模块面板）
-    const renderSetters = (setterItem, setterIndex) => {
+    const renderSetters = (setterItem) => {
       if (!setterItem.content.length) {
         return;
       }
@@ -73,7 +82,7 @@ export default defineComponent({
     return () => {
       return (
         <el-collapse
-          className="g-props-style__collapse"
+          className="g-props-style__collapse g-collapse"
           v-model={styleCollapseActive.value}
         >
           {settersComponents}

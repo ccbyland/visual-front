@@ -25,16 +25,16 @@ export default {
       defaultShow: true,
       options: [
         {
+          label: '微软雅黑',
+          value: 'Microsoft YaHei'
+        },
+        {
           label: '宋体',
           value: 'SimSun',
         },
         {
           label: '黑体',
           value: 'SimHei'
-        },
-        {
-          label: '微软雅黑',
-          value: 'Microsoft Yahei'
         }
       ]
     }
@@ -73,7 +73,7 @@ export default {
         },
         {
           name: 'fontColor',
-          type: 'fontColorPicker',
+          type: 'colorPicker',
           value: '#333',
         },
       ]
@@ -84,7 +84,7 @@ export default {
       children: [
         {
           name: 'backgroundColor',
-          type: 'backgroundColorPicker',
+          type: 'colorPicker',
           value: '#000',
         },
       ]
@@ -97,11 +97,6 @@ export default {
       defaultShow: true,
       children: [
         {
-          name: 'isShow',
-          type: 'checkbox',
-          value: false,
-        },
-        {
           name: 'color',
           type: 'colorPicker',
           value: '#000'
@@ -111,73 +106,6 @@ export default {
     {
       label: '背景色',
       name: 'global_compontentBoxBackground',
-      defaultShow: true,
-      children: [
-        {
-          name: 'backgroundColor',
-          type: 'colorPicker',
-          value: '#000',
-        },
-      ]
-    }
-  ],
-  globalContentChart: [
-    {
-      label: '轴标题',
-      name: 'global_contentChart',
-      defaultShow: true,
-      children: [
-        {
-          name: 'isShow',
-          type: 'checkbox',
-          value: false,
-        },
-        {
-          name: 'color',
-          type: 'colorPicker',
-          value: '#000'
-        }
-      ]
-    },
-    {
-      label: 'X轴',
-      name: 'global_contentChart',
-      defaultShow: true,
-      children: [
-        {
-          name: 'isShow',
-          type: 'checkbox',
-          value: false,
-        },
-        {
-          name: 'color',
-          type: 'colorPicker',
-          value: '#000'
-        }
-      ]
-    },
-    {
-      label: 'Y轴',
-      name: 'global_contentChart',
-      defaultShow: true,
-      children: [
-        {
-          name: 'isShow',
-          type: 'checkbox',
-          value: false,
-        },
-        {
-          name: 'color',
-          type: 'colorPicker',
-          value: '#000'
-        }
-      ]
-    }
-  ],
-  globalContentTable: [
-    {
-      label: '样式设置',
-      name: 'global_contentTable',
       defaultShow: true,
       children: [
         {

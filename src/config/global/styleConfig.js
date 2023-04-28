@@ -38,19 +38,5 @@ export default [
         setters: [{ setterName: 'componentBoxSetter' }],
       }
     ]
-  },
-  {
-    title: '内容样式',
-    layout: 'collapse',
-    content: [
-      {
-        title: '图类样式',
-        setters: [{ setterName: 'globalContentChart' }],
-      },
-      {
-        title: '表类样式',
-        setters: [{ setterName: 'globalContentTable' }],
-      }
-    ]
   }
 ]

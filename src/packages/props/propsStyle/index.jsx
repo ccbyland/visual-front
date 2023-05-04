@@ -7,6 +7,7 @@ export default defineComponent({
     editData: { type: Object },
   },
   setup(props, ctx) {
+
     const { proxy } = getCurrentInstance();
     const propsEditData = computed(() => props.editData);
 
@@ -15,7 +16,7 @@ export default defineComponent({
     const styleCollapseContentActive = ref(0);
 
     const editDataChange = () => {
-      console.error(
+      console.info(
         "[editDataChange] propsEditData.value",
         propsEditData.value
       );

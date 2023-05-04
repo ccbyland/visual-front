@@ -115,5 +115,45 @@ export default {
         },
       ]
     }
+  ],
+  cardTitleSetter: [
+    {
+      label: '显示主标题',
+      type: 'checkbox',
+      name: 'card_mainTitleVisible',
+      value: true,
+    }
+  ],
+  cardLinkSetter: [
+    {
+      label: '显示主标题',
+      type: 'checkbox',
+      name: 'card_mainTitleVisible',
+      value: true,
+    }
+  ],
+  cardBorderSetter: [
+    {
+      label: '显示主标题',
+      type: 'checkbox',
+      name: 'card_mainTitleVisible',
+      value: true,
+    }
+  ],
+  charLineSetter: [
+    {
+      label: '显示主标题',
+      type: 'checkbox',
+      name: 'card_mainTitleVisible',
+      value: true,
+    }
+  ],
+  charLineSignSetter: [
+    {
+      label: '显示主标题',
+      type: 'checkbox',
+      name: 'card_mainTitleVisible',
+      value: true,
+    }
   ]
 }

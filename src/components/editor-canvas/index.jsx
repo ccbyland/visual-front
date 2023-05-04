@@ -10,7 +10,6 @@ export default defineComponent({
     const editorWidgetData = computed(() => store.state.editorWidgetData);
 
     const { mousedownCanvas, mousedownCanvasWidget } = useFocus(editorWidgetData);
-
     return () => {
       return (
         <div className="editor-canvas" onMousedown={mousedownCanvas}>

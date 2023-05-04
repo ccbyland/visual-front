@@ -40,6 +40,26 @@ export default function (data) {
   })
 
   registry({
+    name: 'updateCanvas',
+    execute(newValue) {
+      let state = {
+        before: data.value,
+        after: newValue
+      }
+      return {
+        forward: () => {
+          data = { ...data, ...state.after }
+          store.dispatch("updateEditorWidgetData", data);
+        },
+        back: () => {
+          data = state.before
+          store.dispatch("updateEditorWidgetData", data);
+        }
+      }
+    }
+  })
+
+  registry({
     name: 'updateWidget',
     execute({ newWidget, oldWidget }) {
       let state = {

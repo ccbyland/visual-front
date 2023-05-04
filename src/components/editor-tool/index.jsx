@@ -19,7 +19,9 @@ export default defineComponent({
 
       const addWidget = (widget) => {
         const defaultData = widget.defaultData;
-        const { getQuery } = useDefaultData(widget);
+        const { getProps, getQuery } = useDefaultData(widget);
+
+        console.error(11111111, getProps('styles'))
         const newWidget = reactive({
           i: randomStr(8),
           x: 0,
@@ -27,7 +29,7 @@ export default defineComponent({
           w: defaultData.layout ? defaultData.layout.w : 6,
           h: defaultData.layout ? defaultData.layout.h : 6,
           key: widget.key,
-          props: {},
+          props: getProps('styles'),
           query: getQuery(),
         });
         commands.addWidget(newWidget);

@@ -45,6 +45,9 @@ function createWidgetConfig() {
       widgetList.push(widget)
       widgetMap[widget.key] = widget
 
+      
+      setSetterNameMap(widget, 'styles')
+
       // 组件查询配置初始化
       initQueryConfig(widget)
     }

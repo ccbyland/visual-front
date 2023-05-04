@@ -19,7 +19,7 @@ export default function (widget, data, opt = {}) {
       widgetConfigPropsType = widget.globalConfig[type]
       // 组件
     } else {
-      if (!widget.props || !widget.props[type] || !Array.isArray(!widget.props[type]) || !widget.props[type].length) {
+      if (!widget.props || !widget.props[type] || !Array.isArray(widget.props[type]) || !widget.props[type].length) {
         return
       }
       widgetConfigPropsType = widget.props[type]

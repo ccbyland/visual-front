@@ -6,8 +6,9 @@ import setterConfig from '@/config/setterConfig'
  * @param {*} type 
  * @param {*} param2 
  */
-export const setSetterNameMap = (widget, type, { isGlobal }) => {
+export const setSetterNameMap = (widget, type, options = {}) => {
 
+  const { isGlobal } = options
   let configList = []
 
   // 全局设置器

@@ -3,9 +3,14 @@ import PropsStyle from "@/packages/props/propsStyle";
 import "./index.scss";
 import { useStore } from "vuex";
 import useFocus from "@/hooks/useFocus";
+import { events } from "@/utils/events";
 
 export default defineComponent({
-  setup() {
+  props: {
+    updateCanvas: { type: Function },
+    updateWidget: { type: Function },
+  },
+  setup(props) {
     const store = useStore();
 
     const state = reactive({
@@ -27,29 +32,59 @@ export default defineComponent({
       },
       { immediate: true }
     );
-    watch();
+
+    const update = () => {
+      // 更新容器
+      if (!props.widget) {
+        props.updateCanvas({
+          container: state.editData,
+        });
+        // 更新小部件
+      } else {
+        props.updateWidget();
+      }
+    };
 
     const updateEditData = (newEditData, type) => {
       state.editData = newEditData;
-      // 更新
+      // 更新state数据
+      update();
+      // 更新视图
+      if (type === "page") {
+        events.emit("global_page_change");
+      } else {
+        events.emit(`chart_data_change_${newEditData.i}`);
+      }
     };
 
     return () => {
-      return (
-        <div className="editor-operator">
-          {lastSelectWidget.value ? (
-            <>
-              <div>123</div>
-            </>
-          ) : (
+      let operatorContent = null;
+
+      if (!lastSelectWidget.value) {
+        operatorContent = (
+          <PropsStyle
+            setters={editorwidgetConfig.value.globalConfig.styles}
+            editData={state.editData}
+            onUpdateEditData={(value) => updateEditData(value, "style")}
+          ></PropsStyle>
+        );
+      } else {
+        let styleSetters = [];
+        let widget = editorwidgetConfig.value.widgetMap[lastSelectWidget.value.key];
+        if (widget && widget.props && widget.props.styles) {
+          styleSetters = widget.props.styles;
+        }
+        operatorContent = (
+          <>
             <PropsStyle
-              setters={editorwidgetConfig.value.globalConfig.styles}
+              setters={styleSetters}
               editData={state.editData}
               onUpdateEditData={(value) => updateEditData(value, "style")}
             ></PropsStyle>
-          )}
-        </div>
-      );
+          </>
+        );
+      }
+      return operatorContent;
     };
   },
 });

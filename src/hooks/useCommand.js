@@ -48,7 +48,7 @@ export default function (data) {
       }
       return {
         forward: () => {
-          data = { ...data, ...state.after }
+          data = state.after
           store.dispatch("updateEditorWidgetData", data);
         },
         back: () => {

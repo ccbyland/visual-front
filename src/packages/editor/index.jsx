@@ -2,7 +2,6 @@ import { defineComponent } from "vue";
 import EditorHeader from "@/components/editor-header";
 import EditorTool from "@/components/editor-tool";
 import EditorCanvas from "@/components/editor-canvas";
-import EditorGrid from "@/components/editor-grid";
 import EditorOperator from "@/components/editor-operator";
 import GlobalStyle from "@/utils/globalStyle.js";
 import "./index.scss";
@@ -16,11 +15,11 @@ export default defineComponent({
     const { commands } = useCommand(editorWidgetData);
 
     return () => {
-  
       const containerData = editorWidgetData.container.props;
       const pageStyle = GlobalStyle.getPageStyle(containerData);
       const pageLayout = GlobalStyle.getPageLayout(containerData);
 
+      const globalStyle = { ...pageStyle, ...pageLayout };
       return (
         <div className="g-editor">
           <div className="g-editor__header">
@@ -31,8 +30,9 @@ export default defineComponent({
               <EditorTool></EditorTool>
             </div>
             <div className="g-editor__main-center">
-              <EditorCanvas style={pageStyle}></EditorCanvas>
-              <EditorGrid></EditorGrid>
+              <div className="g-editor__main-center-page" style={globalStyle}>
+                <EditorCanvas></EditorCanvas>
+              </div>
             </div>
             <div className="g-editor__main-right">
               <EditorOperator

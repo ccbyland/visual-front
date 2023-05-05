@@ -3,9 +3,10 @@
   height: 100%;
   box-sizing: border-box;
   border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
   &.selected {
     border: 1px solid #1b538d;
-    border-radius: 5px;
   }
 }
 .g-card__widget {

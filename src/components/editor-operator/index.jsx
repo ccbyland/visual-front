@@ -37,6 +37,7 @@ export default defineComponent({
       // 更新容器
       if (!props.widget) {
         props.updateCanvas({
+          ...editorWidgetData.value,
           container: state.editData,
         });
         // 更新小部件
@@ -70,7 +71,8 @@ export default defineComponent({
         );
       } else {
         let styleSetters = [];
-        let widget = editorwidgetConfig.value.widgetMap[lastSelectWidget.value.key];
+        let widget =
+          editorwidgetConfig.value.widgetMap[lastSelectWidget.value.key];
         if (widget && widget.props && widget.props.styles) {
           styleSetters = widget.props.styles;
         }

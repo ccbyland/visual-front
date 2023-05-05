@@ -21,7 +21,6 @@ export default defineComponent({
         const defaultData = widget.defaultData;
         const { getProps, getQuery } = useDefaultData(widget);
 
-        console.error(11111111, getProps('styles'))
         const newWidget = reactive({
           i: randomStr(8),
           x: 0,

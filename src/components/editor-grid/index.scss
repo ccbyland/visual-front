@@ -10,6 +10,7 @@
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
   grid-gap: 10px;
+  pointer-events: none;
   .item {
     height: 20px;
     background-color: rgba(200, 200, 200, 0.2);

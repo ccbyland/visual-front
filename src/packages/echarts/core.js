@@ -197,7 +197,6 @@ export default {
     }
 
     const renderTitle = () => {
-
       const titleStyle = {}
       const titleTextStyle = {}
       return (

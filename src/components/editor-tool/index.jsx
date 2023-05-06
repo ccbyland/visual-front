@@ -1,24 +1,31 @@
-import { defineComponent, reactive, ref } from "vue";
-import { useStore } from "vuex";
+import { computed, defineComponent, inject, reactive, ref } from "vue";
+import _ from "lodash";
 import { randomStr } from "@/utils";
 import useCommand from "../../hooks/useCommand.js";
-import useWidgetDraggable from "../../hooks/useWidgetDraggable.js";
+// import useWidgetDraggable from "../../hooks/useWidgetDraggable.js";
 import "./index.scss";
 import useDefaultData from "@/hooks/useDefaultData.js";
 
 export default defineComponent({
-  setup() {
+  props: {
+    modelValue: { type: Object },
+  },
+  setup(props, ctx) {
+    const data = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(newValue) {
+        ctx.emit("update:modelValue", _.cloneDeep(newValue));
+      },
+    });
+    const widgetConfig = inject("widgetConfig");
+
     return () => {
+      console.error("[editor-tool] render");
 
-      console.error('[editor-tool] render')
-
-      const canvasRef = ref(null);
-
-      const store = useStore();
-      const editorWidgetConfig = store.state.editorWidgetConfig;
-      const editorWidgetData = store.state.editorWidgetData;
-
-      const { commands } = useCommand(editorWidgetData);
+      // const canvasRef = ref(null);
+      const { commands } = useCommand(data);
 
       const addWidget = (widget) => {
         const defaultData = widget.defaultData;
@@ -31,28 +38,28 @@ export default defineComponent({
           w: defaultData.layout ? defaultData.layout.w : 6,
           h: defaultData.layout ? defaultData.layout.h : 6,
           key: widget.key,
-          props: getProps('styles'),
+          props: getProps("styles"),
           query: getQuery(),
         });
         commands.addWidget(newWidget);
       };
 
-      const { dragStartWidget, dragEndWidget } = useWidgetDraggable(
-        canvasRef,
-        editorWidgetData
-      );
+      // const { dragStartWidget, dragEndWidget } = useWidgetDraggable(
+      //   canvasRef,
+      //   editorWidgetData
+      // );
 
       return (
         <div className="editor-tool">
           <div className="item">
             <div className="label">图表</div>
             <div class="options">
-              {editorWidgetConfig.widgetList.map((widget) => {
+              {widgetConfig.widgetList.map((widget) => {
                 return (
                   <div
                     draggable
-                    onDragStart={(e) => dragStartWidget(e, widget)}
-                    onDragEnd={dragEndWidget}
+                    // onDragStart={(e) => dragStartWidget(e, widget)}
+                    // onDragEnd={dragEndWidget}
                     className="node"
                     onClick={() => addWidget(widget)}
                   >

@@ -2,8 +2,6 @@ import { useStore } from "vuex"
 
 export default function (data) {
 
-  const store = useStore()
-
   const state = {
     commands: {}
   }
@@ -19,23 +17,19 @@ export default function (data) {
     name: 'addWidget',
     execute(newWidget) {
       let state = {
-        before: data.widgets,
+        before: data.value.widgets,
         after: (() => {
-          let widgets = [...data.widgets]
+          let widgets = [...data.value.widgets]
           let newWidgets = [...widgets, newWidget]
           return newWidgets
         })(),
       }
       return {
         forward: () => {
-          // console.error('[addWidget] forward')
-          data = { ...data, widgets: state.after }
-          store.dispatch("updateEditorWidgetData", data);
+          data.value = { ...data.value, widgets: state.after }
         },
         back: () => {
-          // console.error('[addWidget] back')
-          data = { ...data, widgets: state.before }
-          store.dispatch("updateEditorWidgetData", data);
+          data.value = { ...data.value, widgets: state.before }
         }
       }
     }
@@ -50,14 +44,10 @@ export default function (data) {
       }
       return {
         forward: () => {
-          // console.error('[updateCanvas] forward')
-          data = state.after
-          store.dispatch("updateEditorWidgetData", data);
+          data.value = state.after
         },
         back: () => {
-          // console.error('[updateCanvas] back')
-          data = state.before
-          store.dispatch("updateEditorWidgetData", data);
+          data.value = state.before
         }
       }
     }
@@ -79,14 +69,10 @@ export default function (data) {
       }
       return {
         forward: () => {
-          // console.error('[updateWidget] forward')
-          data = { ...data, widgets: state.after }
-          store.dispatch("updateEditorWidgetData", data);
+          data.value = { ...data.value, widgets: state.after }
         },
         back: () => {
-          // console.error('[updateWidget] back')
-          data = { ...data, widgets: state.before }
-          store.dispatch("updateEditorWidgetData", data);
+          data.value = { ...data.value, widgets: state.before }
         }
       }
     }

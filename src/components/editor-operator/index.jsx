@@ -1,53 +1,51 @@
-import { computed, defineComponent, reactive, watch } from "vue";
+import { defineComponent, inject, reactive, watch } from "vue";
+import _ from "lodash";
 import PropsStyle from "@/packages/props/propsStyle";
 import "./index.scss";
-import { useStore } from "vuex";
 import useFocus from "@/hooks/useFocus";
 import { events } from "@/utils/events";
 
 export default defineComponent({
   props: {
+    data: { type: Object },
+    widget: { type: Object },
     updateCanvas: { type: Function },
     updateWidget: { type: Function },
   },
   setup(props) {
-    const store = useStore();
+    const widgetConfig = inject("widgetConfig");
 
     const state = reactive({
       editData: {},
     });
 
-    const editorwidgetConfig = computed(() => store.state.editorWidgetConfig);
-    const editorWidgetData = computed(() => store.state.editorWidgetData);
-    const { lastSelectWidget } = useFocus(editorWidgetData);
-
-    watch(
-      [lastSelectWidget, editorWidgetData],
-      ([newLastSelectWidget, newEditorData]) => {
-        if (!newLastSelectWidget) {
-          state.editData = newEditorData.container;
-        } else {
-          state.editData = newLastSelectWidget;
-        }
-      },
-      { immediate: true }
-    );
-
     const update = () => {
       // 更新容器
-      if (!lastSelectWidget.value) {
+      if (!props.widget) {
         props.updateCanvas({
-          ...editorWidgetData.value,
+          ...props.data,
           container: state.editData,
         });
         // 更新小部件
       } else {
         props.updateWidget({
           newWidget: state.editData,
-          oldWidget: lastSelectWidget.value,
+          oldWidget: props.widget,
         });
       }
     };
+
+    watch(
+      () => [props.widget, props.data],
+      () => {
+        if (!props.widget) {
+          state.editData = _.cloneDeep(props.data.container);
+        } else {
+          state.editData = _.cloneDeep(props.widget);
+        }
+      },
+      { immediate: true }
+    );
 
     const updateEditData = (newEditData, type) => {
       state.editData = newEditData;
@@ -64,18 +62,17 @@ export default defineComponent({
     return () => {
       let operatorContent = null;
 
-      if (!lastSelectWidget.value) {
+      if (!props.widget) {
         operatorContent = (
           <PropsStyle
-            setters={editorwidgetConfig.value.globalConfig.styles}
+            setters={widgetConfig.globalConfig.styles}
             editData={state.editData}
             onUpdateEditData={(value) => updateEditData(value, "style")}
           ></PropsStyle>
         );
       } else {
         let styleSetters = [];
-        let widget =
-          editorwidgetConfig.value.widgetMap[lastSelectWidget.value.key];
+        let widget = widgetConfig.widgetMap[props.widget.key];
         if (widget && widget.props && widget.props.styles) {
           styleSetters = widget.props.styles;
         }

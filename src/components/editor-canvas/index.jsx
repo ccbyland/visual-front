@@ -1,26 +1,34 @@
 import { computed, defineComponent, watch } from "vue";
-import { useStore } from "vuex";
+import _ from "lodash";
 import EditorGrid from "@/components/editor-grid";
 import EditorWidget from "@/components/editor-widget";
 import useFocus from "../../hooks/useFocus";
 import "./index.scss";
 
 export default defineComponent({
-  setup() {
-    const store = useStore();
-    const editorWidgetData = computed(() => store.state.editorWidgetData);
-    const { mousedownCanvas, mousedownCanvasWidget } =
-      useFocus(editorWidgetData);
+  props: {
+    modelValue: { type: Object },
+  },
+  emits: ["update:modelValue"],
+  setup(props, ctx) {
+    const data = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(newValue) {
+        ctx.emit("update:modelValue", _.cloneDeep(newValue));
+      },
+    });
+    const { mousedownCanvas, mousedownCanvasWidget } = useFocus(data);
 
     return () => {
-      
-      console.error("[editor-canvas] render", editorWidgetData);
+      console.error("[editor-canvas] render");
 
       return (
         <>
           <div className="editor-canvas" onMousedown={mousedownCanvas}>
             <grid-layout
-              v-model:layout={editorWidgetData.value.widgets}
+              v-model:layout={data.value.widgets}
               col-num={12}
               row-height={20}
               is-draggable={true} // 是否可拖拽
@@ -29,7 +37,7 @@ export default defineComponent({
               margin={[10, 10]}
               use-css-transforms={true}
             >
-              {editorWidgetData.value.widgets.map((widget, widgetIndex) => {
+              {data.value.widgets.map((widget, widgetIndex) => {
                 return (
                   <grid-item
                     id={`grid-item__${widget.i}`}

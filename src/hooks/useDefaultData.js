@@ -1,8 +1,8 @@
 import queryConfig from "@/config/widget/queryConfig"
 
-export default function (widget, data, opt = {}) {
+export default function (widget, data, options = {}) {
 
-  const { isCanvas } = opt
+  const { isCanvas } = options
 
   /**
    * 根据类型获取对应设置器配置
@@ -73,10 +73,10 @@ export default function (widget, data, opt = {}) {
 
   const setCanvasProps = () => {
     let globalStyleConfig = getProps('styles')
-    return {
-      ...data,
+    data.value = {
+      ...data.value,
       container: {
-        ...data.container,
+        ...data.value.container,
         props: globalStyleConfig
       }
     }

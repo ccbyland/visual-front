@@ -3,9 +3,6 @@ import { useStore } from "vuex";
 
 export default function (data) {
 
-
-    const store = useStore()
-
     const lastSelectWidget = computed(() => data.value.widgets[data.value.widgetSelectedIndex])
 
     /**
@@ -24,22 +21,20 @@ export default function (data) {
      * @param {*} widgetIndex 
      */
     const mousedownCanvasWidget = (e, widget, widgetIndex) => {
-        // console.error('[mousedownCanvasWidget]');
         e.preventDefault()
         e.stopPropagation()
         clearAllWidgetFocus()
         data.value.widgets[widgetIndex] = { ...widget, focus: true }
 
-        store.dispatch('updateEditorWidgetData', { ...data.value, widgetSelectedIndex: widgetIndex })
+        data.value = { ...data.value, widgetSelectedIndex: widgetIndex }
     }
 
     /**
      * 选中画布
      */
     const mousedownCanvas = () => {
-        // console.error('[mousedownCanvas]');
         clearAllWidgetFocus()
-        store.dispatch('updateEditorWidgetData', { ...data.value, widgetSelectedIndex: -1 })
+        data.value = { ...data.value, widgetSelectedIndex: -1 }
     }
 
     return { mousedownCanvas, mousedownCanvasWidget, lastSelectWidget }

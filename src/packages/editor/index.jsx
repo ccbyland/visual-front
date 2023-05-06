@@ -1,24 +1,35 @@
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
+import _ from "lodash";
 import EditorHeader from "@/components/editor-header";
 import EditorTool from "@/components/editor-tool";
 import EditorCanvas from "@/components/editor-canvas";
 import EditorOperator from "@/components/editor-operator";
+import useCommand from "@/hooks/useCommand";
 import GlobalStyle from "@/utils/globalStyle.js";
 import "./index.scss";
-import { useStore } from "vuex";
-import useCommand from "@/hooks/useCommand";
+import useFocus from "@/hooks/useFocus";
 
 export default defineComponent({
-  setup() {
-    const store = useStore();
-    const editorWidgetData = store.state.editorWidgetData;
-    const { commands } = useCommand(editorWidgetData);
+  props: {
+    modelValue: { type: Object },
+  },
+  emits: ["update:modelValue"],
+  setup(props, ctx) {
+    const data = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(newValue) {
+        ctx.emit("update:modelValue", _.cloneDeep(newValue));
+      },
+    });
+    const { commands } = useCommand(data);
+    const { lastSelectWidget } = useFocus(data);
 
     return () => {
-      
-      console.error('[editor] render')
+      console.error("[editor] render");
 
-      const containerData = editorWidgetData.container.props;
+      const containerData = props.modelValue.container.props;
       const pageStyle = GlobalStyle.getPageStyle(containerData);
       const pageLayout = GlobalStyle.getPageLayout(containerData);
 
@@ -30,15 +41,17 @@ export default defineComponent({
           </div>
           <div className="g-editor__main">
             <div className="g-editor__main-left">
-              <EditorTool></EditorTool>
+              <EditorTool v-model={data.value}></EditorTool>
             </div>
             <div className="g-editor__main-center">
               <div className="g-editor__main-center-page" style={globalStyle}>
-                <EditorCanvas></EditorCanvas>
+                <EditorCanvas v-model={data.value}></EditorCanvas>
               </div>
             </div>
             <div className="g-editor__main-right">
               <EditorOperator
+                widget={lastSelectWidget.value}
+                data={data.value}
                 updateCanvas={commands.updateCanvas}
                 updateWidget={commands.updateWidget}
               ></EditorOperator>

@@ -1,6 +1,5 @@
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, inject } from "vue";
 import "./index.scss";
-import { useStore } from "vuex";
 
 export default defineComponent({
   props: {
@@ -8,9 +7,6 @@ export default defineComponent({
   },
   emits: ["update:widget"],
   setup(props, ctx) {
-    const store = useStore();
-    const editorWidgetConfig = store.state.editorWidgetConfig;
-
     const widgetData = computed({
       get: () => {
         return props.widget;
@@ -20,23 +16,23 @@ export default defineComponent({
       },
     });
 
-    return () => {
-      debugger
+    const widgetConfig = inject("widgetConfig");
 
-      console.error('[editor-widget] render')
+    return () => {
+      console.error("[editor-widget] render");
 
       let widget = null;
       let renderWidget = null;
-      const chartStyle = widgetData.value.props
-      const chartQuery =  widgetData.value.query
+      const chartStyle = widgetData.value.props;
+      const chartQuery = widgetData.value.query;
 
       if (widgetData.value.key) {
-        widget = editorWidgetConfig.widgetMap[widgetData.value.key];
+        widget = widgetConfig.widgetMap[widgetData.value.key];
         renderWidget = widget.render({
           id: widgetData.value.i,
           key: widgetData.value.key,
           props: chartStyle,
-          query: chartQuery
+          query: chartQuery,
         });
       }
 
@@ -47,7 +43,7 @@ export default defineComponent({
             widgetData.value.focus ? "selected" : "",
           ]}
         >
-          {renderWidget}-{chartStyle}
+          {renderWidget}
         </div>
       );
     };

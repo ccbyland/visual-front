@@ -24,7 +24,7 @@ export default function (data) {
      * @param {*} widgetIndex 
      */
     const mousedownCanvasWidget = (e, widget, widgetIndex) => {
-
+        // console.error('[mousedownCanvasWidget]');
         e.preventDefault()
         e.stopPropagation()
         clearAllWidgetFocus()
@@ -37,6 +37,7 @@ export default function (data) {
      * 选中画布
      */
     const mousedownCanvas = () => {
+        // console.error('[mousedownCanvas]');
         clearAllWidgetFocus()
         store.dispatch('updateEditorWidgetData', { ...data.value, widgetSelectedIndex: -1 })
     }

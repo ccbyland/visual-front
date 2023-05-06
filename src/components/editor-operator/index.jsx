@@ -35,7 +35,7 @@ export default defineComponent({
 
     const update = () => {
       // 更新容器
-      if (!props.widget) {
+      if (!lastSelectWidget.value) {
         props.updateCanvas({
           ...editorWidgetData.value,
           container: state.editData,

@@ -1,4 +1,7 @@
 export default {
+  /**
+   * 页面样式
+   */
   globalStyleSetter: [
     {
       label: '主题模式',
@@ -39,6 +42,9 @@ export default {
       ]
     }
   ],
+  /**
+   * 页面布局
+   */
   globalLayoutSetter: [
     {
       label: '页面宽度',
@@ -58,6 +64,9 @@ export default {
       ]
     },
   ],
+  /**
+   * 组件标题栏
+   */
   componentTitleSetter: [
     {
       label: '文本',
@@ -90,6 +99,9 @@ export default {
       ]
     },
   ],
+  /**
+   * 组件盒子
+   */
   componentBoxSetter: [
     {
       label: '边框',
@@ -116,43 +128,93 @@ export default {
       ]
     }
   ],
+  /**
+   * 卡片标题栏
+   */
   cardTitleSetter: [
     {
       label: '显示主标题',
       type: 'checkbox',
       name: 'card_mainTitleVisible',
-      value: true,
-    }
+      value: [1],
+      options: [
+        {
+          label: '',
+          value: 1
+        }
+      ]
+    },
+    {
+      label: '文本',
+      name: 'global_compontentTitle',
+      defaultShow: true,
+      children: [
+        {
+          name: 'text',
+          type: 'input',
+          value: '基础折线趋势图',
+        },
+        {
+          name: 'fontSize',
+          type: 'inputNumber',
+          value: 12,
+          min: 12,
+          max: 32
+        },
+        {
+          name: 'fontColor',
+          type: 'colorPicker',
+          value: '#333',
+        },
+      ]
+    }, {
+      label: '背景色',
+      name: 'global_compontentTitleBackground',
+      defaultShow: true,
+      children: [
+        {
+          name: 'backgroundColor',
+          type: 'colorPicker',
+          value: '#000',
+        },
+      ]
+    },
   ],
   cardLinkSetter: [
     {
-      label: '显示主标题',
+      label: '显示分割线',
       type: 'checkbox',
-      name: 'card_mainTitleVisible',
-      value: true,
+      name: 'card_mainTitleVisible1',
+      value: [1],
+      options: [
+        {
+          label: '',
+          value: 1
+        }
+      ]
     }
   ],
   cardBorderSetter: [
     {
       label: '显示主标题',
-      type: 'checkbox',
-      name: 'card_mainTitleVisible',
+      type: 'input',
+      name: 'card_mainTitleVisible2',
       value: true,
     }
   ],
   charLineSetter: [
     {
       label: '显示主标题',
-      type: 'checkbox',
-      name: 'card_mainTitleVisible',
+      type: 'input',
+      name: 'card_mainTitleVisible3',
       value: true,
     }
   ],
   charLineSignSetter: [
     {
       label: '显示主标题',
-      type: 'checkbox',
-      name: 'card_mainTitleVisible',
+      type: 'input',
+      name: 'card_mainTitleVisible4',
       value: true,
     }
   ]

@@ -11,27 +11,29 @@ export default defineComponent({
     const store = useStore();
     const editorWidgetConfig = store.state.editorWidgetConfig;
 
-    const widgetData = computed({
-      get: () => {
-        return props.widget;
-      },
-      set: (val) => {
-        ctx.emit("update:widget", val);
-      },
-    });
+    // const widgetData = computed({
+    //   get: () => {
+    //     return props.widget;
+    //   },
+    //   set: (val) => {
+    //     ctx.emit("update:widget", val);
+    //   },
+    // });
 
     return () => {
 
+      console.error('[editor-widget] render')
+
       let widget = null;
       let renderWidget = null;
-      const chartStyle = widgetData.value.props
-      const chartQuery =  widgetData.value.query
-  
-      if (widgetData.value.key) {
-        widget = editorWidgetConfig.widgetMap[widgetData.value.key];
+      const chartStyle = props.widget.props
+      const chartQuery =  props.widget.query
+
+      if (props.widget.key) {
+        widget = editorWidgetConfig.widgetMap[props.widget.key];
         renderWidget = widget.render({
-          id: widgetData.value.i,
-          key: widgetData.value.key,
+          id: props.widget.i,
+          key: props.widget.key,
           props: chartStyle,
           query: chartQuery
         });
@@ -41,10 +43,10 @@ export default defineComponent({
         <div
           class={[
             "g-card__widget-wrap",
-            widgetData.value.focus ? "selected" : "",
+            props.widget.focus ? "selected" : "",
           ]}
         >
-          {renderWidget}
+          {renderWidget}-{chartStyle}
         </div>
       );
     };

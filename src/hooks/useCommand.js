@@ -28,10 +28,12 @@ export default function (data) {
       }
       return {
         forward: () => {
+          // console.error('[addWidget] forward')
           data = { ...data, widgets: state.after }
           store.dispatch("updateEditorWidgetData", data);
         },
         back: () => {
+          // console.error('[addWidget] back')
           data = { ...data, widgets: state.before }
           store.dispatch("updateEditorWidgetData", data);
         }
@@ -48,10 +50,12 @@ export default function (data) {
       }
       return {
         forward: () => {
+          // console.error('[updateCanvas] forward')
           data = state.after
           store.dispatch("updateEditorWidgetData", data);
         },
         back: () => {
+          // console.error('[updateCanvas] back')
           data = state.before
           store.dispatch("updateEditorWidgetData", data);
         }
@@ -75,10 +79,12 @@ export default function (data) {
       }
       return {
         forward: () => {
+          // console.error('[updateWidget] forward')
           data = { ...data, widgets: state.after }
           store.dispatch("updateEditorWidgetData", data);
         },
         back: () => {
+          // console.error('[updateWidget] back')
           data = { ...data, widgets: state.before }
           store.dispatch("updateEditorWidgetData", data);
         }

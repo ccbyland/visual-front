@@ -42,7 +42,10 @@ export default defineComponent({
         });
         // 更新小部件
       } else {
-        props.updateWidget();
+        props.updateWidget({
+          newWidget: state.editData,
+          oldWidget: lastSelectWidget.value,
+        });
       }
     };
 

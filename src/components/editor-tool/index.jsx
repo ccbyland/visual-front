@@ -9,6 +9,9 @@ import useDefaultData from "@/hooks/useDefaultData.js";
 export default defineComponent({
   setup() {
     return () => {
+
+      console.error('[editor-tool] render')
+
       const canvasRef = ref(null);
 
       const store = useStore();

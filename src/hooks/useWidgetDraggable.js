@@ -4,7 +4,6 @@ export default (canvasRef) => {
 
     const dragenter = (e) => {
         e.dataTransfer.dropEffect = 'move'
-        console.log(12, curWidget)
     }
 
     // const dragover = (e) => {

@@ -1,7 +1,7 @@
 .g-row {
   display: flex;
   align-items: center;
-  height: 30px;
+  min-height: 30px;
   .el-col {
     &:nth-child(1) {
       text-align: right;

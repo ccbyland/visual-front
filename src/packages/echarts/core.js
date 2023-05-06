@@ -54,7 +54,8 @@ export default {
 
     const emptyImg = computed(() => Proxy.EmptyImg || EmptyImg)
 
-    const chartDataChange = ({ chartData }) => {
+    const chartDataChange = (options = {}) => {
+      const { chartData } = options
       if (chartData) {
         empty.value = false
       }
@@ -73,14 +74,13 @@ export default {
 
     const addEvent = () => {
       events.on(`chart_data_change_${props.id}`, chartDataChange)
-
       return () => {
         events.off(`chart_data_change_${props.id}`, chartDataChange)
       }
     }
 
     const renderChart = (data) => {
-      if (data.value) {
+      if (!data || data.value) {
         return
       }
       initChart()
@@ -197,6 +197,7 @@ export default {
     }
 
     const renderTitle = () => {
+
       const titleStyle = {}
       const titleTextStyle = {}
       return (

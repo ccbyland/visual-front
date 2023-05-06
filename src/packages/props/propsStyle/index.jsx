@@ -7,19 +7,14 @@ export default defineComponent({
     editData: { type: Object },
   },
   setup(props, ctx) {
-
     const { proxy } = getCurrentInstance();
     const propsEditData = computed(() => props.editData);
 
     // 当前激活的面板
     const styleCollapseActive = ref([0, 1, 2]);
-    const styleCollapseContentActive = ref(0);
+    const styleCollapseContentActive = ref([0, 1, 2]);
 
     const editDataChange = () => {
-      console.info(
-        "[editDataChange] propsEditData.value",
-        propsEditData.value
-      );
       ctx.emit("updateEditData", propsEditData.value);
     };
 

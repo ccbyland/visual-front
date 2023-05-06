@@ -15,6 +15,9 @@ export default defineComponent({
     const { commands } = useCommand(editorWidgetData);
 
     return () => {
+      
+      console.error('[editor] render')
+
       const containerData = editorWidgetData.container.props;
       const pageStyle = GlobalStyle.getPageStyle(containerData);
       const pageLayout = GlobalStyle.getPageLayout(containerData);

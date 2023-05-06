@@ -1,4 +1,4 @@
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, watch } from "vue";
 import { useStore } from "vuex";
 import EditorGrid from "@/components/editor-grid";
 import EditorWidget from "@/components/editor-widget";
@@ -11,7 +11,11 @@ export default defineComponent({
     const editorWidgetData = computed(() => store.state.editorWidgetData);
     const { mousedownCanvas, mousedownCanvasWidget } =
       useFocus(editorWidgetData);
+
     return () => {
+      
+      console.error("[editor-canvas] render", editorWidgetData);
+
       return (
         <>
           <div className="editor-canvas" onMousedown={mousedownCanvas}>

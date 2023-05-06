@@ -38,6 +38,21 @@ export default defineComponent({
       return null;
     };
     const setterComponentMap = {
+      checkbox: (props, valueData) => {
+        return (
+          <el-checkbox-group
+            className="g-checkbox"
+            v-model={valueData.value}
+            onChange={textChange}
+          >
+            {props.setter.options.map((option) => {
+              return (
+                <el-checkbox label={option.value}>{option.label}</el-checkbox>
+              );
+            })}
+          </el-checkbox-group>
+        );
+      },
       radio: (props, valueData) => {
         return (
           <el-radio-group
@@ -78,6 +93,16 @@ export default defineComponent({
               max={props.max}
               onChange={textChange}
             ></el-input-number>
+          </div>
+        );
+      },
+      input: (props, valueData) => {
+        return (
+          <div className="g-input setter-item-node">
+            <el-input
+              v-model={valueData.value[props.name]}
+              onChange={textChange}
+            ></el-input>
           </div>
         );
       },

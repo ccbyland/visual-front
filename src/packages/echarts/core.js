@@ -198,11 +198,13 @@ export default {
 
     const renderTitle = () => {
 
-      const titleStyle = {}
-      const titleTextStyle = {}
+      const { card_compontentTitle, card_compontentTitleBackground } = props.componentStyle
+      const titleStyle = { 'background': card_compontentTitleBackground.backgroundColor }
+      const titleTextStyle = { 'color': card_compontentTitle.fontColor }
+
       return (
         <div className='g-card__title' style={titleStyle}>
-          <div className='g-card__title-text' style={titleTextStyle}>{props.componentStyle.card_title}</div>
+          <div className='g-card__title-text' style={titleTextStyle}>{card_compontentTitle.text || ''}</div>
         </div>
       )
     }

@@ -1,7 +1,7 @@
-import widgetRegisterConfig from "./widget/widgetRegisterConfig"
+import widgetRegisterConfig from "./widgetRegisterConfig"
 import globalStyleConfig from '@/config/global/styleConfig'
 import { setSetterNameMap } from '@/utils/setterTransform'
-import queryConfig from "./widget/queryConfig"
+import queryConfig from "./queryConfig"
 
 /**
  * 组件查询配置初始化

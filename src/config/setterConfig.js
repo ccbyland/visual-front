@@ -70,7 +70,7 @@ export default {
   componentTitleSetter: [
     {
       label: '文本',
-      name: 'global_compontentTitle',
+      name: 'card_compontentTitle',
       defaultShow: true,
       children: [
         {
@@ -88,7 +88,7 @@ export default {
       ]
     }, {
       label: '背景色',
-      name: 'global_compontentTitleBackground',
+      name: 'card_compontentTitleBackground',
       defaultShow: true,
       children: [
         {
@@ -105,7 +105,7 @@ export default {
   componentBoxSetter: [
     {
       label: '边框',
-      name: 'global_compontentBoxBorder',
+      name: 'card_compontentBoxBorder',
       defaultShow: true,
       children: [
         {
@@ -117,7 +117,7 @@ export default {
     },
     {
       label: '背景色',
-      name: 'global_compontentBoxBackground',
+      name: 'card_compontentBoxBackground',
       defaultShow: true,
       children: [
         {
@@ -146,7 +146,7 @@ export default {
     },
     {
       label: '文本',
-      name: 'global_compontentTitle',
+      name: 'card_compontentTitle',
       defaultShow: true,
       children: [
         {
@@ -169,13 +169,13 @@ export default {
       ]
     }, {
       label: '背景色',
-      name: 'global_compontentTitleBackground',
+      name: 'card_compontentTitleBackground',
       defaultShow: true,
       children: [
         {
           name: 'backgroundColor',
           type: 'colorPicker',
-          value: '#000',
+          value: '#ccc',
         },
       ]
     },

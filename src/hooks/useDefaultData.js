@@ -1,4 +1,4 @@
-import queryConfig from "@/config/widget/queryConfig"
+import queryConfig from "@/config/queryConfig"
 
 export default function (widget, data, options = {}) {
 

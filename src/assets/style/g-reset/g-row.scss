@@ -1,17 +1,27 @@
 .g-row {
   display: flex;
   align-items: center;
-  min-height: 30px;
+  margin-bottom: 5px;
+  // align-items: center;
+  // min-height: 30px;
   .el-col {
     &:nth-child(1) {
-      text-align: right;
-      color: #333;
+      align-self: flex-start;
     }
     &:nth-child(2) {
+      align-self: flex-start;
+    }
+    &:nth-child(3) {
       display: flex;
-      .setter-item-node {
+      flex-wrap: wrap;
+      margin-bottom: -5px;
+      > div {
         margin-right: 5px;
+        margin-bottom: 5px;
       }
+      // .setter-item-node {
+      //   margin-right: 5px;
+      // }
     }
   }
 }

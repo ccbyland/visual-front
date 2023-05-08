@@ -26,6 +26,7 @@ export default defineComponent({
 
       return (
         <>
+          <EditorGrid></EditorGrid>
           <div className="editor-canvas" onMousedown={mousedownCanvas}>
             <grid-layout
               v-model:layout={data.value.widgets}
@@ -56,7 +57,6 @@ export default defineComponent({
               })}
             </grid-layout>
           </div>
-          {/* <EditorGrid></EditorGrid> */}
         </>
       );
     };

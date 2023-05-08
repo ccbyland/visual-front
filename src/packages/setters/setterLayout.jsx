@@ -1,4 +1,4 @@
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "g-setter-layout",
@@ -109,7 +109,11 @@ export default defineComponent({
         //     ></el-input-number>
         //   </div>
         // );
-        return <el-input-number size="small" />;
+        return (
+          <div className="g-input-number">
+            <el-input-number controls-position="right" size="small" />
+          </div>
+        );
       },
       input: (props, valueData) => {
         // return (
@@ -120,9 +124,13 @@ export default defineComponent({
         //     ></el-input>
         //   </div>
         // );
-        return <el-input size="small" />;
+        return (
+          <div className="g-input">
+            <el-input size="small" />
+          </div>
+        );
       },
-      colorPicker: (props, valueData) => {
+      fontColorPicker: (props, valueData) => {
         // return (
         //   <div className="g-color-picker setter-item-node">
         //     <el-color-picker
@@ -131,7 +139,62 @@ export default defineComponent({
         //     />
         //   </div>
         // );
-        return <el-color-picker size="small" />;
+        const a = ref("#ff0000");
+        return (
+          <div className="g-color-picker font-picker">
+            <el-color-picker size="small" v-model={a.value} />
+          </div>
+        );
+      },
+      backgroundColorPicker: (props, valueData) => {
+        const a = ref("#fff");
+        // return (
+        //   <div className="g-color-picker setter-item-node">
+        //     <el-color-picker
+        //       v-model={valueData.value[props.name]}
+        //       onChange={textChange}
+        //     />
+        //   </div>
+        // );
+        return (
+          <div className="g-color-picker background-picker">
+            <el-color-picker size="small" v-model={a.value} />
+          </div>
+        );
+      },
+      textAlign: (props, valueData) => {
+        const a = ref("#fff");
+        // return (
+        //   <div className="g-color-picker setter-item-node">
+        //     <el-color-picker
+        //       v-model={valueData.value[props.name]}
+        //       onChange={textChange}
+        //     />
+        //   </div>
+        // );
+        return (
+          <div className="g-text-align">
+            <div className="node left"></div>
+            <div className="node center"></div>
+          </div>
+        );
+      },
+      fontWeight: (props, valueData) => {
+        const a = ref("#fff");
+        // return (
+        //   <div className="g-color-picker setter-item-node">
+        //     <el-color-picker
+        //       v-model={valueData.value[props.name]}
+        //       onChange={textChange}
+        //     />
+        //   </div>
+        // );
+        return (
+          <div className="g-font-weight">
+          <div className="node bold"></div>
+          <div className="node xt"></div>
+          </div>
+        );
       },
     };
 
@@ -157,9 +220,9 @@ export default defineComponent({
       } else {
         el = (
           <>
-            <el-col span={2}></el-col>
-            <el-col span={6}>{getSetterLabel()}</el-col>
-            <el-col span={16}>{getSetterContent()}</el-col>
+            <el-col span={3}></el-col>
+            <el-col span={4}>{getSetterLabel()}</el-col>
+            <el-col span={17}>{getSetterContent()}</el-col>
           </>
         );
       }

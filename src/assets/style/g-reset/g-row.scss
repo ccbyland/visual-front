@@ -1,7 +1,7 @@
 .g-row {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   // align-items: center;
   // min-height: 30px;
   .el-col {
@@ -14,10 +14,10 @@
     &:nth-child(3) {
       display: flex;
       flex-wrap: wrap;
-      margin-bottom: -5px;
+      margin-bottom: -6px;
       > div {
         margin-right: 5px;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
       }
       // .setter-item-node {
       //   margin-right: 5px;

@@ -1,16 +1,8 @@
 .editor-canvas {
-  // position: absolute;
-  // left: 0;
-  // top: 0;
-  // z-index: 100;
   position: relative;
   width: 100%;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   cursor: pointer;
-  &.selected {
-    border: 1px solid #1b538d;
-    border-radius: 5px;
-  }
 }

@@ -1,13 +1,12 @@
 .editor-header {
   height: 100%;
-  background: #2d3a5c;
-  border-bottom: 1px solid #ababab;
+  background: #394867;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 0 10px;
   box-sizing: border-box;
-  .logo{
+  .logo {
     width: 25px;
     height: 25px;
   }
@@ -16,7 +15,7 @@
     font-size: 18px;
     font-weight: bold;
     margin-left: 10px;
-    font-family: 'almm';
+    font-family: "almm";
     position: relative;
     top: 2px;
   }

@@ -18,26 +18,23 @@
     .g-editor__main-left {
       position: relative;
       width: 50px;
-      background: #efefef;
+      background: #F1F6F9;
       flex-shrink: 0;
     }
     .g-editor__main-center {
       position: relative;
       flex-grow: 1;
-      border: 1px solid #ddd;
-      border-top: 0;
-      border-bottom: 0;
-      box-sizing: border-box;
     }
     .g-editor__main-center-page{
       width: 100%;
       height: 100%;
       position: relative;
+      background: #fff;
     }
     .g-editor__main-right {
       position: relative;
       width: 350px;
-      background: #efefef;
+      background: #F1F6F9;
       flex-shrink: 0;
     }
   }

@@ -2,11 +2,11 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(33, 42, 62, 0.2);
   border-radius: 5px;
   overflow: hidden;
   &.selected {
-    border: 1px solid #1b538d;
+    border: 1px solid #212a3e;
   }
 }
 .g-card__widget {
@@ -23,14 +23,12 @@
   width: 100%;
   height: 35px;
   line-height: 35px;
-  background: #efefef;
   padding: 0 15px;
   box-sizing: border-box;
-  border-bottom: 1px solid #ccc;
   flex-shrink: 0;
+  background: #f1f6f9;
+  color: #212a3e;
   .g-card__title-text {
-    font-size: 12px;
-    color: #fff;
   }
 }
 .g-card__empty {
@@ -46,7 +44,7 @@
     height: 40%;
   }
   .g-card__empty-text {
-    color: #666;
+    color: #212a3e;
     margin-top: 1%;
   }
 }

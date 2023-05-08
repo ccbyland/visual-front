@@ -1,13 +1,70 @@
-@import './reset.scss';
-@import './font.scss';
-@import './vue-grid-layout-reset.scss';
+@import "./reset.scss";
+@import "./font.scss";
+@import "./vue-grid-layout-reset.scss";
 
+@import "./g-reset/g-collapse.scss";
+@import "./g-reset/g-row.scss";
+@import "./g-reset/g-input.scss";
+@import "./g-reset/g-radio.scss";
+@import "./g-reset/g-checkbox.scss";
+@import "./g-reset/g-select.scss";
+@import "./g-reset/g-input-number.scss";
+@import "./g-reset/g-color-picker.scss";
+@import "./g-reset/g-font-color-picker.scss";
 
-@import './g-reset/g-collapse.scss';
-@import './g-reset/g-row.scss';
-@import './g-reset/g-input.scss';
-@import './g-reset/g-radio.scss';
-@import './g-reset/g-checkbox.scss';
-@import './g-reset/g-select.scss';
-@import './g-reset/g-input-number.scss';
-@import './g-reset/g-color-picker.scss';
+.g-text-align {
+  height: 24px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #595e6b;
+  border-radius: 4px;
+  .node {
+    padding: 0 2px;
+    cursor: pointer;
+    &.left {
+      width: 16px;
+      height: 16px;
+      background: url("../images/icon-text-align-left.png") no-repeat center
+        center;
+      background-size: contain;
+    }
+    &.center {
+      width: 16px;
+      height: 16px;
+      background: url("../images/icon-text-align-center.png") no-repeat center
+        center;
+      background-size: contain;
+    }
+  }
+}
+
+.g-font-weight {
+  height: 24px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #595e6b;
+  border-radius: 4px;
+  .node {
+    padding: 0 2px;
+    cursor: pointer;
+    &.bold {
+      width: 16px;
+      height: 16px;
+      background: url("../images/icon-bold.png") no-repeat center center;
+      background-size: contain;
+    }
+    &.xt {
+      width: 16px;
+      height: 16px;
+      background: url("../images/icon-text-align-xt.png") no-repeat center
+        center;
+      background-size: contain;
+    }
+  }
+}

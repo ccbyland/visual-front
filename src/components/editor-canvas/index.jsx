@@ -56,7 +56,7 @@ export default defineComponent({
               })}
             </grid-layout>
           </div>
-          <EditorGrid></EditorGrid>
+          {/* <EditorGrid></EditorGrid> */}
         </>
       );
     };

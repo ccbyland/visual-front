@@ -164,7 +164,7 @@ export default {
         {
           name: 'fontColor',
           type: 'colorPicker',
-          value: '#333',
+          value: '#fff',
         },
       ]
     }, {
@@ -175,7 +175,7 @@ export default {
         {
           name: 'backgroundColor',
           type: 'colorPicker',
-          value: '#ccc',
+          value: '#666',
         },
       ]
     },

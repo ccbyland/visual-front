@@ -67,10 +67,12 @@ export default defineComponent({
         //   </el-radio-group>
         // );
         return (
-          <el-radio-group>
-            <el-radio size="small">Option 1</el-radio>
-            <el-radio size="small">Option 2</el-radio>
-          </el-radio-group>
+          <div className="g-radio">
+            <el-radio-group>
+              <el-radio size="small">Option 1</el-radio>
+              <el-radio size="small">Option 2</el-radio>
+            </el-radio-group>
+          </div>
         );
       },
       select: (props, valueData) => {

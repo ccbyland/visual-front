@@ -1,23 +1,24 @@
-// .g-radio {
-//   .el-radio {
-//     &:nth-child(1) {
-//       margin-right: 10px;
-//     }
-//     .el-radio__input {
-//       .el-radio__inner {
-//         width: 12px;
-//         height: 12px;
-//       }
-//       &.is-checked{
-//         .el-radio__inner{
-//           border-color: #2d3a5c;
-//     background: #2d3a5c;
-//         }
-//       }
-//     }
-//     .el-radio__label {
-//       color: #666;
-//       font-size: 12px;
-//     }
-//   }
-// }
+.g-radio {
+  .el-radio {
+    &:nth-child(1) {
+      margin-right: 12px;
+    }
+    .el-radio__input {
+      .el-radio__inner {
+        width: 12px;
+        height: 12px;
+      }
+      &.is-checked {
+        .el-radio__inner {
+          border-color: #333;
+          background: #fff;
+        }
+      }
+    }
+    .el-radio__label {
+      padding-left: 5px;
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+}

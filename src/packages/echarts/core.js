@@ -204,7 +204,7 @@ export default {
       }
       const { card_titleText, card_titleStyle, card_dividerVisible, card_dividerStyle } = componentStyle
       const titleStyle = { 'background': card_titleStyle.backgroundColor, 'border-bottom': card_dividerVisible ? `${card_dividerStyle.width}px solid ${card_dividerStyle.color}` : '' }
-      const titleTextStyle = { 'color': card_titleStyle.colorPicker, 'font-size': card_titleStyle.fontSize + 'px', 'font-weight': card_titleStyle.fontWeight, 'text-align': card_titleStyle.textAlign }
+      const titleTextStyle = { 'color': card_titleStyle.colorPicker, 'font-size': card_titleStyle.fontSize + 'px', 'font-weight': card_titleStyle.fontStyle.indexOf('bold') > -1 ? 'bold' : '', 'font-style': card_titleStyle.fontStyle.indexOf('italic') > -1 ? 'italic' : '', 'text-align': card_titleStyle.textAlign }
 
       return (
         <div className='g-card__title' style={titleStyle}>

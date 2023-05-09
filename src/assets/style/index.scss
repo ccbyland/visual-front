@@ -41,9 +41,9 @@
   }
 }
 
-.g-font-weight {
+.g-custom-selection {
   height: 24px;
-  padding: 0 5px;
+  padding: 0 4px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -51,20 +51,27 @@
   border: 1px solid #595e6b;
   border-radius: 4px;
   .node {
-    padding: 0 2px;
+    width: 18px;
+    height: 18px;
+    mask-repeat: no-repeat;
+    mask-size: 80%;
+    mask-position: center center;
     cursor: pointer;
-    &.bold {
-      width: 16px;
-      height: 16px;
-      background: url("../images/icon-bold.png") no-repeat center center;
-      background-size: contain;
+    background: #000;
+    &.active {
+      background: #409eff;
     }
-    &.xt {
-      width: 16px;
-      height: 16px;
-      background: url("../images/icon-text-align-xt.png") no-repeat center
-        center;
-      background-size: contain;
+    &.bold {
+      mask-image: url("../images/bold.svg");
+    }
+    &.italic {
+      mask-image: url("../images/italic.svg");
+    }
+    &.center {
+      mask-image: url("../images/center.svg");
+    }
+    &.left {
+      mask-image: url("../images/left.svg");
     }
   }
 }

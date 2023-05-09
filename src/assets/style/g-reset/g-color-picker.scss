@@ -2,6 +2,14 @@
   .el-color-picker__trigger {
     border: 1px solid #595e6b;
     width: auto;
+
+    &::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      margin-right: 3px;
+      flex-shrink: 0;
+    }
   }
   .el-color-picker__color {
     width: 14px;
@@ -13,30 +21,16 @@
   }
   &.font-picker {
     .el-color-picker__trigger::before {
-      content: "";
-      width: 14px;
-      height: 14px;
       background: url("~@/assets/images/icon-color-font.png") no-repeat center
         center;
       background-size: 100%;
-      margin-right: 3px;
-      flex-shrink: 0;
-      position: relative;
-      top: -1px;
     }
   }
   &.background-picker {
     .el-color-picker__trigger::before {
-      content: "";
-      width: 14px;
-      height: 14px;
       background: url("~@/assets/images/icon-color-background.png") no-repeat
         center center;
       background-size: 100%;
-      margin-right: 3px;
-      flex-shrink: 0;
-      position: relative;
-      top: -1px;
     }
   }
 }

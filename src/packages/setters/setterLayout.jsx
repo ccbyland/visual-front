@@ -38,6 +38,25 @@ export default defineComponent({
       }
       return null;
     };
+
+    const toggleCustomSelection = (props, value) => {
+      const { multiple, name } = props;
+      let temp = {};
+      if (multiple) {
+        const v = valueData.value[name];
+        const index = v.indexOf(value);
+        if (index > -1) {
+          v.splice(index, 1);
+        } else {
+          v.push(value);
+        }
+      } else {
+        temp = { [name]: [value] };
+      }
+      valueData.value = { ...valueData.value, ...temp };
+      textChange();
+    };
+
     const setterComponentMap = {
       checkbox: (props, valueData) => {
         return (
@@ -132,37 +151,41 @@ export default defineComponent({
           </div>
         );
       },
-      textAlign: (props, valueData) => {
-        const a = ref("#fff");
-        // return (
-        //   <div className="g-color-picker setter-item-node">
-        //     <el-color-picker
-        //       v-model={valueData.value[props.name]}
-        //       onChange={textChange}
-        //     />
-        //   </div>
-        // );
+      fontStyle: (props, valueData) => {
         return (
-          <div className="g-text-align">
-            <div className="node left"></div>
-            <div className="node center"></div>
+          <div className="g-custom-selection">
+            {props.options.map((option) => {
+              let className = ["node"];
+              className.push(option.icon);
+              if (valueData.value[props.name].indexOf(option.value) > -1) {
+                className.push("active");
+              }
+              return (
+                <div
+                  onClick={() => toggleCustomSelection(props, option.icon)}
+                  className={className.join(" ")}
+                ></div>
+              );
+            })}
           </div>
         );
       },
-      fontWeight: (props, valueData) => {
-        const a = ref("#fff");
-        // return (
-        //   <div className="g-color-picker setter-item-node">
-        //     <el-color-picker
-        //       v-model={valueData.value[props.name]}
-        //       onChange={textChange}
-        //     />
-        //   </div>
-        // );
+      textAlign: (props, valueData) => {
         return (
-          <div className="g-font-weight">
-            <div className="node bold"></div>
-            <div className="node xt"></div>
+          <div className="g-custom-selection">
+            {props.options.map((option) => {
+              let className = ["node"];
+              className.push(option.icon);
+              if (valueData.value[props.name].indexOf(option.value) > -1) {
+                className.push("active");
+              }
+              return (
+                <div
+                  onClick={() => toggleCustomSelection(props, option.icon)}
+                  className={className.join(" ")}
+                ></div>
+              );
+            })}
           </div>
         );
       },

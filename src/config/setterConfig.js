@@ -99,24 +99,25 @@ export default {
           max: 32,
         },
         {
-          name: "fontWeight",
-          type: "fontWeight",
-          value: "bold",
+          name: "fontStyle",
+          type: "fontStyle",
+          multiple: true,
+          value: ["bold"],
           options: [
-            {
-              icon: "initial",
-              value: "initial",
-            },
             {
               icon: "bold",
               value: "bold",
+            },
+            {
+              icon: "italic",
+              value: "italic",
             },
           ],
         },
         {
           name: "textAlign",
           type: "textAlign",
-          value: "left",
+          value: ["left"],
           options: [
             {
               icon: "left",
@@ -136,7 +137,7 @@ export default {
         {
           name: "backgroundColor",
           type: "backgroundColorPicker",
-          value: "#212a3e",
+          value: "#999",
         },
       ],
     }
@@ -166,7 +167,7 @@ export default {
         {
           name: "color",
           type: "backgroundColorPicker",
-          value: "#ff0000",
+          value: "#000",
         }
       ],
     }
@@ -219,7 +220,7 @@ export default {
         {
           name: "color",
           type: "backgroundColorPicker",
-          value: "#000",
+          value: "#fff",
         }
       ],
     }

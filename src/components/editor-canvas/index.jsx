@@ -4,6 +4,7 @@ import EditorGrid from "@/components/editor-grid";
 import EditorWidget from "@/components/editor-widget";
 import useFocus from "../../hooks/useFocus";
 import "./index.scss";
+import { events } from "@/utils/events";
 
 export default defineComponent({
   props: {
@@ -19,11 +20,14 @@ export default defineComponent({
         ctx.emit("update:modelValue", _.cloneDeep(newValue));
       },
     });
+
+    const gridItemOperated = () => {
+      events.emit("dragend");
+    };
     const { mousedownCanvas, mousedownCanvasWidget } = useFocus(data);
 
     return () => {
       console.info("[editor-canvas] render");
-
       return (
         <>
           <EditorGrid></EditorGrid>
@@ -47,6 +51,7 @@ export default defineComponent({
                     w={widget.w}
                     h={widget.h}
                     i={widget.i}
+                    onMoved={gridItemOperated}
                     onMousedown={(e) =>
                       mousedownCanvasWidget(e, widget, widgetIndex)
                     }

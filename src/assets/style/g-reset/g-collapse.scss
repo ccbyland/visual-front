@@ -5,13 +5,13 @@
     overflow: hidden;
     box-shadow: 0 0 10px 5px rgba(57, 72, 103, 0.2);
     margin-bottom: 10px;
-    &:last-child{
+    &:last-child {
       margin-bottom: 0;
     }
     .el-collapse-item__header {
       background: #394867;
       height: 30px;
-      padding-left: 6px;
+      padding-left: 16px;
       font-weight: bold;
     }
     .el-collapse-item__content {
@@ -34,6 +34,7 @@
       box-shadow: none;
       margin-bottom: 0;
       .el-collapse-item__header {
+        padding-left: 8px;
         background: #212a3e;
         height: 20px;
         line-height: 20px;

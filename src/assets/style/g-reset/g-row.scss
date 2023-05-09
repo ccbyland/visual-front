@@ -2,8 +2,6 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  // align-items: center;
-  // min-height: 30px;
   &:last-child {
     margin-bottom: 0;
   }
@@ -24,9 +22,6 @@
         margin-right: 5px;
         margin-bottom: 6px;
       }
-      // .setter-item-node {
-      //   margin-right: 5px;
-      // }
     }
   }
 }

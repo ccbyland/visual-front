@@ -27,6 +27,65 @@ export default {
           // }
         ],
       },
+      {
+        layout: "collapse",
+        title: "标题与卡片",
+        content: [
+          {
+            title: "标题",
+            setters: [
+              { setterName: "cardTitleSetter" },
+              { setterName: 'cardLinkSetter' }
+            ],
+          },
+          {
+            title: "分割线",
+            setters: [
+              { setterName: "cardTitleSetter" },
+              // { setterName: 'cardLinkSetter' }
+            ],
+          },
+          // {
+          //   title: '组件容器',
+          //   setters: [
+          //     { setterName: 'cardBorderSetter' }
+          //   ]
+          // }
+        ],
+      },
+      {
+        layout: "collapse",
+        title: "标题与卡片",
+        content: [
+          {
+            title: "标题",
+            setters: [
+              { setterName: "cardTitleSetter" },
+              { setterName: 'cardLinkSetter' }
+            ],
+          },
+          {
+            title: "分割线",
+            setters: [
+              { setterName: "cardTitleSetter" },
+              // { setterName: 'cardLinkSetter' }
+            ],
+          },
+          {
+            title: "分割线",
+            setters: [
+              { setterName: "cardTitleSetter" },
+              // { setterName: 'cardLinkSetter' }
+            ],
+          },
+          // {
+          //   title: '组件容器',
+          //   setters: [
+          //     { setterName: 'cardBorderSetter' }
+          //   ]
+          // }
+        ],
+      },
       // , {
       //   layout: 'default',
       //   title: '图表样式',

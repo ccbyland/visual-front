@@ -15,6 +15,7 @@
     position: relative;
     flex-grow: 1;
     display: flex;
+    overflow: hidden;
     .g-editor__main-left {
       position: relative;
       width: 50px;
@@ -36,6 +37,7 @@
       width: 350px;
       background: #F1F6F9;
       flex-shrink: 0;
+      overflow-y: scroll;
     }
   }
 }

@@ -65,6 +65,7 @@ export default defineComponent({
       if (!props.widget) {
         operatorContent = (
           <PropsStyle
+            panelType="global"
             setters={widgetConfig.globalConfig.styles}
             editData={state.editData}
             onUpdateEditData={(value) => updateEditData(value, "style")}
@@ -79,6 +80,7 @@ export default defineComponent({
         operatorContent = (
           <>
             <PropsStyle
+              panelType="widget"
               setters={styleSetters}
               editData={state.editData}
               onUpdateEditData={(value) => updateEditData(value, "style")}

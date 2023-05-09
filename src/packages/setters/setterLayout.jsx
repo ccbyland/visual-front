@@ -4,6 +4,7 @@ export default defineComponent({
   name: "g-setter-layout",
   props: {
     value: { type: String },
+    panelType: { type: String },
     setter: { type: Object },
     currEditData: { type: Object },
   },
@@ -210,21 +211,30 @@ export default defineComponent({
 
     return () => {
       let el = null;
-      if (props.setter.type === "checkbox") {
+      if(props.panelType === 'global'){
         el = (
           <>
-            <el-col span={2}>{getSetterContent()}</el-col>
-            <el-col span={22}>{getSetterLabel()}</el-col>
+            <el-col span={6}>{getSetterLabel()}</el-col>
+            <el-col span={18}>{getSetterContent()}</el-col>
           </>
         );
-      } else {
-        el = (
-          <>
-            <el-col span={3}></el-col>
-            <el-col span={4}>{getSetterLabel()}</el-col>
-            <el-col span={17}>{getSetterContent()}</el-col>
-          </>
-        );
+      }else{
+        if (props.setter.type === "checkbox") {
+          el = (
+            <>
+              <el-col span={2}>{getSetterContent()}</el-col>
+              <el-col span={22}>{getSetterLabel()}</el-col>
+            </>
+          );
+        } else {
+          el = (
+            <>
+              <el-col span={3}></el-col>
+              <el-col span={4}>{getSetterLabel()}</el-col>
+              <el-col span={17}>{getSetterContent()}</el-col>
+            </>
+          );
+        }
       }
       return <el-row className="g-row">{el}</el-row>;
     };

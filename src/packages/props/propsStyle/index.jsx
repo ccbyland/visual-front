@@ -4,6 +4,7 @@ import "./index.scss";
 export default defineComponent({
   props: {
     setters: { type: Array },
+    panelType: { type: String },
     editData: { type: Object },
   },
   setup(props, ctx) {
@@ -24,6 +25,7 @@ export default defineComponent({
         propsEditData.value.props && (
           <g-setter-layout
             setter={setter}
+            panelType={props.panelType}
             v-model:value={propsEditData.value.props[setter.name]}
             propsEditData={propsEditData.value.props}
             onChange={editDataChange}

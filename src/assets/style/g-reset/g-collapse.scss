@@ -3,12 +3,12 @@
   .el-collapse-item {
     border-radius: 5px;
     overflow: hidden;
-    margin-bottom: 10px;
     box-shadow: 0 0 10px 5px rgba(57, 72, 103, 0.2);
+    margin-bottom: 15px;
     .el-collapse-item__header {
       background: #394867;
-      height: 35px;
-      padding-left: 12px;
+      height: 30px;
+      padding-left: 6px;
       font-weight: bold;
     }
     .el-collapse-item__content {
@@ -17,21 +17,27 @@
     }
   }
   &__sub {
+    border-bottom: 1px solid #394867;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
     .el-collapse-item {
       box-shadow: none;
-      border-bottom: 1px solid #394867;
-      border-radius: 0;
+      margin-bottom: 0;
       .el-collapse-item__header {
         background: #212a3e;
+        height: 20px;
+        line-height: 20px;
       }
       .el-collapse-item__content {
         background: #212a3e;
-      }
-    }
-    &:last-child {
-      .el-collapse-item {
-        margin-bottom: 0;
-        border-bottom: none;
+        padding: 5px;
       }
     }
   }

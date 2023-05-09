@@ -1,19 +1,22 @@
-// .g-select {
-//   .el-input {
-//     width: 160px;
-//     .el-input__inner {
-//       color: #666;
-//       height: 24px;
-//     }
-//   }
-// }
+.g-select {
+  .el-input {
+    width: 120px;
+    .el-input__inner {
+      //   color: #666;
+      //   height: 24px;
+    }
+  }
+}
 
-// .el-select__popper {
-//   .el-select-dropdown {
-//     min-width: 160px!important;
-//   }
-//   .el-popper__arrow {
-//     left: 50%!important;
-//     margin-left: -5px!important;
-//   }
-// }
+.el-select__popper {
+  .el-select-dropdown {
+    .el-select-dropdown__item {
+      height: 24px;
+      line-height: 24px;
+    }
+  }
+  .el-popper__arrow {
+    left: 50% !important;
+    margin-left: -5px !important;
+  }
+}

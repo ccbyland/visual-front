@@ -3,7 +3,7 @@ export default class GlobalStyle {
   static getPageStyle(props) {
     return {
       'font-family': props.global_styleFontFamily,
-      'background-color': props.global_styleThemeMode === 'dark' ? '#394867' : '#fff'
+      'background-color': props.global_styleThemeMode === 'dark' ? '#212a3e' : '#fff'
     }
   }
   static getPageLayout(props) {

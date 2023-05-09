@@ -40,126 +40,95 @@ export default defineComponent({
     };
     const setterComponentMap = {
       checkbox: (props, valueData) => {
-        // return (
-        //   <el-checkbox-group
-        //     className="g-checkbox"
-        //     v-model={valueData.value}
-        //     onChange={textChange}
-        //   >
-        //     {props.setter.options.map((option) => {
-        //       return (
-        //         <el-checkbox label={option.value}>{option.label}</el-checkbox>
-        //       );
-        //     })}
-        //   </el-checkbox-group>
-        // );
-        return <el-checkbox size="small" />;
+        return (
+          <div className="g-checkbox">
+            <el-checkbox
+              size="small"
+              v-model={valueData.value}
+              onChange={textChange}
+            />
+          </div>
+        );
       },
       radio: (props, valueData) => {
-        // return (
-        //   <el-radio-group
-        //     className="g-radio"
-        //     v-model={valueData.value}
-        //     onChange={textChange}
-        //   >
-        //     {props.setter.options.map((option) => {
-        //       return <el-radio label={option.value}>{option.label}</el-radio>;
-        //     })}
-        //   </el-radio-group>
-        // );
         return (
           <div className="g-radio">
-            <el-radio-group>
-              <el-radio size="small">Option 1</el-radio>
-              <el-radio size="small">Option 2</el-radio>
+            <el-radio-group onChange={textChange} v-model={valueData.value}>
+              {props.setter.options.map((option) => {
+                return (
+                  <el-radio size="small" label={option.value}>
+                    {option.label}
+                  </el-radio>
+                );
+              })}
             </el-radio-group>
           </div>
         );
       },
       select: (props, valueData) => {
-        // return (
-        //   <el-select
-        //     className="g-select"
-        //     v-model={valueData.value}
-        //     onChange={textChange}
-        //   >
-        //     {props.setter.options.map((option) => {
-        //       return (
-        //         <el-option
-        //           label={option.label}
-        //           value={option.value}
-        //         ></el-option>
-        //       );
-        //     })}
-        //   </el-select>
-        // );
         return (
-          <el-select size="small">
-            <el-option />
-          </el-select>
+          <div className="g-select">
+            <el-select
+              size="small"
+              v-model={valueData.value}
+              onChange={textChange}
+            >
+              {props.setter.options.map((option) => {
+                return (
+                  <el-option
+                    label={option.label}
+                    value={option.value}
+                  ></el-option>
+                );
+              })}
+            </el-select>
+          </div>
         );
       },
       inputNumber: (props, valueData) => {
-        // return (
-        //   <div className="g-input-number setter-item-node">
-        //     <el-input-number
-        //       v-model={valueData.value[props.name]}
-        //       min={props.min}
-        //       max={props.max}
-        //       onChange={textChange}
-        //     ></el-input-number>
-        //   </div>
-        // );
         return (
           <div className="g-input-number">
-            <el-input-number controls-position="right" size="small" />
+            <el-input-number
+              v-model={valueData.value[props.name]}
+              min={props.min}
+              max={props.max}
+              onChange={textChange}
+              controls-position="right"
+              size="small"
+            />
           </div>
         );
       },
       input: (props, valueData) => {
-        // return (
-        //   <div className="g-input setter-item-node">
-        //     <el-input
-        //       v-model={valueData.value[props.name]}
-        //       onChange={textChange}
-        //     ></el-input>
-        //   </div>
-        // );
         return (
           <div className="g-input">
-            <el-input size="small" />
+            <el-input
+              v-model={valueData.value[props.name]}
+              onChange={textChange}
+              size="small"
+            />
           </div>
         );
       },
       fontColorPicker: (props, valueData) => {
-        // return (
-        //   <div className="g-color-picker setter-item-node">
-        //     <el-color-picker
-        //       v-model={valueData.value[props.name]}
-        //       onChange={textChange}
-        //     />
-        //   </div>
-        // );
-        const a = ref("#ff0000");
         return (
           <div className="g-color-picker font-picker">
-            <el-color-picker size="small" v-model={a.value} />
+            <el-color-picker
+              v-model={valueData.value[props.name]}
+              size="small"
+              onChange={textChange}
+            />
           </div>
         );
       },
       backgroundColorPicker: (props, valueData) => {
-        const a = ref("#fff");
-        // return (
-        //   <div className="g-color-picker setter-item-node">
-        //     <el-color-picker
-        //       v-model={valueData.value[props.name]}
-        //       onChange={textChange}
-        //     />
-        //   </div>
-        // );
         return (
           <div className="g-color-picker background-picker">
-            <el-color-picker size="small" v-model={a.value} />
+            <el-color-picker
+              v-model={valueData.value[props.name]}
+              size="small"
+              onChange={textChange}
+            />
           </div>
         );
       },
@@ -192,8 +161,8 @@ export default defineComponent({
         // );
         return (
           <div className="g-font-weight">
-          <div className="node bold"></div>
-          <div className="node xt"></div>
+            <div className="node bold"></div>
+            <div className="node xt"></div>
           </div>
         );
       },
@@ -211,14 +180,14 @@ export default defineComponent({
 
     return () => {
       let el = null;
-      if(props.panelType === 'global'){
+      if (props.panelType === "global") {
         el = (
           <>
             <el-col span={6}>{getSetterLabel()}</el-col>
             <el-col span={18}>{getSetterContent()}</el-col>
           </>
         );
-      }else{
+      } else {
         if (props.setter.type === "checkbox") {
           el = (
             <>

@@ -19,7 +19,7 @@ export default defineComponent({
     const widgetConfig = inject("widgetConfig");
 
     return () => {
-      console.error("[editor-widget] render");
+      console.info("[editor-widget] render");
 
       let widget = null;
       let renderWidget = null;

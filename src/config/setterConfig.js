@@ -65,25 +65,32 @@ export default {
     },
   ],
   /**
-   * 卡片标题栏
+   * 卡片-标题-标题
    */
   cardTitleSetter: [
     {
-      label: "显示主标题",
+      label: "显示标题",
       type: "checkbox",
-      name: "card_mainTitleVisible",
+      name: "card_titleVisible",
       value: true,
     },
     {
-      label: "文本",
-      name: "card_compontentTitle",
+      label: "文案",
+      name: "card_titleText",
       defaultShow: true,
       children: [
         {
           name: "text",
           type: "input",
           value: "基础折线趋势图",
-        },
+        }
+      ],
+    },
+    {
+      label: "样式",
+      name: "card_titleStyle",
+      defaultShow: true,
+      children: [
         {
           name: "fontSize",
           type: "inputNumber",
@@ -109,7 +116,7 @@ export default {
         {
           name: "textAlign",
           type: "textAlign",
-          value: "center",
+          value: "left",
           options: [
             {
               icon: "left",
@@ -124,143 +131,96 @@ export default {
         {
           name: "colorPicker",
           type: "fontColorPicker",
-          value: "#212A3E",
+          value: "#fff",
         },
         {
           name: "backgroundColor",
           type: "backgroundColorPicker",
-          value: "#F1F6F9",
+          value: "#212a3e",
         },
       ],
     }
   ],
   /**
-   * 卡片标题栏
+   * 卡片-标题-分割线
    */
-  cardLinkSetter: [
+  cardDividerSetter: [
     {
-      label: "显示主标题",
+      label: "显示分割线",
       type: "checkbox",
-      name: "card_mainTitleVisible",
+      name: "card_dividerVisible",
       value: true,
     },
     {
-      label: "文本",
-      name: "card_compontentTitle",
+      label: "样式",
+      name: "card_dividerStyle",
       defaultShow: true,
       children: [
         {
-          name: "text",
-          type: "input",
-          value: "基础折线趋势图",
-        },
-        {
-          name: "fontSize",
+          name: "width",
           type: "inputNumber",
-          value: 12,
-          min: 12,
-          max: 32,
+          value: 1,
+          min: 1,
+          max: 5,
         },
         {
-          name: "fontWeight",
-          type: "fontWeight",
-          value: "bold",
-          options: [
-            {
-              icon: "initial",
-              value: "initial",
-            },
-            {
-              icon: "bold",
-              value: "bold",
-            },
-          ],
-        },
-        {
-          name: "textAlign",
-          type: "textAlign",
-          value: "center",
-          options: [
-            {
-              icon: "left",
-              value: "left",
-            },
-            {
-              icon: "center",
-              value: "center",
-            },
-          ],
-        },
-        {
-          name: "colorPicker",
-          type: "fontColorPicker",
-          value: "#212A3E",
-        },
-        {
-          name: "backgroundColor",
+          name: "color",
           type: "backgroundColorPicker",
-          value: "#F1F6F9",
+          value: "#ff0000",
         }
       ],
     }
-    ,
+  ],
+  /**
+   * 卡片-组件容器-边框
+   */
+  cardContainerBorderSetter: [
     {
-      label: "文本",
-      name: "card_compontentTitle",
+      label: "显示卡片边框",
+      type: "checkbox",
+      name: "card_containerBorderVisible",
+      value: true,
+    },
+    {
+      label: "样式",
+      name: "card_containerBorderStyle",
       defaultShow: true,
       children: [
         {
-          name: "text",
-          type: "input",
-          value: "基础折线趋势图",
-        },
-        {
-          name: "fontSize",
+          name: "width",
           type: "inputNumber",
-          value: 12,
-          min: 12,
-          max: 32,
+          value: 1,
+          min: 1,
+          max: 5,
         },
         {
-          name: "fontWeight",
-          type: "fontWeight",
-          value: "bold",
-          options: [
-            {
-              icon: "initial",
-              value: "initial",
-            },
-            {
-              icon: "bold",
-              value: "bold",
-            },
-          ],
-        },
-        {
-          name: "textAlign",
-          type: "textAlign",
-          value: "center",
-          options: [
-            {
-              icon: "left",
-              value: "left",
-            },
-            {
-              icon: "center",
-              value: "center",
-            },
-          ],
-        },
-        {
-          name: "colorPicker",
-          type: "fontColorPicker",
-          value: "#212A3E",
-        },
-        {
-          name: "backgroundColor",
+          name: "color",
           type: "backgroundColorPicker",
-          value: "#F1F6F9",
-        },
+          value: "#000",
+        }
+      ],
+    }
+  ],
+  /**
+   * 卡片-组件容器-背景
+   */
+  cardContainerBackgroundSetter: [
+    {
+      label: "自定义背景填充",
+      type: "checkbox",
+      name: "card_containerBackgroundVisible",
+      value: true,
+    },
+    {
+      label: "样式",
+      name: "card_containerBackgroundStyle",
+      defaultShow: true,
+      children: [
+        {
+          name: "color",
+          type: "backgroundColorPicker",
+          value: "#000",
+        }
       ],
     }
   ]

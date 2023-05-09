@@ -22,7 +22,7 @@ export default defineComponent({
     const widgetConfig = inject("widgetConfig");
 
     return () => {
-      console.error("[editor-tool] render");
+      console.info("[editor-tool] render");
 
       // const canvasRef = ref(null);
       const { commands } = useCommand(data);

@@ -27,7 +27,7 @@ export default defineComponent({
     const { lastSelectWidget } = useFocus(data);
 
     return () => {
-      console.error("[editor] render");
+      console.info("[editor] render");
 
       const containerData = props.modelValue.container.props;
       const pageStyle = GlobalStyle.getPageStyle(containerData);

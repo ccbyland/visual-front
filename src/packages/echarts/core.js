@@ -196,15 +196,19 @@ export default {
       chartInstance && chartInstance.setOption(option)
     }
 
-    const renderTitle = () => {
 
-      // const { card_compontentTitle, card_compontentTitleBackground } = props.componentStyle
-      // const titleStyle = { 'background': card_compontentTitleBackground.backgroundColor }
-      // const titleTextStyle = { 'color': card_compontentTitle.fontColor }
+    const renderTitle = () => {
+      const componentStyle = props.componentStyle
+      if (!componentStyle.card_titleVisible) {
+        return null
+      }
+      const { card_titleText, card_titleStyle, card_dividerVisible, card_dividerStyle } = componentStyle
+      const titleStyle = { 'background': card_titleStyle.backgroundColor, 'border-bottom': card_dividerVisible ? `${card_dividerStyle.width}px solid ${card_dividerStyle.color}` : '' }
+      const titleTextStyle = { 'color': card_titleStyle.colorPicker, 'font-size': card_titleStyle.fontSize + 'px', 'font-weight': card_titleStyle.fontWeight, 'text-align': card_titleStyle.textAlign }
 
       return (
-        <div className='g-card__title'>
-          <div className='g-card__title-text'>123</div>
+        <div className='g-card__title' style={titleStyle}>
+          <div className='g-card__title-text' style={titleTextStyle}>{card_titleText.text}</div>
         </div>
       )
     }
@@ -231,10 +235,16 @@ export default {
     }
 
     return () => {
-      return <>
-        {renderTitle()}
-        {empty.value ? renderEmpty() : renderCanvas()}
-      </>
+      const componentStyle = props.componentStyle
+      const { card_containerBackgroundVisible, card_containerBackgroundStyle, card_containerBorderVisible, card_containerBorderStyle } = componentStyle
+      const containerStyle = { 'background': card_containerBackgroundVisible ? card_containerBackgroundStyle.color : '', 'border': card_containerBorderVisible ? `${card_containerBorderStyle.width}px solid ${card_containerBorderStyle.color}` : '' }
+
+      return (
+        <div className='g-card__widget' style={containerStyle}>
+          {renderTitle()}
+          {empty.value ? renderEmpty() : renderCanvas()}
+        </div>
+      )
     }
 
   }

@@ -22,7 +22,7 @@ export default defineComponent({
     const { mousedownCanvas, mousedownCanvasWidget } = useFocus(data);
 
     return () => {
-      console.error("[editor-canvas] render");
+      console.info("[editor-canvas] render");
 
       return (
         <>

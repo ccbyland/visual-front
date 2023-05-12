@@ -1,10 +1,10 @@
 import { computed, defineComponent, watch } from "vue";
 import _ from "lodash";
-import EditorGrid from "@/components/editor-grid";
 import EditorWidget from "@/components/editor-widget";
 import useFocus from "../../hooks/useFocus";
 import "./index.scss";
 import { events } from "@/utils/events";
+import GlobalStyle from "@/utils/globalStyle";
 
 export default defineComponent({
   props: {
@@ -28,10 +28,17 @@ export default defineComponent({
 
     return () => {
       console.info("[editor-canvas] render");
+
+      const containerData = props.modelValue.container.props;
+      const pageStyle = GlobalStyle.getPageStyle(containerData);
+
       return (
         <>
-          <EditorGrid></EditorGrid>
-          <div className="editor-canvas" onMousedown={mousedownCanvas}>
+          <div
+            className="editor-canvas"
+            style={pageStyle}
+            onMousedown={mousedownCanvas}
+          >
             <grid-layout
               v-model:layout={data.value.widgets}
               col-num={12}

@@ -13,6 +13,12 @@
   pointer-events: none;
   .item {
     height: 20px;
-    background-color: #F1F6F9;
+    background-color: #f1f6f9;
+  }
+  &.theme-dark {
+    background: #212a3e;
+    .item {
+      background-color: #394867;
+    }
   }
 }

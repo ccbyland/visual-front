@@ -5,9 +5,10 @@ import EditorTool from "@/components/editor-tool";
 import EditorCanvas from "@/components/editor-canvas";
 import EditorOperator from "@/components/editor-operator";
 import useCommand from "@/hooks/useCommand";
-import GlobalStyle from "@/utils/globalStyle.js";
+import EditorGrid from "@/components/editor-grid";
 import "./index.scss";
 import useFocus from "@/hooks/useFocus";
+import GlobalStyle from "@/utils/globalStyle";
 
 export default defineComponent({
   props: {
@@ -28,12 +29,11 @@ export default defineComponent({
 
     return () => {
       console.info("[editor] render");
+      
 
       const containerData = props.modelValue.container.props;
-      const pageStyle = GlobalStyle.getPageStyle(containerData);
       const pageLayout = GlobalStyle.getPageLayout(containerData);
 
-      const globalStyle = { ...pageStyle, ...pageLayout };
       return (
         <div className="g-editor">
           <div className="g-editor__header">
@@ -44,7 +44,8 @@ export default defineComponent({
               <EditorTool v-model={data.value}></EditorTool>
             </div>
             <div className="g-editor__main-center">
-              <div className="g-editor__main-center-page" style={globalStyle}>
+              <div className="g-editor__main-center-page" style={pageLayout}>
+                <EditorGrid v-model={props.modelValue}></EditorGrid>
                 <EditorCanvas v-model={data.value}></EditorCanvas>
               </div>
             </div>

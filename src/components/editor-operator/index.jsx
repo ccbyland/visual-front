@@ -1,8 +1,8 @@
-import { defineComponent, inject, reactive, watch } from "vue";
+import { defineComponent, inject, reactive, ref, watch } from "vue";
 import _ from "lodash";
 import PropsStyle from "@/packages/props/propsStyle";
+import propsQuery from "@/packages/props/propsQuery";
 import "./index.scss";
-import useFocus from "@/hooks/useFocus";
 import { events } from "@/utils/events";
 
 export default defineComponent({
@@ -14,6 +14,7 @@ export default defineComponent({
   },
   setup(props) {
     const widgetConfig = inject("widgetConfig");
+    const activeName = ref("0");
 
     const state = reactive({
       editData: {},
@@ -77,17 +78,24 @@ export default defineComponent({
         if (widget && widget.props && widget.props.styles) {
           styleSetters = widget.props.styles;
         }
+
         operatorContent = (
-          <>
-            <PropsStyle
-              panelType="widget"
-              setters={styleSetters}
-              editData={state.editData}
-              onUpdateEditData={(value) => updateEditData(value, "style")}
-            ></PropsStyle>
-          </>
+          <el-tabs v-model={activeName.value} class="g-operator_tabs">
+            <el-tab-pane label="样式" name="0">
+              <PropsStyle
+                panelType="widget"
+                setters={styleSetters}
+                editData={state.editData}
+                onUpdateEditData={(value) => updateEditData(value, "style")}
+              ></PropsStyle>
+            </el-tab-pane>
+            <el-tab-pane label="数据" name="1">
+              <propsQuery editData={state.editData}></propsQuery>
+            </el-tab-pane>
+          </el-tabs>
         );
       }
+
       return operatorContent;
     };
   },

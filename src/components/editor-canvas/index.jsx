@@ -31,6 +31,8 @@ export default defineComponent({
 
       const containerData = props.modelValue.container.props;
       const pageStyle = GlobalStyle.getPageStyle(containerData);
+      const globalStyle = props.modelValue.container.props;
+      const gridMarginArr = GlobalStyle.getGridMarginArr(containerData)
 
       return (
         <>
@@ -46,7 +48,7 @@ export default defineComponent({
               is-draggable={true} // 是否可拖拽
               is-resizable={true} // 是否可设置大小
               vertical-compact={true} // 是否垂直紧凑布局
-              margin={[10, 10]}
+              margin={gridMarginArr}
               use-css-transforms={true}
             >
               {data.value.widgets.map((widget, widgetIndex) => {
@@ -63,7 +65,10 @@ export default defineComponent({
                       mousedownCanvasWidget(e, widget, widgetIndex)
                     }
                   >
-                    <EditorWidget v-model:widget={widget}></EditorWidget>
+                    <EditorWidget
+                      v-model:widget={widget}
+                      globalStyle={globalStyle}
+                    ></EditorWidget>
                   </grid-item>
                 );
               })}

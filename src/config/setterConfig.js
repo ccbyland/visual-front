@@ -21,6 +21,13 @@ export default {
       ],
     },
     {
+      label: "图表色系",
+      type: "colorScheme",
+      name: "global_styleColorScheme",
+      value: "",
+      defaultShow: true,
+    },
+    {
       label: "页面字体",
       type: "select",
       name: "global_styleFontFamily",
@@ -39,6 +46,48 @@ export default {
           label: "黑体",
           value: "SimHei",
         },
+      ],
+    },
+    {
+      label: "卡片圆角",
+      type: "radio",
+      name: "global_styleCardRadius",
+      value: "none",
+      defaultShow: true,
+      options: [
+        {
+          label: "无",
+          value: "none",
+        },
+        {
+          label: "小",
+          value: "min",
+        },
+        {
+          label: "大",
+          value: "max",
+        },
+      ],
+    },
+    {
+      label: "卡片间距",
+      type: "radio",
+      name: "global_styleCardMangin",
+      value: "compact",
+      defaultShow: true,
+      options: [
+        {
+          label: "紧凑",
+          value: "compact",
+        },
+        {
+          label: "常规",
+          value: "convention",
+        },
+        // {
+        //   label: "自定义",
+        //   value: "custom",
+        // },
       ],
     },
   ],
@@ -63,6 +112,171 @@ export default {
         },
       ],
     },
+    // {
+    //   label: "页面边距",
+    //   type: "selectMargin",
+    //   name: "global_layoutPageMargin",
+    //   value: "auto",
+    //   defaultShow: true,
+    // },
+  ],
+  /**
+   * 页面背景
+   */
+  globalBackgroundSetter: [
+    {
+      label: "页面背景",
+      type: "backgroundPicker",
+      name: "pagebackground",
+      value: "auto",
+      defaultShow: true,
+    },
+    {
+      label: "顶部图片",
+      type: "imagePicker",
+      name: "topImage",
+      value: "",
+      defaultShow: true,
+    },
+    {
+      label: "底部图片",
+      type: "imagePicker",
+      name: "bottomImage",
+      value: "",
+      defaultShow: true,
+    },
+  ],
+  /**
+   * 全局-组件标题
+   */
+  componentTitleSetter: [
+    {
+      label: "文本",
+      name: "card_textStyle",
+      defaultShow: true,
+      children: [
+        {
+          name: "fontSize",
+          type: "inputNumber",
+          value: 12,
+          min: 12,
+          max: 32,
+        },
+        {
+          name: "colorPicker",
+          type: "fontColorPicker",
+          value: "#fff",
+        },
+        {
+          name: "fontStyle",
+          type: "fontStyle",
+          multiple: true,
+          value: ["bold"],
+          options: [
+            {
+              icon: "bold",
+              value: "bold",
+            },
+            {
+              icon: "italic",
+              value: "italic",
+            },
+          ],
+        },
+        {
+          name: "textAlign",
+          type: "textAlign",
+          value: ["left"],
+          options: [
+            {
+              icon: "left",
+              value: "left",
+            },
+            {
+              icon: "center",
+              value: "center",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "背景填充",
+      name: "card_backgroundStyle",
+      defaultShow: true,
+      children: [
+        {
+          name: "backgroundColor",
+          type: "backgroundColorPicker",
+          value: "#999",
+        },
+      ],
+    },
+    {
+      label: "区域位置",
+      type: "radio",
+      name: "card_titleRegionalLocation",
+      value: "auto",
+      defaultShow: true,
+      options: [
+        {
+          label: "图表内部",
+          value: "auto",
+        },
+        {
+          label: "图表上方",
+          value: "fixed",
+        },
+      ],
+    },
+    {
+      label: "分割线",
+      name: "card_dividerStyle",
+      defaultShow: true,
+      children: [
+        {
+          name: "width",
+          type: "inputNumber",
+          value: 1,
+          min: 1,
+          max: 5,
+        },
+        {
+          name: "color",
+          type: "backgroundColorPicker",
+          value: "#000",
+        },
+      ],
+    },
+  ],
+  /**
+   * 全局-组件卡片
+   */
+  componentContainerSetter: [
+    {
+      label: "背景填充",
+      name: "card_containerBackgroundStyle",
+      defaultShow: true,
+      children: [
+        {
+          name: "color",
+          type: "backgroundColorPicker",
+          value: "#fff",
+        },
+      ],
+    },
+    {
+      label: "边框",
+      name: "card_containerBorderStyle",
+      defaultShow: true,
+      children: [
+        {
+          name: "color",
+          type: "backgroundColorPicker",
+          value: "#000",
+        },
+      ],
+    },
   ],
   /**
    * 卡片-标题-标题
@@ -83,7 +297,7 @@ export default {
           name: "text",
           type: "input",
           value: "基础折线趋势图",
-        }
+        },
       ],
     },
     {
@@ -140,7 +354,7 @@ export default {
           value: "#999",
         },
       ],
-    }
+    },
   ],
   /**
    * 卡片-标题-分割线
@@ -168,9 +382,9 @@ export default {
           name: "color",
           type: "backgroundColorPicker",
           value: "#000",
-        }
+        },
       ],
-    }
+    },
   ],
   /**
    * 卡片-组件容器-边框
@@ -198,9 +412,9 @@ export default {
           name: "color",
           type: "backgroundColorPicker",
           value: "#000",
-        }
+        },
       ],
-    }
+    },
   ],
   /**
    * 卡片-组件容器-背景
@@ -221,8 +435,8 @@ export default {
           name: "color",
           type: "backgroundColorPicker",
           value: "#fff",
-        }
+        },
       ],
-    }
-  ]
+    },
+  ],
 };

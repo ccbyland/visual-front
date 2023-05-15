@@ -1,7 +1,8 @@
 .g-radio {
   .el-radio {
-    &:nth-child(1) {
-      margin-right: 12px;
+    margin-right: 12px;
+    &:last-child {
+      margin-right: 0;
     }
     .el-radio__input {
       .el-radio__inner {

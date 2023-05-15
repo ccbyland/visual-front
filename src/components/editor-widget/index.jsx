@@ -4,6 +4,7 @@ import "./index.scss";
 export default defineComponent({
   props: {
     widget: { type: Object },
+    globalStyle: { type: Object },
   },
   emits: ["update:widget"],
   setup(props, ctx) {
@@ -33,6 +34,7 @@ export default defineComponent({
           key: widgetData.value.key,
           props: chartStyle,
           query: chartQuery,
+          globalStyle: props.globalStyle,
         });
       }
 

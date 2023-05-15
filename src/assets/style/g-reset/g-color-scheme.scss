@@ -1,0 +1,38 @@
+.g-color-scheme {
+  position: relative;
+  .g-color-scheme-select {
+    opacity: 0;
+  }
+}
+.g-color-scheme-value {
+  height: 24px;
+  line-height: 24px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #fff;
+  border-radius: 3px;
+  padding: 0 8px 0 5px;
+  box-shadow: 0 0 0 1px #dcdfe6 inset;
+  .g-color-scheme-label {
+    color: #606266;
+    font-size: 12px;
+  }
+}
+.g-color-scheme-option {
+  display: flex;
+  align-items: center;
+  .g-color-scheme-colors {
+    display: flex;
+    .g-color-scheme-colors-item {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-left: 2px;
+    }
+  }
+  .g-color-scheme-label {
+    margin-left: 10px;
+  }
+}

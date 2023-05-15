@@ -57,6 +57,11 @@ export default defineComponent({
       textChange();
     };
 
+    const setValueData = (value) => {
+      valueData.value = value;
+      textChange();
+    };
+
     const setterComponentMap = {
       checkbox: (props, valueData) => {
         return (
@@ -187,6 +192,14 @@ export default defineComponent({
               );
             })}
           </div>
+        );
+      },
+      colorScheme: (props, valueData) => {
+        return (
+          <g-color-scheme
+            value={valueData.value}
+            onChange={setValueData}
+          ></g-color-scheme>
         );
       },
     };

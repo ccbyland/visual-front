@@ -12,8 +12,8 @@ export default defineComponent({
     const propsEditData = computed(() => props.editData);
 
     // 当前激活的面板
-    const styleCollapseActive = ref([0, 1, 2]);
-    const styleCollapseContentActive = ref([0, 1, 2]);
+    const styleCollapseActive = ref([0, 1, 2, 3]);
+    const styleCollapseContentActive = ref([0, 1, 2, 3]);
 
     const editDataChange = () => {
       ctx.emit("updateEditData", propsEditData.value);

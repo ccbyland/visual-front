@@ -4,8 +4,23 @@ export default class GlobalStyle {
       "font-family": props.global_styleFontFamily,
     };
   }
+  static getGridMarginArr(props) {
+    const { global_styleCardMangin } = props;
+    let marginArr = [];
+    switch (global_styleCardMangin) {
+      case "compact":
+        marginArr = [10, 10];
+        break;
+      case "convention":
+        marginArr = [20, 20];
+        break;
+    }
+    return marginArr;
+  }
   static getPageClass(props) {
-    return  props.global_styleThemeMode === "dark" ? "theme-dark" : "theme-light"
+    return props.global_styleThemeMode === "dark"
+      ? "theme-dark"
+      : "theme-light";
   }
   static getPageLayout(props) {
     return {

@@ -25,18 +25,27 @@ export default [
       }
     ]
   },
-  // {
-  //   title: '组件',
-  //   layout: 'collapse',
-  //   content: [
-  //     {
-  //       title: '标题',
-  //       setters: [{ setterName: 'componentTitleSetter' }],
-  //     },
-  //     {
-  //       title: '盒子',
-  //       setters: [{ setterName: 'componentBoxSetter' }],
-  //     }
-  //   ]
-  // }
+  {
+    title: '页面背景',
+    layout: 'default',
+    content: [
+      {
+        setters: [{ setterName: 'globalBackgroundSetter' }],
+      }
+    ]
+  },
+  {
+    title: '组件',
+    layout: 'collapse',
+    content: [
+      {
+        title: '标题',
+        setters: [{ setterName: 'componentTitleSetter' }],
+      },
+      {
+        title: '卡片',
+        setters: [{ setterName: 'componentContainerSetter' }],
+      }
+    ]
+  }
 ]

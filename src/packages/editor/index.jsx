@@ -5,7 +5,7 @@ import EditorTool from "@/components/editor-tool";
 import EditorCanvas from "@/components/editor-canvas";
 import EditorOperator from "@/components/editor-operator";
 import useCommand from "@/hooks/useCommand";
-import EditorGrid from "@/components/editor-grid";
+// import EditorGrid from "@/components/editor-grid";
 import "./index.scss";
 import useFocus from "@/hooks/useFocus";
 import GlobalStyle from "@/utils/globalStyle";
@@ -45,7 +45,7 @@ export default defineComponent({
             </div>
             <div className="g-editor__main-center">
               <div className="g-editor__main-center-page" style={pageLayout}>
-                <EditorGrid v-model={props.modelValue}></EditorGrid>
+                {/* <EditorGrid v-model={props.modelValue}></EditorGrid> */}
                 <EditorCanvas v-model={data.value}></EditorCanvas>
               </div>
             </div>

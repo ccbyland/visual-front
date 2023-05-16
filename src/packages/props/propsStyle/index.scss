@@ -2,7 +2,25 @@
   padding: 10px;
 }
 
-.g-label{
+.g-label {
   color: #fff;
   line-height: 24px;
+}
+
+.g-color-gary {
+  .g-label {
+    color: #ccc;
+  }
+}
+
+.el-tabs {
+  .el-tabs__item {
+    color: #394867;
+    &.is-active {
+      color: #212a3e;
+    }
+  }
+  .el-tabs__active-bar {
+    background-color: #212a3e;
+  }
 }

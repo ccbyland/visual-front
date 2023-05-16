@@ -15,8 +15,8 @@ export default {
           {
             title: "卡片",
             setters: [
-              { setterName: "cardContainerBorderSetter" },
               { setterName: "cardContainerBackgroundSetter" },
+              { setterName: "cardContainerBorderSetter" },
             ],
           }
         ],

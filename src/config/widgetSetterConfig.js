@@ -9,7 +9,7 @@ export default {
             title: "标题",
             setters: [
               { setterName: "cardTitleSetter" },
-              { setterName: 'cardDividerSetter' }
+              { setterName: "cardDividerSetter" },
             ],
           },
           {
@@ -18,11 +18,63 @@ export default {
               { setterName: "cardContainerBackgroundSetter" },
               { setterName: "cardContainerBorderSetter" },
             ],
-          }
+          },
         ],
-      }
+      },
     ],
     query: [{ queryName: "area_type" }, { queryName: "area_value" }],
     analysis: [],
-  }
+  },
+  bar: {
+    styles: [
+      {
+        layout: "collapse",
+        title: "标题与卡片",
+        content: [
+          {
+            title: "标题",
+            setters: [
+              { setterName: "cardTitleSetter" },
+              { setterName: "cardDividerSetter" },
+            ],
+          },
+          {
+            title: "卡片",
+            setters: [
+              { setterName: "cardContainerBackgroundSetter" },
+              { setterName: "cardContainerBorderSetter" },
+            ],
+          },
+        ],
+      },
+    ],
+    query: [{ queryName: "area_type" }, { queryName: "area_value" }],
+    analysis: [],
+  },
+  pie: {
+    styles: [
+      {
+        layout: "collapse",
+        title: "标题与卡片",
+        content: [
+          {
+            title: "标题",
+            setters: [
+              { setterName: "cardTitleSetter" },
+              { setterName: "cardDividerSetter" },
+            ],
+          },
+          {
+            title: "卡片",
+            setters: [
+              { setterName: "cardContainerBackgroundSetter" },
+              { setterName: "cardContainerBorderSetter" },
+            ],
+          },
+        ],
+      },
+    ],
+    query: [{ queryName: "area_type" }, { queryName: "area_value" }],
+    analysis: [],
+  },
 };

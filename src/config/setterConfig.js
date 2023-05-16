@@ -303,7 +303,7 @@ export default {
         {
           name: "text",
           type: "input",
-          value: "基础折线趋势图",
+          value: "标题",
         },
       ],
     },

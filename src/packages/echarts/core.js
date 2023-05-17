@@ -199,29 +199,32 @@ export default {
 
     const renderTitle = () => {
       const componentStyle = props.componentStyle;
-      if (!componentStyle.card_titleVisible) {
-        return null;
-      }
       const {
+        card_titleVisible,
         card_titleText,
         card_titleStyle,
+        card_backgroundStyle,
         card_dividerVisible,
         card_dividerStyle,
       } = componentStyle;
+
+      if (!card_titleVisible) {
+        return null;
+      }
       const titleStyle = {
-        background: card_titleStyle.backgroundColor,
-        "border-bottom": card_dividerVisible
+        background: card_backgroundStyle.backgroundColor,
+        borderBottom: card_dividerVisible
           ? `${card_dividerStyle.width}px solid ${card_dividerStyle.color}`
           : "",
       };
       const titleTextStyle = {
         color: card_titleStyle.colorPicker,
-        "font-size": card_titleStyle.fontSize + "px",
-        "font-weight":
+        fontSize: card_titleStyle.fontSize + "px",
+        fontWeight:
           card_titleStyle.fontStyle.indexOf("bold") > -1 ? "bold" : "",
-        "font-style":
+        fontStyle:
           card_titleStyle.fontStyle.indexOf("italic") > -1 ? "italic" : "",
-        "text-align": card_titleStyle.textAlign,
+        textAlign: card_titleStyle.textAlign,
       };
 
       return (
@@ -257,21 +260,23 @@ export default {
       const componentStyle = props.componentStyle;
       const globalStyle = props.globalStyle;
       const { global_styleCardRadius } = globalStyle;
-      console.error("global_styleCardRadius", global_styleCardRadius);
       const {
         card_containerBackgroundVisible,
         card_containerBackgroundStyle,
         card_containerBorderVisible,
         card_containerBorderStyle,
       } = componentStyle;
-      const containerStyle = {
-        background: card_containerBackgroundVisible
-          ? card_containerBackgroundStyle.color
-          : "",
-        border: card_containerBorderVisible
-          ? `${card_containerBorderStyle.width}px solid ${card_containerBorderStyle.color}`
-          : "",
-      };
+
+      const containerStyle = {};
+      if (
+        card_containerBackgroundVisible &&
+        card_containerBackgroundStyle.color
+      ) {
+        containerStyle.background = card_containerBackgroundStyle.color;
+      }
+      if (card_containerBorderVisible && card_containerBorderStyle.color) {
+        containerStyle.border = `${card_containerBorderStyle.width}px solid ${card_containerBorderStyle.color}`;
+      }
 
       switch (global_styleCardRadius) {
         case "none":

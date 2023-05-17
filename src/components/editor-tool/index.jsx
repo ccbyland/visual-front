@@ -1,10 +1,18 @@
-import { computed, defineComponent, inject, reactive, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  inject,
+  onMounted,
+  reactive,
+  ref,
+} from "vue";
 import _ from "lodash";
 import { randomStr } from "@/utils";
 import useCommand from "../../hooks/useCommand.js";
-// import useWidgetDraggable from "../../hooks/useWidgetDraggable.js";
+import useWidgetDragger from "../../hooks/useWidgetDragger.js";
 import "./index.scss";
 import useDefaultData from "@/hooks/useDefaultData.js";
+import { events } from "@/utils/events.js";
 
 export default defineComponent({
   props: {
@@ -20,11 +28,25 @@ export default defineComponent({
       },
     });
     const widgetConfig = inject("widgetConfig");
+    const gridItemRef = ref([]);
+    const gridLayoutRef = ref(null);
+
+    const handleGridItemRefUpdate = (v) => {
+      gridItemRef.value = v;
+    };
+    const handleGridLayoutRefUpdate = (v) => {
+      gridLayoutRef.value = v;
+    };
+
+    onMounted(() => {
+      events.on("gridItemRefUpdate", handleGridItemRefUpdate);
+      events.on("gridLayoutRefUpdate", handleGridLayoutRefUpdate);
+    });
 
     return () => {
       console.info("[editor-tool] render");
 
-      // const canvasRef = ref(null);
+      const canvasRef = ref(null);
       const { commands } = useCommand(data);
 
       const addWidget = (widget) => {
@@ -34,7 +56,7 @@ export default defineComponent({
         const newWidget = reactive({
           i: randomStr(8),
           x: 0,
-          y: 0,
+          y: data.value.widgets.length * 2 * 5,
           w: defaultData.layout ? defaultData.layout.w : 6,
           h: defaultData.layout ? defaultData.layout.h : 6,
           key: widget.key,
@@ -44,10 +66,12 @@ export default defineComponent({
         commands.addWidget(newWidget);
       };
 
-      // const { dragStartWidget, dragEndWidget } = useWidgetDraggable(
-      //   canvasRef,
-      //   editorWidgetData
-      // );
+      const { dragStartWidget, dragEndWidget } = useWidgetDragger(
+        canvasRef,
+        data,
+        gridItemRef,
+        gridLayoutRef
+      );
 
       return (
         <div className="editor-tool">
@@ -58,8 +82,8 @@ export default defineComponent({
                 return (
                   <div
                     draggable
-                    // onDragStart={(e) => dragStartWidget(e, widget)}
-                    // onDragEnd={dragEndWidget}
+                    onDragStart={(e) => dragStartWidget(e, widget)}
+                    onDragEnd={dragEndWidget}
                     className="node"
                     onClick={() => addWidget(widget)}
                   >

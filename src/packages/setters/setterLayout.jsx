@@ -302,8 +302,8 @@ export default defineComponent({
         } else {
           el = (
             <>
-              <el-col span={3}></el-col>
-              <el-col span={4}>{getSetterLabel()}</el-col>
+              <el-col span={2}></el-col>
+              <el-col class="g-color-gary" span={5}>{getSetterLabel()}</el-col>
               <el-col span={17}>{getSetterContent()}</el-col>
             </>
           );

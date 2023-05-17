@@ -60,6 +60,6 @@ const editorWidgetConfig = createWidgetConfig()
 editorWidgetConfig.register(widgetRegisterConfig.line)
 editorWidgetConfig.register(widgetRegisterConfig.bar)
 editorWidgetConfig.register(widgetRegisterConfig.pie)
-editorWidgetConfig.register(widgetRegisterConfig.map)
+// editorWidgetConfig.register(widgetRegisterConfig.map)
 
 export default editorWidgetConfig

@@ -165,7 +165,7 @@ export default {
         {
           name: "colorPicker",
           type: "fontColorPicker",
-          value: "#fff",
+          value: "#000",
         },
         {
           name: "fontStyle",
@@ -266,10 +266,17 @@ export default {
       ],
     },
     {
-      label: "边框",
+      label: "卡片边框",
       name: "card_containerBorderStyle",
       defaultShow: true,
       children: [
+        {
+          name: "width",
+          type: "inputNumber",
+          value: 1,
+          min: 1,
+          max: 5,
+        },
         {
           name: "color",
           type: "backgroundColorPicker",
@@ -289,19 +296,19 @@ export default {
       value: true,
     },
     {
-      label: "文案",
+      label: "标题",
       name: "card_titleText",
       defaultShow: true,
       children: [
         {
           name: "text",
           type: "input",
-          value: "基础折线趋势图",
+          value: "标题",
         },
       ],
     },
     {
-      label: "样式",
+      label: "文本",
       name: "card_titleStyle",
       defaultShow: true,
       children: [
@@ -311,6 +318,11 @@ export default {
           value: 12,
           min: 12,
           max: 32,
+        },
+        {
+          name: "colorPicker",
+          type: "fontColorPicker",
+          value: "#000",
         },
         {
           name: "fontStyle",
@@ -343,11 +355,13 @@ export default {
             },
           ],
         },
-        {
-          name: "colorPicker",
-          type: "fontColorPicker",
-          value: "#fff",
-        },
+      ],
+    },
+    {
+      label: "背景填充",
+      name: "card_backgroundStyle",
+      defaultShow: true,
+      children: [
         {
           name: "backgroundColor",
           type: "backgroundColorPicker",
@@ -387,6 +401,29 @@ export default {
     },
   ],
   /**
+   * 卡片-组件容器-背景
+   */
+  cardContainerBackgroundSetter: [
+    {
+      label: "显示背景填充",
+      type: "checkbox",
+      name: "card_containerBackgroundVisible",
+      value: true,
+    },
+    {
+      label: "样式",
+      name: "card_containerBackgroundStyle",
+      defaultShow: true,
+      children: [
+        {
+          name: "color",
+          type: "backgroundColorPicker",
+          value: "#fff",
+        },
+      ],
+    },
+  ],
+  /**
    * 卡片-组件容器-边框
    */
   cardContainerBorderSetter: [
@@ -412,29 +449,6 @@ export default {
           name: "color",
           type: "backgroundColorPicker",
           value: "#000",
-        },
-      ],
-    },
-  ],
-  /**
-   * 卡片-组件容器-背景
-   */
-  cardContainerBackgroundSetter: [
-    {
-      label: "自定义背景填充",
-      type: "checkbox",
-      name: "card_containerBackgroundVisible",
-      value: true,
-    },
-    {
-      label: "样式",
-      name: "card_containerBackgroundStyle",
-      defaultShow: true,
-      children: [
-        {
-          name: "color",
-          type: "backgroundColorPicker",
-          value: "#fff",
         },
       ],
     },

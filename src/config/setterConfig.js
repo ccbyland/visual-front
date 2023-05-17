@@ -365,7 +365,7 @@ export default {
         {
           name: "backgroundColor",
           type: "backgroundColorPicker",
-          value: "#999",
+          value: "#eee",
         },
       ],
     },

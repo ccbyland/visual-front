@@ -1,0 +1,11 @@
+.g-background-picker {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  .el-tooltip__trigger {
+    width: 140px;
+    border: 1px solid #999;
+    height: 100%;
+    box-sizing: border-box;
+  }
+}

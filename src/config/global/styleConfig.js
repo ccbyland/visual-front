@@ -25,15 +25,15 @@ export default [
       }
     ]
   },
-  {
-    title: '页面背景',
-    layout: 'default',
-    content: [
-      {
-        setters: [{ setterName: 'globalBackgroundSetter' }],
-      }
-    ]
-  },
+  // {
+  //   title: '页面背景',
+  //   layout: 'default',
+  //   content: [
+  //     {
+  //       setters: [{ setterName: 'globalBackgroundSetter' }],
+  //     }
+  //   ]
+  // },
   {
     title: '组件',
     layout: 'collapse',

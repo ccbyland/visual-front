@@ -202,6 +202,74 @@ export default defineComponent({
           ></g-color-scheme>
         );
       },
+      backgroundPicker: (props, valueData) => {
+        const slots = {
+          reference: () => {
+            return (
+              <>
+                <div className="g-background-picker_reference"></div>
+              </>
+            );
+          },
+          default: () => {
+            return (
+              <div
+                style={{
+                  width: "100px",
+                  height: "20px",
+                  backgroundColor: "#333",
+                }}
+              >
+                111
+              </div>
+            );
+          },
+        };
+        return (
+          <div className="g-background-picker">
+            <el-popover
+              placement="top-start"
+              width={200}
+              trigger="click"
+              v-slots={slots}
+            ></el-popover>
+          </div>
+        );
+      },
+      imagePicker: (props, valueData) => {
+        const slots = {
+          reference: () => {
+            return (
+              <>
+                <div className="g-background-picker_reference"></div>
+              </>
+            );
+          },
+          default: () => {
+            return (
+              <div
+                style={{
+                  width: "100px",
+                  height: "20px",
+                  backgroundColor: "#333",
+                }}
+              >
+                111
+              </div>
+            );
+          },
+        };
+        return (
+          <div className="g-image-picker">
+            <el-popover
+              placement="top-start"
+              width={200}
+              trigger="click"
+              v-slots={slots}
+            ></el-popover>
+          </div>
+        );
+      },
     };
 
     let getSetterContent = () => {

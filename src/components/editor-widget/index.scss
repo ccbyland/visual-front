@@ -25,7 +25,7 @@
   padding: 0 15px;
   box-sizing: border-box;
   flex-shrink: 0;
-  color: #212a3e;
+  color: #000;
 }
 .g-card__empty {
   flex-grow: 1;
@@ -39,7 +39,7 @@
     height: 40%;
   }
   .g-card__empty-text {
-    color: #212a3e;
+    color: #000;
     margin-top: 1%;
   }
 }

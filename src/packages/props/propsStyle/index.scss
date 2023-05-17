@@ -14,8 +14,16 @@
 }
 
 .el-tabs {
+  .el-tabs__header {
+    padding-bottom: 0;
+    margin: 0 10px;
+    .el-tabs__nav {
+      margin-left: 10px;
+    }
+  }
   .el-tabs__item {
     color: #fff;
+    padding: 0 10px;
     &.is-active {
       color: #fff;
     }

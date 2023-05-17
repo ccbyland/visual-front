@@ -1,5 +1,4 @@
 .g-collapse {
-  color: #fff;
   .el-collapse-item {
     overflow: hidden;
     box-shadow: 0 0 10px 5px rgba(57, 72, 103, 0.2);
@@ -8,7 +7,8 @@
       margin-bottom: 0;
     }
     .el-collapse-item__header {
-      background: #212a3e;
+      color: #fff;
+      background: rgba(33, 42, 62, 0.8);
       height: 30px;
       padding-left: 16px;
       font-weight: bold;
@@ -36,7 +36,7 @@
       margin-bottom: 0;
       .el-collapse-item__header {
         padding-left: 8px;
-        background: #212a3e;
+        background: rgba(33, 42, 62, 0.6);
         height: 25px;
         line-height: 25px;
       }

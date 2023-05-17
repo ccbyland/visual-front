@@ -1,6 +1,6 @@
 .g-color-picker {
   .el-color-picker__trigger {
-    border: 1px solid #595e6b;
+    border: 1px solid #ccc;
     width: auto;
 
     &::before {
@@ -21,14 +21,14 @@
   }
   &.font-picker {
     .el-color-picker__trigger::before {
-      background: url("~@/assets/images/icon-color-font.png") no-repeat center
+      background: url("~@/assets/images/icon-color-font.svg") no-repeat center
         center;
       background-size: 100%;
     }
   }
   &.background-picker {
     .el-color-picker__trigger::before {
-      background: url("~@/assets/images/icon-color-background.png") no-repeat
+      background: url("~@/assets/images/icon-color-background.svg") no-repeat
         center center;
       background-size: 100%;
     }

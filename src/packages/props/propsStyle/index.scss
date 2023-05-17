@@ -3,21 +3,21 @@
 }
 
 .g-label {
-  color: #fff;
+  color: #000;
   line-height: 24px;
 }
 
 .g-color-gary {
   .g-label {
-    color: #ccc;
+    color: #666;
   }
 }
 
 .el-tabs {
   .el-tabs__item {
-    color: #394867;
+    color: #fff;
     &.is-active {
-      color: #212a3e;
+      color: #fff;
     }
   }
   .el-tabs__active-bar {

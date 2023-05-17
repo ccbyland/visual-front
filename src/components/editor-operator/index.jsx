@@ -96,7 +96,7 @@ export default defineComponent({
         );
       }
 
-      return operatorContent;
+      return <div className="editor-operator">{operatorContent}</div>;
     };
   },
 });

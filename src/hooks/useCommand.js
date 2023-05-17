@@ -1,6 +1,5 @@
 import { events } from "@/utils/events";
 import _ from "lodash";
-import { useStore } from "vuex";
 
 export default function (data) {
   const state = {

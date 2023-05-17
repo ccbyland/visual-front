@@ -1,14 +1,12 @@
 import { computed, defineComponent } from "vue";
 import _ from "lodash";
 import EditorHeader from "@/components/editor-header";
-import EditorTool from "@/components/editor-tool";
-import EditorCanvas from "@/components/editor-canvas";
+import EditorMain from "@/components/editor-main";
 import EditorOperator from "@/components/editor-operator";
 import useCommand from "@/hooks/useCommand";
 import EditorGrid from "@/components/editor-grid";
 import "./index.scss";
 import useFocus from "@/hooks/useFocus";
-import GlobalStyle from "@/utils/globalStyle";
 
 export default defineComponent({
   props: {
@@ -29,10 +27,6 @@ export default defineComponent({
 
     return () => {
       console.info("[editor] render");
-      
-
-      const containerData = props.modelValue.container.props;
-      const pageLayout = GlobalStyle.getPageLayout(containerData);
 
       return (
         <div className="g-editor">
@@ -41,13 +35,8 @@ export default defineComponent({
           </div>
           <div className="g-editor__main">
             <div className="g-editor__main-left">
-              <EditorTool v-model={data.value}></EditorTool>
-            </div>
-            <div className="g-editor__main-center">
-              <div className="g-editor__main-center-page" style={pageLayout}>
-                <EditorGrid v-model={props.modelValue}></EditorGrid>
-                <EditorCanvas v-model={data.value}></EditorCanvas>
-              </div>
+              {/* <EditorGrid v-model={props.modelValue}></EditorGrid> */}
+              <EditorMain v-model={data.value}></EditorMain>
             </div>
             <div className="g-editor__main-right">
               <EditorOperator

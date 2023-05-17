@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #595e6b;
+    border: 1px solid #ccc;
     border-radius: 4px;
     .node {
       width: 18px;
@@ -14,9 +14,9 @@
       mask-size: 80%;
       mask-position: center center;
       cursor: pointer;
-      background: #000;
+      background: #bbb;
       &.active {
-        background: #409eff;
+        background: #212a3e;
       }
       &.bold {
         mask-image: url("../images/bold.svg");

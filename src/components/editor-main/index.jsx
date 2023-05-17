@@ -1,10 +1,14 @@
-import { computed, defineComponent, watch } from "vue";
+import { computed, defineComponent, inject, reactive, ref } from "vue";
 import _ from "lodash";
 import EditorWidget from "@/components/editor-widget";
 import useFocus from "../../hooks/useFocus";
 import "./index.scss";
 import { events } from "@/utils/events";
 import GlobalStyle from "@/utils/globalStyle";
+import useCommand from "@/hooks/useCommand";
+import useDefaultData from "@/hooks/useDefaultData";
+import { randomStr } from "@/utils";
+import useWidgetDragger from "@/hooks/useWidgetDragger";
 
 export default defineComponent({
   props: {
@@ -21,10 +25,40 @@ export default defineComponent({
       },
     });
 
+    const widgetConfig = inject("widgetConfig");
     const gridItemOperated = () => {
       events.emit("dragend");
     };
     const { mousedownCanvas, mousedownCanvasWidget } = useFocus(data);
+
+    const gridItemRef = ref([]);
+    const gridLayoutRef = ref(null);
+    const canvasRef = ref(null);
+    const { commands } = useCommand(data);
+
+    const addWidget = (widget) => {
+      const defaultData = widget.defaultData;
+      const { getProps, getQuery } = useDefaultData(widget);
+
+      const newWidget = reactive({
+        i: randomStr(8),
+        x: 0,
+        y: data.value.widgets.length * 2 * 5,
+        w: defaultData.layout ? defaultData.layout.w : 6,
+        h: defaultData.layout ? defaultData.layout.h : 6,
+        key: widget.key,
+        props: getProps("styles"),
+        query: getQuery(),
+      });
+      commands.addWidget(newWidget);
+    };
+
+    const { dragStartWidget, dragEndWidget } = useWidgetDragger(
+      canvasRef,
+      data,
+      gridItemRef,
+      gridLayoutRef
+    );
 
     return () => {
       console.info("[editor-canvas] render");
@@ -32,10 +66,33 @@ export default defineComponent({
       const containerData = props.modelValue.container.props;
       const pageStyle = GlobalStyle.getPageStyle(containerData);
       const globalStyle = props.modelValue.container.props;
-      const gridMarginArr = GlobalStyle.getGridMarginArr(containerData)
+      const gridMarginArr = GlobalStyle.getGridMarginArr(containerData);
 
       return (
-        <>
+        <div className="editor-main">
+          <div className="editor-tool">
+            <div className="item">
+              <div className="label">图表</div>
+              <div class="options">
+                {widgetConfig.widgetList.map((widget) => {
+                  return (
+                    <div
+                      draggable
+                      onDragStart={(e) => dragStartWidget(e, widget)}
+                      onDragEnd={dragEndWidget}
+                      className="node"
+                      onClick={() => addWidget(widget)}
+                    >
+                      <img
+                        className="icon"
+                        src={require(`@/assets/images/canvas-module/${widget.key}.svg`)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
           <div
             className="editor-canvas"
             style={pageStyle}
@@ -74,7 +131,7 @@ export default defineComponent({
               })}
             </grid-layout>
           </div>
-        </>
+        </div>
       );
     };
   },

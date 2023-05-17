@@ -8,7 +8,7 @@ import "./index.scss";
 export default defineComponent({
   setup() {
     const state = ref(data);
-    
+
     // 全局注入组件配置对象
     provide("widgetConfig", widgetConfig);
 
@@ -21,11 +21,7 @@ export default defineComponent({
     setCanvasProps();
 
     return () => {
-      return (
-        <div class="g-page-editor">
-          <Editor v-model={state.value}></Editor>
-        </div>
-      );
+      return <Editor v-model={state.value}></Editor>;
     };
   },
 });

@@ -1,4 +1,4 @@
-import { computed, defineComponent, getCurrentInstance, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import "./index.scss";
 
 export default defineComponent({
@@ -8,7 +8,6 @@ export default defineComponent({
     editData: { type: Object },
   },
   setup(props, ctx) {
-    const { proxy } = getCurrentInstance();
     const propsEditData = computed(() => props.editData);
 
     // 当前激活的面板
@@ -56,7 +55,7 @@ export default defineComponent({
           );
         });
       } else {
-        return setterItem.content.map((item, index) => {
+        return setterItem.content.map((item) => {
           return (
             item.setters.length &&
             item.setters.map((setter) => {

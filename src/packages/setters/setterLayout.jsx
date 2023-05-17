@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent } from "vue";
 
 export default defineComponent({
   name: "g-setter-layout",
@@ -202,7 +202,7 @@ export default defineComponent({
           ></g-color-scheme>
         );
       },
-      backgroundPicker: (props, valueData) => {
+      backgroundPicker: () => {
         const slots = {
           reference: () => {
             return (
@@ -236,7 +236,7 @@ export default defineComponent({
           </div>
         );
       },
-      imagePicker: (props, valueData) => {
+      imagePicker: () => {
         const slots = {
           reference: () => {
             return (

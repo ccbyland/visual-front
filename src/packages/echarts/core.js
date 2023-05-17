@@ -211,12 +211,13 @@ export default {
       if (!card_titleVisible) {
         return null;
       }
-      const titleStyle = {
-        background: card_backgroundStyle.backgroundColor,
-        borderBottom: card_dividerVisible
-          ? `${card_dividerStyle.width}px solid ${card_dividerStyle.color}`
-          : "",
-      };
+      const titleStyle = {};
+      if (card_backgroundStyle.backgroundColor) {
+        titleStyle.background = card_backgroundStyle.backgroundColor;
+      }
+      if (card_dividerVisible && card_dividerStyle.color) {
+        titleStyle.borderBottom = `${card_dividerStyle.width}px solid ${card_dividerStyle.color}`;
+      }
       const titleTextStyle = {
         color: card_titleStyle.colorPicker,
         fontSize: card_titleStyle.fontSize + "px",

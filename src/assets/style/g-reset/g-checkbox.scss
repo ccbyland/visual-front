@@ -1,12 +1,12 @@
-// .g-checkbox {
-//   .el-checkbox {
-//     .el-checkbox__input {
-//       &.is-checked {
-//         .el-checkbox__inner {
-//           border-color: #2d3a5c;
-//           background: #2d3a5c;
-//         }
-//       }
-//     }
-//   }
-// }
+.g-checkbox {
+  .el-checkbox {
+    .el-checkbox__input {
+      &.is-checked {
+        .el-checkbox__inner {
+          border-color: #394867;
+          background: #394867;
+        }
+      }
+    }
+  }
+}

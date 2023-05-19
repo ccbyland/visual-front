@@ -1,0 +1,34 @@
+.g-data-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.g-data-area__dimension-wrap {
+  height: 50%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.g-data-area__measure-wrap {
+  height: 50%;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+.g-data-area__title {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding-left: 10px;
+}
+.g-data-area__scroll {
+  padding: 0 10px;
+  overflow-y: scroll;
+}
+.g-props-area__field-item {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  padding: 5px;
+  cursor: pointer;
+}

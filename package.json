@@ -12,6 +12,7 @@
     "deepcopy": "^2.1.0",
     "lodash": "^4.17.21",
     "vue": "^3.2.13",
+    "vue-draggable-next": "^2.1.1",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
@@ -31,7 +32,6 @@
     "unplugin-auto-import": "^0.15.3",
     "unplugin-vue-components": "^0.24.1",
     "vue-grid-layout": "^3.0.0-beta1",
-    "vuedraggable": "^4.1.0",
     "vuex": "^4.0.0"
   },
   "eslintConfig": {

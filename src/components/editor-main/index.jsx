@@ -33,7 +33,7 @@ export default defineComponent({
     const canvasRef = ref(null);
     const gridLayoutRef = ref(null);
     const gridItemRef = ref([]);
-    const forbidChildPointerEvents = ref(false)
+    const forbidChildPointerEvents = ref(false);
 
     const setGridItemRef = (item) => {
       gridItemRef.value.push(item);
@@ -106,7 +106,10 @@ export default defineComponent({
         <div
           id="canvas_content"
           ref={canvasRef}
-          className="editor-canvas"
+          class={[
+            "editor-canvas",
+            forbidChildPointerEvents.value ? "g-editor__forbid-pointer-events" : "",
+          ]}
           style={pageStyle}
           onMousedown={mousedownCanvas}
         >
@@ -117,7 +120,7 @@ export default defineComponent({
             row-height={20}
             is-draggable={true} // 是否可拖拽
             is-resizable={true} // 是否可设置大小
-            vertical-compact={false} // 是否垂直紧凑布局
+            vertical-compact={true} // 是否垂直紧凑布局
             margin={gridMarginArr}
             use-css-transforms={true}
           >

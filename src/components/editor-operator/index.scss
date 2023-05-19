@@ -1,4 +1,28 @@
 .editor-operator {
   height: 100%;
   background: #394867;
+  .g-operator_tabs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .el-tabs__content {
+      flex-grow: 1;
+      .el-tab-pane {
+        height: 100%;
+      }
+    }
+  }
+}
+.g-editor-operator__props {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.g-editor-operator__query {
+  width: 50%;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+.g-editor-operator__data {
+  width: 50%;
 }

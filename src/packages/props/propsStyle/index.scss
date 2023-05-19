@@ -1,5 +1,7 @@
 .g-props-style__collapse {
   padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .g-label {
@@ -16,7 +18,7 @@
 .el-tabs {
   .el-tabs__header {
     padding-bottom: 0;
-    margin: 0 10px;
+    margin-bottom: 0;
     .el-tabs__nav {
       margin-left: 10px;
     }

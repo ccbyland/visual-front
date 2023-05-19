@@ -50,3 +50,7 @@
     }
   }
 }
+
+.g-editor__forbid-pointer-events * {
+  pointer-events: none !important;
+}

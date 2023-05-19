@@ -94,7 +94,6 @@ export default (
 
   const drop = (e) => {
     console.error("drop");
-
     gridLayoutRef.value.dragEvent("dragend", "", dragPos.x, dragPos.y, h, w);
     let widgets = data.value.widgets.filter((obj) => obj.i !== "");
     data.value = {
@@ -103,8 +102,8 @@ export default (
         ...widgets,
         {
           i: id,
-          x: 0,
-          y: 0,
+          x: dragPos.x,
+          y: dragPos.y,
           w,
           h,
           key: curWidget.key,
@@ -116,7 +115,6 @@ export default (
   };
 
   const checkWidgetAttr = (widget) => {
-    forbidChildPointerEvents.value = true;
     defaultData = widget.defaultData;
     const { getProps, getQuery } = useDefaultData(widget);
     props = getProps("styles");
@@ -127,13 +125,13 @@ export default (
   };
 
   const dragstartWidget = (e, widget) => {
-    forbidChildPointerEvents.value = false;
+    forbidChildPointerEvents.value = true;
     console.error("dragstartWidget");
     // canvasRef.value.addEventListener("dragenter", dragenter);
     // 当在画布区移动时，添加草稿部件，并跟随鼠标位置异动
     canvasRef.value.addEventListener("dragover", dragover);
     // 离开画布区时，清空目标拖拽数据，避免产生半成品
-    // canvasRef.value.addEventListener("dragleave", dragleave);
+    canvasRef.value.addEventListener("dragleave", dragleave);
     // 当在画布区释放时，添加对应小部件
     canvasRef.value.addEventListener("drop", drop);
     curWidget = widget;
@@ -142,10 +140,11 @@ export default (
   };
 
   const dragendWidget = () => {
+    forbidChildPointerEvents.value = false;
     console.error("dragendWidget");
     // canvasRef.value.removeEventListener("dragenter", dragenter);
     canvasRef.value.removeEventListener("dragover", dragover);
-    // canvasRef.value.removeEventListener("dragleave", dragleave);
+    canvasRef.value.removeEventListener("dragleave", dragleave);
     canvasRef.value.removeEventListener("drop", drop);
     curWidget = null;
   };

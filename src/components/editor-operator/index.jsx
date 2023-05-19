@@ -2,6 +2,7 @@ import { defineComponent, inject, reactive, ref, watch } from "vue";
 import _ from "lodash";
 import PropsStyle from "@/packages/props/propsStyle";
 import propsQuery from "@/packages/props/propsQuery";
+import dataSetPanel from "@/packages/data/index";
 import "./index.scss";
 import { events } from "@/utils/events";
 
@@ -65,12 +66,14 @@ export default defineComponent({
 
       if (!props.widget) {
         operatorContent = (
-          <PropsStyle
-            panelType="global"
-            setters={widgetConfig.globalConfig.styles}
-            editData={state.editData}
-            onUpdateEditData={(value) => updateEditData(value, "style")}
-          ></PropsStyle>
+          <div class="g-editor-operator__props">
+            <PropsStyle
+              panelType="global"
+              setters={widgetConfig.globalConfig.styles}
+              editData={state.editData}
+              onUpdateEditData={(value) => updateEditData(value, "style")}
+            ></PropsStyle>
+          </div>
         );
       } else {
         let styleSetters = [];
@@ -90,7 +93,14 @@ export default defineComponent({
               ></PropsStyle>
             </el-tab-pane>
             <el-tab-pane label="数据" name="1">
-              <propsQuery editData={state.editData}></propsQuery>
+              <div class="g-editor-operator__props">
+                <div class="g-editor-operator__query">
+                  <propsQuery editData={state.editData}></propsQuery>
+                </div>
+                <div class="g-editor-operator__data">
+                  <dataSetPanel editData={state.editData}></dataSetPanel>
+                </div>
+              </div>
             </el-tab-pane>
           </el-tabs>
         );

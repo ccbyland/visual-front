@@ -56,6 +56,7 @@ export default defineComponent({
         key: widget.key,
         props: getProps("styles"),
         query: getQuery(),
+        optionalConfig: {}
       });
       commands.addWidget(newWidget);
     };

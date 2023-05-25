@@ -156,6 +156,7 @@ export default {
       });
     };
     const genOptionData = (chartData) => {
+      debugger
       if (!settings.dimension.length || !settings.measure.length) {
         empty.value = true;
         return false;

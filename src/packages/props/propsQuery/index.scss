@@ -22,6 +22,8 @@
         justify-content: space-between;
         border: 1px dashed rgba(255, 255, 255, 0.5);
         margin: 0 10px;
+        min-height: 20px;
+        padding: 2px 0;
       }
       .g-props-query__field-name {
         height: 40px;
@@ -32,11 +34,12 @@
       }
       .g-props-query__field-item {
         border: 1px solid rgba(255, 255, 255, 0.5);
-        margin: 5px 0;
+        margin: 3px 0;
         display: flex;
         justify-content: space-between;
         color: #fff;
         padding: 5px;
+        cursor: pointer;
         .g-props-query__field-tool{
           .el-icon{
             cursor: pointer;
@@ -58,5 +61,6 @@
     color: #fff;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0px 0px 5px 1px #666 inset;
   }
 }

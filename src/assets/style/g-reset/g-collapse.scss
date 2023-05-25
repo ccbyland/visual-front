@@ -1,8 +1,9 @@
 .g-collapse {
   .el-collapse-item {
     overflow: hidden;
-    box-shadow: 0 0 10px 5px rgba(57, 72, 103, 0.2);
+    box-shadow: 0 0 10px 5px rgba(57, 72, 103, 1);
     margin-bottom: 10px;
+    border-radius: 5px;
     &:last-child {
       margin-bottom: 0;
     }
@@ -12,12 +13,10 @@
       height: 30px;
       padding-left: 16px;
       font-weight: bold;
-      border-radius: 5px 5px 0 0;
     }
     .el-collapse-item__content {
       background: #fff;
       padding: 10px;
-      border-radius: 0 0 5px 5px;
     }
   }
   &__sub {

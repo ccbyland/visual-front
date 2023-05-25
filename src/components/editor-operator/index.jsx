@@ -92,10 +92,13 @@ export default defineComponent({
                 onUpdateEditData={(value) => updateEditData(value, "style")}
               ></PropsStyle>
             </el-tab-pane>
-            <el-tab-pane label="数据" name="1">
+            <el-tab-pane label="字段" name="1">
               <div class="g-editor-operator__props">
                 <div class="g-editor-operator__query">
-                  <propsQuery editData={state.editData}></propsQuery>
+                  <propsQuery
+                    editData={state.editData}
+                    onUpdateEditData={(value) => updateEditData(value, "field")}
+                  ></propsQuery>
                 </div>
                 <div class="g-editor-operator__data">
                   <dataSetPanel editData={state.editData}></dataSetPanel>

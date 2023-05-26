@@ -4,6 +4,7 @@ import "./index.scss";
 import { VueDraggableNext } from "vue-draggable-next";
 import { events } from "@/utils/events";
 import { ElMessage } from "element-plus";
+import { datasetExcuteByColumn } from "@/api/dataSet";
 
 export default defineComponent({
   components: {
@@ -51,19 +52,29 @@ export default defineComponent({
     };
 
     const updateQueryData = async () => {
-      debugger;
       let res = null;
       const queryAreaList = queryEditData.value.query.area || [];
-      const groupAreaList = queryAreaList[0].value;
-      const countAreaList = queryAreaList[1].value;
+      const groupAreaList = queryAreaList[0]?.value ?? [];
+      const countAreaList = queryAreaList[1]?.value ?? [];
 
-      res = await proxy.$api.getChartData({
-        datasetId: queryEditData.value.optionalConfig.datasetId,
-        groupList: groupAreaList,
-        countList: countAreaList,
+      const groupList = groupAreaList.map((item) => ({
+        key: item.key,
+        condition: "group",
+      }));
+      const countList = countAreaList.map((item) => ({
+        key: item.key,
+        condition: "sum",
+      }));
+      const dimensions = [...groupList, ...countList];
+
+      res = await datasetExcuteByColumn({
+        id: queryEditData.value.optionalConfig.datasetId,
+        dimensions: dimensions,
       });
       events.emit(`chart_data_change_${queryEditData.value.i}`, {
-        chartData: res,
+        chartData: {
+          data: res,
+        },
       });
     };
 

@@ -9,6 +9,7 @@ import App from './App.jsx'
 import router from './router'
 import store from './store/index.js'
 import './assets/style/index.scss'
+import '../mock/index.js'
 
 const app = createApp(App)
 

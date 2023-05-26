@@ -5,6 +5,7 @@ import deepcopy from "deepcopy";
 import { events } from "@/utils/events";
 import { genCompleteChartOption } from "@/utils/chartOption";
 import ComponentStyle from "@/utils/componentStyle";
+import _ from "lodash";
 
 export default {
   props: {
@@ -23,7 +24,8 @@ export default {
     let chartInstance = null; // 当前图表实例对象
     let dimensionData = [];
     let measureData = [];
-    let settings = {
+    let data = null;
+    let fields = {
       dimension: [], // 维度
       measure: [], // 度量
     };
@@ -38,75 +40,12 @@ export default {
 
     const empty = ref(false);
     const chartData = computed(() => store.state.chartData[props.id]);
-    onMounted(() => {
-      if (chartData.value) {
-        empty.value = false;
-        renderChart(chartData.value);
-      } else {
-        empty.value = true;
-      }
-      offEvent = addEvent();
-    });
-
-    onUnmounted(() => {
-      offEvent && offEvent();
-    });
 
     const emptyImg = computed(() => Proxy.EmptyImg || EmptyImg);
 
-    const chartDataChange = (options = {}) => {
-      const { chartData } = options;
-      if (chartData) {
-        empty.value = false;
-      }
-      let data = null;
-      if (chartData && chartData.data) {
-        data = chartData.data;
-        store.dispatch("updateChartData", {
-          id: props.id,
-          data,
-        });
-      }
-      setTimeout(() => {
-        renderChart(data);
-      }, 0);
-    };
-
-    const addEvent = () => {
-      events.on(`chart_data_change_${props.id}`, chartDataChange);
-      return () => {
-        events.off(`chart_data_change_${props.id}`, chartDataChange);
-      };
-    };
-
-    const renderChart = (data) => {
-      if (!data || data.value) {
-        return;
-      }
-      initChart();
-      genChartOption(data);
-    };
-
-    const initChart = () => {
-      if (chartInstance) {
-        return;
-      }
-      const chartDom = document.getElementById(props.id);
-      chartInstance = proxy.$echarts.init(chartDom);
-      if (!chartInstance) {
-        console.warn("[initChart] echarts 初始化DOM失败");
-        return;
-      }
-      addResizeEvent();
-    };
-
-    const setSize = () => {
-      const rect = ComponentStyle.calChartClientRect(
-        props.componentStyle,
-        props.id
-      );
-      chartInstance && chartInstance.resize(rect);
-    };
+    /**
+     * 添加resize事件
+     */
     const addResizeEvent = () => {
       const resizeObserver = window.ResizeObserver;
       const callback = (domList) => {
@@ -117,86 +56,276 @@ export default {
       const gridItemDom = document.getElementById(`grid-item__${props.id}`);
       observer.observe(gridItemDom);
     };
-    const genOptionProps = () => {
-      settings = {
+
+    /**
+     * 图表数据更新
+     * @param {*} options
+     */
+    const chartDataChange = (options = {}) => {
+      // 图表数据
+      const { chartData } = options;
+      // 关闭无数据状态
+      if (chartData) {
+        empty.value = false;
+      }
+      // 解析图表数据
+      if (chartData && chartData.data) {
+        data = chartData.data;
+        // store.dispatch("updateChartData", {
+        //   id: props.id,
+        //   data,
+        // });
+      }
+      // 不存在数据则终止更新
+      if (!data) {
+        return;
+      }
+      // 更新图表
+      setTimeout(() => {
+        initMaterial(data);
+      }, 0);
+    };
+
+    /**
+     * 绑定事件
+     * @returns
+     */
+    const addEvent = () => {
+      /**
+       * 图表数据更新
+       */
+      events.on(`chart_data_change_${props.id}`, chartDataChange);
+      return () => {
+        events.off(`chart_data_change_${props.id}`, chartDataChange);
+      };
+    };
+
+    /**
+     * 检测字段是否有效
+     * @returns
+     */
+    const checkQueryValid = () => {
+      // 该小部件对应的 字段-领域 是否有配置
+      if (!props.query.area || !props.query.area.length) {
+        return false;
+      }
+      // 遍历所有领域
+      for (const item of props.query.area) {
+        // 必填 且 没有填值
+        if (item.rule && item.rule.required && !item.value.length) {
+          return false;
+        }
+        return true;
+      }
+    };
+
+    /**
+     * 转换图表需要的维度、度量格式数据
+     * @param {*} chartData
+     * @returns
+     */
+    const genOptionData = (chartData) => {
+      // 数据为空
+      if (!Array.isArray(chartData) || !chartData.length) {
+        return;
+      }
+      // 维度数据 TODO
+      if (fields.dimension.length) {
+        dimensionData = chartData.map((item) => item[fields.dimension[0]]);
+      }
+      // 度量数据
+      if (fields.measure.length) {
+        measureData = fields.measure.reduce((result, cur) => {
+          // 获取该度量的值列表数据，并以度量name为key存储
+          result[cur] = chartData.map((item) => item[cur]);
+          return result;
+        }, {});
+      }
+    };
+
+    /**
+     * 生成图表字段数据（维度、度量 对应的名称）
+     * @returns
+     */
+    const genOptionFields = () => {
+      // 该小部件对应的 字段-领域 是否有配置
+      if (!props.query.area || !props.query.area.length) {
+        return;
+      }
+      // 初始化数据容器
+      fields = {
         dimension: [],
         measure: [],
       };
+      // 遍历该配置
       props.query.area.forEach((item) => {
+        // 当前领域是否配置type（对应：dimension、measure等）
         if (item.rule && item.rule.type) {
-          if (item.queryName == "area_type") {
-            item.value = [{ name: "city", title: "城市" }];
-          }
-          if (item.queryName == "area_value") {
-            item.value = [{ name: "number", title: "件数" }];
-          }
+          // 领域 为 类目轴 或 值轴
           if (item.queryName == "area_type" || item.queryName == "area_value") {
+            // 遍历用户选择的的字段
             item.value.forEach((valueItem) => {
-              settings[item.rule.type].push(valueItem.name);
+              // 把 字段 放到对应领域的容器中去
+              fields[item.rule.type].push(valueItem.name);
             });
           }
+        }
+      });
+    };
+
+    /**
+     * 生成该图表options参数（series、legend）
+     * @returns
+     */
+    const genOptionProps = () => {
+      // 该小部件对应的 字段-领域 是否有配置
+      if (!props.query.area || !props.query.area.length) {
+        return;
+      }
+      // 遍历该配置
+      props.query.area.forEach((item) => {
+        // 当前领域是否配置type（对应：dimension、measure等）
+        if (item.rule && item.rule.type) {
+          // 领域 为值轴
           if (item.queryName == "area_value") {
             let series = [];
-            let legendData = [];
+            // let legendData = [];
+            // 遍历当前值列表
             item.value.forEach((valueItem, valueIndex) => {
+              // 将标准化后的值放入series中
               if (!series[valueIndex]) {
                 series.push({ name: valueItem.title });
               }
+              // 给每个值添加type属性，同时放入option.series中
               option.series = series.map((seriesItem) => {
                 return { ...seriesItem, type: props.type };
               });
-
-              if (!legendData[valueIndex]) {
-                legendData.push({ name: valueItem.name });
-              }
-              option.legend.data = legendData;
+              //
+              // if (!legendData[valueIndex]) {
+              //   legendData.push({ name: valueItem.name });
+              // }
+              // option.legend.data = legendData;
             });
           }
         }
       });
     };
-    const genOptionData = (chartData) => {
-      debugger
-      if (!settings.dimension.length || !settings.measure.length) {
+
+    /**
+     * 生成报表参数
+     * @param {*} chartData
+     * @returns
+     */
+    const genOption = (chartData) => {
+      // 检测字段是否有效
+      if (!checkQueryValid()) {
         empty.value = true;
-        return false;
-      }
-      dimensionData = chartData.map((chartDataItem) => {
-        return chartDataItem[settings.dimension[0]];
-      });
-      settings.measure.forEach((measureItem) => {
-        let measureDataItem = [];
-        chartData.forEach((chartDataItem) => {
-          measureDataItem.push(chartDataItem[measureItem]);
-        });
-        measureData.push(measureDataItem);
-      });
-      return true;
-    };
-
-    const genChartOption = (data) => {
-      let chartData = deepcopy(data);
-
-      if (Array.isArray(chartData) && chartData.length) {
-        genOptionProps();
-        if (!genOptionData(chartData)) {
-          return;
-        }
-      }
-
-      if (!option || !dimensionData.length || !measureData.length) {
         return;
       }
-      option = proxy.genCustomOption(option, dimensionData, measureData);
-
-      chartInstance && setChartOption();
+      // 生成图表字段数据（维度、度量 对应的名称）
+      genOptionFields();
+      // 生成该图表options参数（series、legend）
+      genOptionProps();
+      // 转换图表需要的维度、度量格式数据
+      genOptionData(chartData);
+      // 获取图表option数据
+      if (option && dimensionData.length && Object.keys(measureData).length) {
+        option = proxy.genCustomOption(option, dimensionData, measureData);
+      } else {
+        option = proxy.defaultOption;
+      }
+      // 更新图表大小
+      setSize();
+      if (!empty.value && chartInstance) {
+        // 设置option
+        setOption();
+      }
     };
 
-    const setChartOption = () => {
+    /**
+     * 设置option
+     */
+    const setOption = () => {
       chartInstance && chartInstance.clear();
       option = genCompleteChartOption(option);
       chartInstance && chartInstance.setOption(option);
     };
+
+    /**
+     * 更新图表大小
+     */
+    const setSize = () => {
+      const rect = ComponentStyle.calChartClientRect(
+        props.componentStyle,
+        props.id
+      );
+      if (!empty.value && chartInstance) {
+        chartInstance.resize(rect);
+      }
+    };
+    /**
+     * 初始化容器
+     * @returns
+     */
+    const init = () => {
+      if (chartInstance) {
+        return;
+      }
+      // 获取图表容器
+      const chartDom = document.getElementById(props.id);
+      if (!chartDom) {
+        return;
+      }
+      // 图表初始化
+      chartInstance = proxy.$echarts.init(chartDom);
+      if (!chartInstance) {
+        console.warn("[init] echarts 初始化DOM失败");
+        return;
+      }
+      // 事件绑定
+      addResizeEvent();
+    };
+
+    /**
+     * 销毁图表
+     * @returns
+     */
+    const destroyChart = () => {
+      if (proxy.render) return;
+      observer && observer.disconnect();
+      chartInstance && chartInstance.dispose();
+      chartInstance = null;
+    };
+
+    /**
+     * 初始化图表
+     * @param {*} data
+     * @returns
+     */
+    const initMaterial = (data) => {
+      if (!data || data.value) {
+        return;
+      }
+      // 初始化容器
+      init();
+      // 初始化option
+      genOption(data);
+    };
+
+    onMounted(() => {
+      if (chartData.value) {
+        empty.value = false;
+        initMaterial(chartData.value);
+      } else {
+        empty.value = true;
+      }
+      offEvent = addEvent();
+    });
+
+    onUnmounted(() => {
+      destroyChart();
+      offEvent && offEvent();
+    });
 
     const renderTitle = () => {
       const componentStyle = props.componentStyle;

@@ -302,14 +302,15 @@ export default {
      * @param {*} data
      * @returns
      */
-    const initMaterial = (data) => {
-      if (!data || data.value) {
+    const initMaterial = (chartData) => {
+      if (empty.value) {
         return;
       }
+      let cloneChartData = _.cloneDeep(chartData);
       // 初始化容器
       init();
       // 初始化option
-      genOption(data);
+      genOption(cloneChartData);
     };
 
     onMounted(() => {

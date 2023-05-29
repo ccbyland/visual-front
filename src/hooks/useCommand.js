@@ -12,7 +12,6 @@ export default function (data) {
   const registry = (commanObj) => {
     state.commandArray.push(commanObj);
     state.commands[commanObj.name] = (...args) => {
-      debugger
       const { forward, back } = commanObj.execute(...args);
       forward();
 
@@ -149,7 +148,6 @@ export default function (data) {
     execute() {
       return {
         forward() {
-          debugger
           let item = state.queue[state.current + 1];
           if (item) {
             item.forward && item.forward();
@@ -166,7 +164,6 @@ export default function (data) {
     execute() {
       return {
         forward() {
-          debugger
           if (state.current === -1) return; // 没有可撤销的了
           let item = state.queue[state.current];
           if (item) {

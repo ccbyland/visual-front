@@ -103,15 +103,19 @@ export default defineComponent({
         </div>
       );
 
+      const pageClass = GlobalStyle.getPageClass(containerData);
+      const pageLayout = GlobalStyle.getPageLayout(containerData);
+      
       const editorCanvas = (
         <div
           id="canvas_content"
           ref={canvasRef}
           class={[
+            pageClass,
             "editor-canvas",
             forbidChildPointerEvents.value ? "g-editor__forbid-pointer-events" : "",
           ]}
-          style={pageStyle}
+          style={{...pageStyle, ...pageLayout}}
           onMousedown={mousedownCanvas}
         >
           <grid-layout

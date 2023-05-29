@@ -3,7 +3,7 @@
   height: 100%;
 }
 .editor-canvas {
-  box-shadow: 0 0 5px 5px #ddd inset;
+  box-shadow: 0 0 5px 5px rgba(94, 94, 94, 0.3) inset;
   position: relative;
   width: 100%;
   height: 100%;
@@ -11,6 +11,10 @@
   overflow-x: hidden;
   cursor: pointer;
   background: #fff;
+  &.theme-dark {
+    background: #212a3e;
+    box-shadow: 0 0 5px 5px rgba(94, 94, 94, 0.3) inset;
+  }
 }
 .editor-tool {
   display: flex;

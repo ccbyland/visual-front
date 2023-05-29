@@ -1,10 +1,21 @@
 import { defineComponent, ref } from "vue";
 import "./dataSet.scss";
+import { useStore } from "vuex";
 
 export default defineComponent({
+  props: {
+    dataSetId: {
+      type: String,
+      default: "",
+    },
+    id: {
+      type: String,
+      default: "",
+    },
+  },
   setup(props, ctx) {
+    const store = useStore();
     const options = ref([{ label: "销售报表数据（测试）", value: "1" }]);
-    const value = ref("");
 
     const change = (datasetId) => {
       ctx.emit("change", datasetId);
@@ -13,7 +24,7 @@ export default defineComponent({
       return (
         <div class="g-data-set">
           <el-select
-            v-model={value.value}
+            v-model={props.dataSetId}
             placeholder="请选择数据集"
             size="small"
             popper-append-to-body={false}

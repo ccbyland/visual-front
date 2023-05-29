@@ -78,12 +78,22 @@ export default defineComponent({
       });
     };
 
-    const renderDraggableItem = (queryItemValue) => {
+    // 删除数据
+    const deleteQueryField = (queryItem, index) => {
+      if (!queryItem.value.length) return;
+      queryItem.value.splice(index, 1);
+      updateQueryEditData();
+    };
+
+    const renderDraggableItem = (queryItemValue, index, queryItem) => {
       return (
         <div class="g-props-query__field-item">
           <div class="g-props-query__field-text">{queryItemValue.name}</div>
           <div class="g-props-query__field-tool">
-            <el-icon title="删除">
+            <el-icon
+              title="删除"
+              onClick={(e) => deleteQueryField(queryItem, index)}
+            >
               <Delete />
             </el-icon>
           </div>
@@ -100,6 +110,11 @@ export default defineComponent({
     }
     const draggableChange = (queryItem) => {
       queryItem.value = unique(queryItem.value);
+      // TODO 维度当前仅支持一个
+      if (queryItem.rule.type === "dimension" && queryItem.value.length > 1) {
+        queryItem.value = queryItem.value.slice(0, 1);
+        ElMessage.warning("维度当前仅支持一个");
+      }
       updateQueryEditData();
     };
     const updateQueryEditData = () => {

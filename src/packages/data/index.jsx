@@ -26,6 +26,7 @@ export default defineComponent({
       return (
         <div class="g-data-index">
           <DataSet
+            id={propsEditData.value.i}
             dataSetId={dataSetId.value}
             onChange={handleDataSetChange}
           ></DataSet>

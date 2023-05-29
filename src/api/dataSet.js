@@ -101,7 +101,6 @@ const sourceData = {
  * @returns
  */
 export const datasetExcuteByColumn = async (params) => {
-  debugger;
   const { id, dimensions } = params;
   const group = [];
   const sum = [];

@@ -16,6 +16,7 @@ export default defineComponent({
   setup(props, ctx) {
     const data = computed({
       get() {
+        console.error('props.modelValue', props.modelValue)
         return props.modelValue;
       },
       set(newValue) {
@@ -31,7 +32,7 @@ export default defineComponent({
       return (
         <div className="g-editor">
           <div className="g-editor__header">
-            <EditorHeader></EditorHeader>
+            <EditorHeader v-model={data.value}></EditorHeader>
           </div>
           <div className="g-editor__main">
             <div className="g-editor__main-left">

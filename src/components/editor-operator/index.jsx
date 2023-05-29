@@ -53,11 +53,14 @@ export default defineComponent({
       state.editData = newEditData;
       // 更新state数据
       update();
-      // 更新视图
-      if (type === "page") {
-        events.emit("global_page_change");
-      } else {
-        events.emit(`chart_data_change_${newEditData.i}`);
+
+      if (type !== "field") {
+        // 更新视图
+        if (type === "page") {
+          events.emit("global_page_change");
+        } else {
+          events.emit(`chart_data_change_${newEditData.i}`);
+        }
       }
     };
 

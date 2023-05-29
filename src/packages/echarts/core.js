@@ -1,7 +1,6 @@
 import EmptyImg from "@/assets/images/card/empty.png";
 import { computed, getCurrentInstance, onMounted, onUnmounted, ref } from "vue";
 import { useStore } from "vuex";
-import deepcopy from "deepcopy";
 import { events } from "@/utils/events";
 import { genCompleteChartOption } from "@/utils/chartOption";
 import ComponentStyle from "@/utils/componentStyle";
@@ -64,6 +63,9 @@ export default {
     const chartDataChange = (options = {}) => {
       // 图表数据
       const { chartData } = options;
+
+      console.error('chartData', chartData)
+
       // 关闭无数据状态
       if (chartData) {
         empty.value = false;
@@ -189,23 +191,23 @@ export default {
           // 领域 为值轴
           if (item.queryName == "area_value") {
             let series = [];
-            // let legendData = [];
+            let legendData = [];
             // 遍历当前值列表
             item.value.forEach((valueItem, valueIndex) => {
               // 将标准化后的值放入series中
               if (!series[valueIndex]) {
-                series.push({ name: valueItem.title });
+                series.push({ name: valueItem.name });
               }
-              // 给每个值添加type属性，同时放入option.series中
-              option.series = series.map((seriesItem) => {
-                return { ...seriesItem, type: props.type };
-              });
               //
-              // if (!legendData[valueIndex]) {
-              //   legendData.push({ name: valueItem.name });
-              // }
-              // option.legend.data = legendData;
+              if (!legendData[valueIndex]) {
+                legendData.push({ name: valueItem.name });
+              }
             });
+            // 给每个值添加type属性，同时放入option.series中
+            option.series = series.map((seriesItem) => {
+              return { ...seriesItem, type: props.type };
+            });
+            option.legendData = legendData
           }
         }
       });
